@@ -27,3 +27,4 @@ Links of papers:
 
 Feature extraction :
 1 https://sail.usc.edu/publications/files/schuller2010_interspeech.pdf
+2 https://mediatum.ub.tum.de/doc/1082431/1082431.pdf
