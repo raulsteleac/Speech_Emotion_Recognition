@@ -24,3 +24,6 @@ Links of papers:
 
 10 https://arxiv.org/pdf/1904.10788.pdf
 
+
+Feature extraction :
+1 https://sail.usc.edu/publications/files/schuller2010_interspeech.pdf
