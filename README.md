@@ -4,7 +4,7 @@ Links of papers:
 
 0.!!!Imperial = https://arxiv.org/pdf/1903.12424.pdf 
 
-1.http://www.utdallas.edu/~mirsamadi/files/mirsamadi17a.pdf
+1.http://www.utdallas.edu/~mirsamadi/files/mirsamadi17a.pdf - Done
 
 2 https://link.springer.com/epdf/10.1007/978-3-319-76270-8_59?shared_access_token=p_kAq6WIOWJrGbqDvFeUPPe4RwlQNchNByi7wbcMAY7LBQFDq4dgOP6mScQsZpEKEfOxEVlt6A6jQP9i3GmniUGIUIQ5DpXXuqFghmiwn0MNT0TMvGfQczAhJUt8lkhgZere1ilkHyjBDskmtY6Zbw%3D%3D
 
@@ -18,7 +18,7 @@ Links of papers:
 
 7 https://www.ijrte.org/wp-content/uploads/papers/v7i4s/E1917017519.pdf
 
-8 https://www.scitepress.org/papers/2018/66116/66116.pdf
+8 https://www.scitepress.org/papers/2018/66116/66116.pdf -Done
 
 9 https://www.astesj.com/publications/ASTESJ_030437.pdf
 
