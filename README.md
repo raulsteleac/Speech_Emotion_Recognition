@@ -12,6 +12,8 @@ Links of papers:
 
 4 https://www.scitepress.org/papers/2018/66116/66116.pdf?fbclid=IwAR1DCvFv2H3eJeSE628FH2xHU_vxfUxHoaCIs_JX0ExW0A9hW_afgQP8S_o -Done
 
+Autoencoder-based Unsupervised Domain Adaptation for Speech Emotion Recognition
+-
 5 http://www.tangsoo.de/documents/Publications/Deng14-AUD-TUM&UK.pdf
 
 6 https://arxiv.org/pdf/1801.06353.pdf
