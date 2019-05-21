@@ -30,3 +30,7 @@ Autoencoder-based Unsupervised Domain Adaptation for Speech Emotion Recognition
 Feature extraction :
 1 https://sail.usc.edu/publications/files/schuller2010_interspeech.pdf
 2 https://mediatum.ub.tum.de/doc/1082431/1082431.pdf
+
+
+
+file:///home/raulslab/Downloads/On_Acoustic_Emotion_Recognition_Compensating_for_C.pdf
