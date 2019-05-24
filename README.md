@@ -20,13 +20,15 @@ Transfer Learning for Improving Speech Emotion Classification Accuracy
 -
 6 https://arxiv.org/pdf/1801.06353.pdf
 
-7 https://www.ijrte.org/wp-content/uploads/papers/v7i4s/E1917017519.pdf
+7 http://www.cs.toronto.edu/~asamir/papers/is10_2.pdf
 
-8 https://www.scitepress.org/papers/2018/66116/66116.pdf -Done
+8 https://www.ijrte.org/wp-content/uploads/papers/v7i4s/E1917017519.pdf
 
-9 https://www.astesj.com/publications/ASTESJ_030437.pdf
+9 https://www.scitepress.org/papers/2018/66116/66116.pdf -Done
 
-10 https://arxiv.org/pdf/1904.10788.pdf
+10 https://www.astesj.com/publications/ASTESJ_030437.pdf
+
+11 https://arxiv.org/pdf/1904.10788.pdf
 
 
 Feature extraction :
