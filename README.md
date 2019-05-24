@@ -31,6 +31,7 @@ Transfer Learning for Improving Speech Emotion Classification Accuracy
 
 11 https://arxiv.org/pdf/1904.10788.pdf
 
+12 http://mi.eng.cam.ac.uk/UKSpeech2017/posters/z_hodari_poster.pdf
 
 Feature extraction :
 --
