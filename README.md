@@ -1,6 +1,7 @@
 # Speech_Emotion_Recognition
 
 Links of papers:
+--
 
 0.!!!Imperial = https://arxiv.org/pdf/1903.12424.pdf 
 
@@ -32,9 +33,11 @@ Transfer Learning for Improving Speech Emotion Classification Accuracy
 
 
 Feature extraction :
+--
 1 https://sail.usc.edu/publications/files/schuller2010_interspeech.pdf
 2 https://mediatum.ub.tum.de/doc/1082431/1082431.pdf
-
+“The geneva minimalistic acoustic parameter set (gemaps)
+for voice research and affective computing,”
 
 
 file:///home/raulslab/Downloads/On_Acoustic_Emotion_Recognition_Compensating_for_C.pdf
