@@ -21,7 +21,7 @@ Autoencoder-based Unsupervised Domain Adaptation for Speech Emotion Recognition
 
 Transfer Learning for Improving Speech Emotion Classification Accuracy
 -
-6 https://arxiv.org/pdf/1801.06353.pdf
+6 https://arxiv.org/pdf/1801.06353.pdf -DONE
 
 7 http://www.cs.toronto.edu/~asamir/papers/is10_2.pdf
 
