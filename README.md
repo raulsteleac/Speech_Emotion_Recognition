@@ -9,6 +9,7 @@ ATTENTION-AUGMENTED END-TO-END MULTI-TASK LEARNING FOR EMOTION PREDICTION FROM S
 http://danielpovey.com/files/2018_interspeech_emotion_id.pdf
 file:///home/raulslab/Downloads/learning_audio_paralinguistics_from_the_raw_waveform.pdf
 https://www.cs.virginia.edu/~stankovic/psfiles/Mobiquitous17.pdf
+http://static.aixpaper.com/pdf/7/c2/gs.2018.9b655ad114.v1.pdf
 
 1.http://www.utdallas.edu/~mirsamadi/files/mirsamadi17a.pdf - Done
 
