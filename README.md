@@ -2,8 +2,12 @@
 
 Links of papers:
 --
-
+ATTENTION-AUGMENTED END-TO-END MULTI-TASK LEARNING FOR EMOTION PREDICTION FROM SPEECH
+-
 0.!!!Imperial = https://arxiv.org/pdf/1903.12424.pdf 
+
+http://danielpovey.com/files/2018_interspeech_emotion_id.pdf
+file:///home/raulslab/Downloads/learning_audio_paralinguistics_from_the_raw_waveform.pdf
 
 1.http://www.utdallas.edu/~mirsamadi/files/mirsamadi17a.pdf - Done
 
