@@ -14,6 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from python_speech_features import mfcc,logfbank 
 from tqdm import tqdm
+import tensorflow as tf
 # %%
 class Feature_Extractor(object):
       def __init__(self, directory_name, data_set_name):
@@ -151,59 +152,69 @@ class Feature_Extractor(object):
             self.emotion_number = 4
             self.emotion_letter_position = -17
 
-
-# ft = Feature_Extractor('SAVEE/', 'SAVEE')
-# # %%
-
-# features, targets = ft.get_featurs_and_targets()
-
-# #%%
-# print(ft.inputs.shape)
-# print(ft.inputs[0].shape)
-# print(ft.inputs[1].shape)
-# print(ft.inputs[2].shape)
-# print(ft.inputs[3].shape)
-# print(ft.inputs[4].shape)
-
 #%%
 
 class NormalConfig(object):
       dir_name = 'EMO-DB'
       data_set_name = 'EMO-DB'
-      train_test_slice = 0.2
-      batch_size = 30
+      train_test_slice = 0.8
 
-class Data_Constructer(object):
+class Data_Producer(object):
       def __init__ (self, config):
-            self._feature_extractor = Feature_Extractor(config.dir_name, config.data_set_name)
-            self._inputs, self._targets = self._feature_extractor.get_featurs_and_targets()
-            
+            self._feature_extractor = Feature_Extractor(config.dir_name, config.data_set_name)     
             self._train_test_slice = config.train_test_slice
-            self._batch_size = config.batch_size
+
+      def _import_data(self):
+            """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR
+            """
+            self._inputs, self._targets = self._feature_extractor.get_featurs_and_targets()
 
       def _separate_train_from_test(self):
-            length = self._inputs.shape[0]
-            self._train_inputs = self._inputs[0 : -int(length*self._train_test_slice) + 1]
-            self._train_targets = self._targets[0 : -int(length*self._train_test_slice) + 1]
+            """ REGROUP DATA INTO TRAIN DATA AND TEST DATA
+                - given the small number of sample the validation phase is ignored
+            """
+            self._train_length = int(self._inputs.shape[0]*self._train_test_slice)
+            self._test_length = int(self._inputs.shape[0]*(1-self._train_test_slice))
 
-            self._test_inputs  = self._inputs[-int(length*self._train_test_slice) : ]
-            self._test_targets = self._targets[-int(length*self._train_test_slice) : ]
+            self._train_inputs = self._inputs[0 : -self._test_length + 1]
+            self._train_targets = self._targets[0 : -self._test_length + 1]
 
-      def _batch_data(self):
-            self._batch_nr = int(self._train_inputs.shape[0] // self._batch_size)
-            # self._train_inputs = np.reshape(self._train_inputs[0 : self._batch_size * self._batch_nr], (self._batch_nr, self._batch_size))
-            # self._train_targets = np.reshape(self._train_targets[0 : self._batch_size * self._batch_nr], (self._batch_nr, self._batch_size))
+            self._test_inputs  = self._inputs[-self._test_length : ]
+            self._test_targets = self._targets[-self._test_length : ]
 
-dc = Data_Constructer(NormalConfig())
-dc._separate_train_from_test()
-dc._batch_data()
-print(dc._train_inputs.shape)
-print(dc._train_inputs[0].shape)
-print(dc._train_inputs[0][0].shape)
+      def produce_data(self, session, name=None):
+            """ 
+            """
+            self._import_data()
+            self._separate_train_from_test()
+
+            self._train_inputs_dt = tf.data.Dataset.from_generator(lambda: self._train_inputs, tf.float64, output_shapes=[None, None])
+            self._train_targets_dt = tf.data.Dataset.from_generator(lambda: self._train_targets, tf.float64, output_shapes=[None])
+            self._test_inputs_dt = tf.data.Dataset.from_generator(lambda: self._test_inputs, tf.float64, output_shapes=[None, None])
+            self._test_targets_dt = tf.data.Dataset.from_generator(lambda: self._test_targets, tf.float64, output_shapes=[None])
+
+            iterator_train_inputs  = self._train_inputs_dt.make_one_shot_iterator()
+            iterator_train_targets = self._train_targets_dt.make_one_shot_iterator()
+            iterator_test_inputs   = self._test_inputs_dt.make_one_shot_iterator()
+            iterator_test_targets  = self._test_targets_dt.make_one_shot_iterator()
+
+            X_train = iterator_train_inputs.get_next()
+            y_train = iterator_train_targets.get_next()
+            X_test = iterator_train_inputs.get_next()
+            y_test = iterator_train_targets.get_next()
+
+            return (X_train, y_train), (X_test, y_test), (self._train_length, self._test_length)
 
 
 #%%
-print(dc._test_inputs.shape)
-print(dc._batch_nr//(30 * 30))
+ses = tf.Session()
+dc = Data_Producer(NormalConfig())
+(X_train, y_train), (X_test, y_test), (_train_length, _test_length) = dc.produce_data(ses)
 
-#%%
+print(ses.run(X_train).shape)
+print(ses.run(y_train).shape)
+
+print(ses.run(X_test).shape)
+print(ses.run(y_test).shape)
+
+ses.close()
