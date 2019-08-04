@@ -1,5 +1,4 @@
 # %%
-import scipy.io.wavfile
 import os
 try:
     os.chdir(os.path.join(
@@ -12,9 +11,9 @@ import librosa
 import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
-from python_speech_features import mfcc, logfbank
-from tqdm import tqdm
 import tensorflow as tf
+
+from tqdm import tqdm
 # %%
 
 
@@ -130,16 +129,6 @@ class Feature_Extractor(object):
                 feature) for feature in file_features] for file_features in files_features])
             return np.array([self._reshape_features_for_one_file(file_features) for file_features in tqdm(files_features)])
 
-      def get_featurs_and_targets(self):
-            """ THIS FUNCTION WILL BE THE ONE CALLED FROM THE OUTSIDE OF THIS CLASS
-                TO OBTAIN THE FEATURES AND TARGETS  
-            """
-            print("------------------ Processing audio files")
-            self._transform_wave_files(self.files)
-            self.show_pic(self.features[0])
-            self.inputs = self._reshape_features(self.features)
-            return self.inputs, self.targets
-
       def show_pic(self, features):
             i = 1
             names = ['MFCC', 'Delta', 'Delta-Deltas',
@@ -152,6 +141,16 @@ class Feature_Extractor(object):
                   plt.colorbar()
                   i = i+1
             plt.show()
+
+      def get_featurs_and_targets(self):
+            """ THIS FUNCTION WILL BE THE ONE CALLED FROM THE OUTSIDE OF THIS CLASS
+                TO OBTAIN THE FEATURES AND TARGETS  
+            """
+            print("------------------ Processing audio files")
+            self._transform_wave_files(self.files)
+            self.show_pic(self.features[0])
+            self.inputs = self._reshape_features(self.features)
+            return self.inputs, self.targets
 
       def set_EMO_DB_config(self):
             self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}
@@ -169,13 +168,6 @@ class Feature_Extractor(object):
             self.emotion_letter_position = -17
 
 #%%
-
-
-class NormalConfig(object):
-      dir_name = 'EMO-DB'
-      data_set_name = 'EMO-DB'
-      train_test_slice = 0.8
-
 
 class Data_Producer(object):
       def __init__(self, config):
@@ -209,14 +201,21 @@ class Data_Producer(object):
             self._import_data()
             self._separate_train_from_test()
 
+            hidden_size = self._train_inputs[0].shape[1]
+
             self._train_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: self._train_inputs, tf.float64, output_shapes=[None, None])
+                lambda: self._train_inputs, tf.float64, output_shapes=[None, 75])
             self._train_targets_dt = tf.data.Dataset.from_generator(
                 lambda: self._train_targets, tf.float64, output_shapes=[None])
             self._test_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: self._test_inputs, tf.float64, output_shapes=[None, None])
+                lambda: self._test_inputs, tf.float64, output_shapes=[None, 75])
             self._test_targets_dt = tf.data.Dataset.from_generator(
                 lambda: self._test_targets, tf.float64, output_shapes=[None])
+
+            self._train_inputs_dt = self._train_inputs_dt.repeat()
+            self._train_targets_dt = self._train_targets_dt.repeat()
+            self._test_inputs_dt = self._test_inputs_dt.repeat()
+            self._test_targets_dt = self._test_targets_dt.repeat()
 
             iterator_train_inputs = self._train_inputs_dt.make_one_shot_iterator()
             iterator_train_targets = self._train_targets_dt.make_one_shot_iterator()
@@ -231,16 +230,18 @@ class Data_Producer(object):
             return (X_train, y_train), (X_test, y_test), (self._train_length, self._test_length)
 
 
-#%%
-ses = tf.Session()
-dc = Data_Producer(NormalConfig())
-(X_train, y_train), (X_test, y_test), (_train_length,
-                                       _test_length) = dc.produce_data(ses)
+# #%%
+# ses = tf.Session()
+# dc = Data_Producer(NormalConfig())
+# (X_train, y_train), (X_test, y_test), (_train_length, _test_length) = dc.produce_data(ses)
 
-print(ses.run(X_train).shape)
-print(ses.run(y_train).shape)
+# print(ses.run(X_train).shape)
+# print(ses.run(y_train).shape)
 
-print(ses.run(X_test).shape)
-print(ses.run(y_test).shape)
+# print(ses.run(X_test).shape)
+# print(ses.run(y_test).shape)
 
-ses.close()
+# ses.close()
+
+
+# #%%
