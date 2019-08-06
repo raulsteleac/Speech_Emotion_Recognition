@@ -5,8 +5,10 @@ Links of papers:
 ATTENTION-AUGMENTED END-TO-END MULTI-TASK LEARNING FOR EMOTION PREDICTION FROM SPEECH
 -
 https://arxiv.org/pdf/1903.12424.pdf 
+
 ^ 128 nodes per GRU layer
 http://danielpovey.com/files/2018_interspeech_emotion_id.pdf
+
 ^ they use perturbation : For each speech signal 10 different amplitude modulated
                           versions are created initially. Speed perturbation [18] is performed on the amplitude modulated                               signals with speed factors 0.9, 1.0 and 1.1. 
 file:///home/raulslab/Downloads/learning_audio_paralinguistics_from_the_raw_waveform.pdf
