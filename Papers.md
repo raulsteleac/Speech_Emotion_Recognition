@@ -7,6 +7,7 @@ ATTENTION-AUGMENTED END-TO-END MULTI-TASK LEARNING FOR EMOTION PREDICTION FROM S
 https://arxiv.org/pdf/1903.12424.pdf 
 
 ^ 128 nodes per GRU layer
+
 http://danielpovey.com/files/2018_interspeech_emotion_id.pdf
 
 ^ they use perturbation : For each speech signal 10 different amplitude modulated
