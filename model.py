@@ -10,7 +10,8 @@ except:
 import numpy as np
 import tensorflow as tf
 
-from reader import Data_Producer_Train_Test, Data_Producer_Inference
+from data_producers import Data_Producer_Train_Test
+from data_producers import Data_Producer_Inference
 
 class SER_Data_Producer(object):
       def __init__(self, config):
@@ -46,7 +47,7 @@ class Speech_Emotion_Recognizer(object):
             self._learning_rate = 0.003
             self._keep_prob = 0.7
             self.model_op_name = model_op_name
-            self.init = tf.random_uniform_initializer(-0.1, 0.1)
+            self.init = tf.random_normal_initializer(-0.1, 0.1)
 
       def model(self):
             """ MAIN FUNCTION OF THE CLASS, RESPONSIBLE FOR CREATING THE MODEL
@@ -135,11 +136,11 @@ class Speech_Emotion_Recognizer(object):
                         "accuracy": self.accuracy
                         }
 
-      def run_model(self, session, writer, merged_summaries):
+      def run_model(self, session, writer, merged_summaries, files = None):
             """ RUNNING MODEL ON CURRENT CONFIGURATION 
                 This method is computing training, validation or testing depending on what model is calling it.
             """
-            print("\n %s just started !" % self.model_op_name)
+            print("\n %s just started ! \n" % self.model_op_name)
             if not self._is_inference:
                   total_accuracy = 0.0
                   sample_accuray = 0.0
@@ -153,11 +154,14 @@ class Speech_Emotion_Recognizer(object):
                               sample_accuray = 0.0
                   print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))
             else:
-                  vals = session.run(self.running_ops)
-                  emotions = ['Anger', 'Happines', 'Sadness', 'Fear', 'Natural']
-                  index = np.argmax(vals["predictions"])
-                  print("\n\n\n -------------- Raw predictions =  %s ---------------- \n" % vals["predictions_raw"])
-                  print(" -------------- Emotion =  %s ---------------- \n\n\n" % emotions[index])
+                  for i in range(self._op_length):
+                        if files[i] != 'Inference/Blank_WAV_file.wav':
+                              vals = session.run(self.running_ops)
+                              emotions = ['Anger', 'Happines', 'Sadness', 'Fear', 'Natural']
+                              index = np.argmax(vals["predictions"])
+                              print(" -------------- Emotion for file %s =  %s \n" % (files[i],emotions[index]))
+                              print(" -------------- Raw predictions for file %s =  %s \n" % (files[i],vals["predictions_raw"]))
+                              print("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>< \n\n")
             
       def debug_print(self, session):
             print(type(self._inputs))
@@ -165,6 +169,15 @@ class Speech_Emotion_Recognizer(object):
             print(self._targets)
             print(session.run(self._inputs).shape)
             print(session.run(self._targets).shape)
+
+      def create_saver(self):
+            self.saver = tf.train.Saver()
+
+      def save_model(self, ses, path):
+            self.saver.save(ses, path)
+
+      def restore_model(self, ses, path):
+            self.saver.restore(ses, path)
 
 class EMO_DB_Config(object):
       dir_name = ['EMO-DB']
@@ -188,7 +201,7 @@ class MULTIPLE_DATA_SETS_Config(object):
 
 class Inference_Config(object):
       dir_name = ['Inference']
-
+#%%
 def main():
       ses = tf.Session()
 
@@ -204,6 +217,8 @@ def main():
       ser_train_model.model()
       ser_test_model.model()
 
+      ser_train_model.create_saver()
+
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       merged_summaries = tf.summary.merge_all()
 
@@ -212,20 +227,35 @@ def main():
       for epoch in range(epochs):
             print("\n-----------> Epoch %d" % epoch)
             ser_train_model.run_model(ses, writer, merged_summaries)
+      ser_train_model.save_model(ses, "/tmp/model.ckpt")
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       ser_test_model.run_model(ses, writer, merged_summaries)
-
-      ser_dp_inference = Data_Producer_Inference(Inference_Config())
-      infr_inputs, inference_length = ser_dp_inference.produce_data(ses)
-
-      ser_inference_model = Speech_Emotion_Recognizer(inputs=infr_inputs, op_length=inference_length, is_training=False, is_inference=True)
-
-      ser_inference_model.model()
-      ser_inference_model.run_model(ses, writer, merged_summaries)
 
       ses.close()
 
 if __name__ == '__main__':
       main()
 
+#%%
+def inference():
+      ses = tf.Session()
+
+      ser_dp_inference = Data_Producer_Inference(Inference_Config())
+      infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
+
+      writer = tf.summary.FileWriter('./graphs', ses.graph)
+      merged_summaries = tf.summary.merge_all()
+
+      ser_inference_model = Speech_Emotion_Recognizer(
+      inputs=infr_inputs, op_length=inference_length, model_op_name="Inference", is_training=False, is_inference=True)
+
+      ser_inference_model.create_saver()
+      ser_inference_model.restore_model(ses, "/tmp/model.ckpt")
+
+      ser_inference_model.model()
+      ser_inference_model.run_model(ses, writer, merged_summaries, files)
+
+      ses.close()
+
+inference()
 #%%
