@@ -34,56 +34,48 @@ class Feature_Extractor(object):
                                     list_of_files, os.path.join(root, f))
             return list_of_files
 
+class Feature_Extractor_End_to_End(Feature_Extractor):
+      def __init__(self, directory_name_list):
+            super().__init__(directory_name_list)
+
+      def reshape_framse(self, stft):
+            window_length = 128
+            stft = np.transpose(stft)
+            window_nr = (stft.shape[0] // window_length + 1) * window_length
+            pad_size = window_nr - stft.shape[0]
+            stft = np.pad(stft, ((0, pad_size), (0, 0)), 'edge')
+            conv_frames = np.array([stft[i * 128:(i+1) * 128]
+                                    for i in range(int(stft.shape[0]/(stft.shape[1])+1))])
+            return conv_frames[:, :, 0:128]
+
+      def show_pic(self, feature):
+            """ LOG FUNCTION THAT PRINTS A PLOT FOR EACH FEATURE (MFCC, ZCR,.etc) OF ONE FILE
+            """
+            i = 1
+            names = ['STFT']
+            plt.figure(figsize=(60, 20))
+            plt.subplot(1, 1, i)
+            plt.title(names[i-1])
+            librosa.display.specshow(feature)
+            plt.colorbar()
+            i = i+1
+            plt.show()
+      
       def _get_audio_features(self, wav_file):
             """ EXTRACT THE AUDIO FEATURES FROM THE .WAV FILES USING THE LIBROSA LIBRARY
                 Arguments:
                 wav_file - the name of the .wav file from which to extract the features
                 Local variables:
-                mfcc - the coefficients of the Mel Frequency Cepstral for each frame
-                delta - the deltas of the mfcc (analogue to speed) for each frame
-                delta_deltas - the deltas of the delta (analogue to acceleration) for each frame
-                rms - the root mean square of the amplitude of the signal in each frame
-                zcr - Zero crossing rate, the rate at which a signal changes its sign during one frame
-                chroma - measures of the different pitch classes, 12 for every frame
-                rollof -  measures of the frequency that falls under some percentage (cutoff) of the total energy of the spectrum
+                stft - the coefficients of the Mel Frequency Cepstral for each frame
             """
             signal, rate = librosa.load(wav_file, 16000)
-            mfcc = librosa.feature.mfcc(y=signal, sr=rate, hop_length=260, n_mfcc=20)
-            delta = librosa.feature.delta(mfcc)
-            delta_deltas = librosa.feature.delta(delta)
-            rms = librosa.feature.rms(y=signal, frame_length=640, hop_length=260)
-            zcr = librosa.feature.zero_crossing_rate(y=signal, frame_length=640, hop_length=260)
-            chroma = librosa.feature.chroma_stft(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
-            rolloff = librosa.feature.spectral_rolloff(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
+            librosa.core.time_to_frames
+            stft = np.abs(librosa.stft(signal, n_fft=256,win_length=128, hop_length=32, center=False))
+            return stft
 
-            features = [mfcc, delta, delta_deltas, rms, zcr, chroma, rolloff]
-            return features
-
-      def show_pic(self, features):
-            """ LOG FUNCTION THAT PRINTS A PLOT FOR EACH FEATURE (MFCC, ZCR,.etc) OF ONE FILE
-            """
-            i = 1
-            names = ['MFCC', 'Delta', 'Delta-Deltas',
-                     'RMS', 'ZCR', 'Chrmoa', 'Roll-off']
-            plt.figure(figsize=(30, 20))
-            for signal in features:
-                  plt.subplot(7, 2, i)
-                  plt.title(names[i-1])
-                  librosa.display.specshow(signal)
-                  plt.colorbar()
-                  i = i+1
-            plt.show()
-
-      def _flatten_features(self, row):
-            """ FLATTENS THE MATRICIES, OF DIFERENT SHAPE, THAT REPRESENT THE FEATURES EXTRACTED FROM THE AUDIO FILES
-            """
-            new_features = np.array([])
-            for feature in row:
-                  new_values = np.array([])
-                  for val in feature:
-                        new_values = np.append(new_values, values=val)
-                  new_features = np.append(new_features, new_values)
-            return new_features
+class Feature_Extractor_Hand_Crafted(Feature_Extractor):
+      def __init__(self, directory_name_list):
+            super().__init__(directory_name_list)
 
       def _reshape_features_for_one_file(self, features):
             """
@@ -103,111 +95,61 @@ class Feature_Extractor(object):
             files_features = np.array([[np.transpose(feature) for feature in file_features] for file_features in files_features])
             return np.array([self._reshape_features_for_one_file(file_features) for file_features in tqdm(files_features)])
 
-class Feature_Extractor_Training_Testing(Feature_Extractor):
-      def __init__(self, directory_name_list, data_set_name_list):
-            super().__init__(directory_name_list)
-            self._data_set_name_list = data_set_name_list
+      def show_pic(self, features):
+            """ LOG FUNCTION THAT PRINTS A PLOT FOR EACH FEATURE (MFCC, ZCR,.etc) OF ONE FILE
+            """
+            i = 1
+            names = ['MFCC', 'Delta', 'Delta-Deltas',
+                     'RMS', 'ZCR', 'Chrmoa', 'Roll-off']
+            plt.figure(figsize=(30, 20))
+            for signal in features:
+                  plt.subplot(7, 2, i)
+                  plt.title(names[i-1])
+                  librosa.display.specshow(signal)
+                  plt.colorbar()
+                  i = i+1
+            plt.show()
 
-      def _set_data_set_config(self, data_set_name):
-            """ SET CONFIGURATION DEPENDING ON THE DATA SET GIVEN BY THE ARGUMENT OF THIS FUNCTION
+      def _get_audio_features(self, wav_file):
+            """ EXTRACT THE AUDIO FEATURES FROM THE .WAV FILES USING THE LIBROSA LIBRARY
                 Arguments:
-                data_set_name - name of the currently used data set e.g. : EMO-DB, SAVEE
+                wav_file - the name of the .wav file from which to extract the features
+                Local variables:
+                mfcc - the coefficients of the Mel Frequency Cepstral for each frame
+                delta - the deltas of the mfcc (analogue to speed) for each frame
+                delta_deltas - the deltas of the delta (analogue to acceleration) for each frame
+                rms - the root mean square of the amplitude of the signal in each frame
+                zcr - Zero crossing rate, the rate at which a signal changes its sign during one frame
+                chroma - measures of the different pitch classes, 12 for every frame
+                rollof -  measures of the frequency that falls under some percentage (cutoff) of the total energy of the spectrum
             """
-            if data_set_name == 'EMO-DB':
-                  self.set_EMO_DB_config()
+            signal, rate = librosa.load(wav_file, 16000)
+            mfcc = librosa.feature.mfcc(
+                y=signal, sr=rate, hop_length=260, n_mfcc=20)
+            delta = librosa.feature.delta(mfcc)
+            delta_deltas = librosa.feature.delta(delta)
+            rms = librosa.feature.rms(
+                y=signal, frame_length=640, hop_length=260)
+            zcr = librosa.feature.zero_crossing_rate(
+                y=signal, frame_length=640, hop_length=260)
+            chroma = librosa.feature.chroma_stft(
+                y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
+            rolloff = librosa.feature.spectral_rolloff(
+                y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
 
-            if data_set_name == 'RAVDESS':
-                  self.set_RAVDESS_config()
+            features = [mfcc, delta, delta_deltas, rms, zcr, chroma, rolloff]
+            return features
 
-            if data_set_name == 'SAVEE':
-                  self.set_SAVEE_config()
-
-      def _one_hotizize(self, targets):
-            """ CONVERT THE LETTERS REPRESENTING EMOTIONS INTO ONE HOT ENCODING
-                Arguments:
-                targes - list of emotion coressponding to each input file
-                Returns:
-                The one-hot encoded version of the targets
+      def _flatten_features(self, row):
+            """ FLATTENS THE MATRICIES, OF DIFERENT SHAPE, THAT REPRESENT THE FEATURES EXTRACTED FROM THE AUDIO FILES
             """
-            targets = [self.e_to_n_mapping[emotion] for emotion in targets]
-            return np.eye(self.emotion_number)[targets]
-      
-      def _transform_wave_files(self, files):
-            """ CALL THE FEATURE EXTRACTION FUNCTIONS ON ALL FILES IN THE DATA SET  
-                Arguments:
-                files - the list of file from which to extract the features
-            """
-            print("------------------ Extracting audio features from files")
-            files = [wav_file for wav_file in files if wav_file[self.emotion_letter_position] in self.e_to_n_mapping.keys()]
-            print(files[0])
-            self.features = np.array([self._get_audio_features(wav_file) for wav_file in tqdm(files)])
-            targets = [wav_file[self.emotion_letter_position] for wav_file in files]
-            self.targets = np.append(self.targets, self._one_hotizize(targets))
-
-      def _shuffle_data(self, inputs, targets):
-            """ SHUFFLE BOTH THE INPUTS AND THE TARGETS IN THE SAME MANNER
-                Returns:
-                inputs, targets - the shuffled version of the data  
-            """
-            shuffle = np.arange(inputs.shape[0])
-            np.random.seed(17)
-            np.random.shuffle(shuffle)
-            inputs = inputs[shuffle]
-            targets = targets[shuffle]
-            return inputs, targets
-
-      def get_featurs_and_targets(self):
-            """ THIS FUNCTION WILL BE THE ONE CALLED FROM THE OUTSIDE OF THIS CLASS
-                TO OBTAIN THE FEATURES AND TARGETS 
-                Returns:
-                self.inputs, self.targets - represents the list of features and targets propagated outside this class 
-            """
-            print("------------------ Processing audio files")
-            self.inputs = np.array([])
-            self.targets = np.array([[]])
-
-            for files, ds_name in zip(self.files, self._data_set_name_list):
-                self._set_data_set_config(ds_name)
-                self._transform_wave_files(files)
-                self.show_pic(self.features[0])
-                self.inputs = np.append(self.inputs, self._reshape_features(self.features))
-
-            self.targets = np.reshape(self.targets, (-1, self.emotion_number))
-            self.inputs, self.targets = self._shuffle_data(self.inputs, self.targets)
-            return self.inputs, self.targets, self.inputs[0].shape[1]
-
-      def set_EMO_DB_config(self):
-            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'A': 3, 'N': 4}
-            self.emotion_number = 5
-            self.emotion_letter_position = -6
-
-      def set_SAVEE_config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'f': 3, 'n': 4}
-            self.emotion_number = 5
-            self.emotion_letter_position = 9
-
-      def set_RAVDESS_config(self):
-            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '6': 3, '1': 4}
-            self.emotion_number = 5
-            self.emotion_letter_position = -17
-
-class Feature_Extractor_Inference(Feature_Extractor):
-      def __init__(self, directory_name_list):
-            super().__init__(directory_name_list)
-      
-      def get_features_and_files(self):
-            """ CALL THE FEATURE EXTRACTION FUNCTIONS ON ALL FILES IN THE DATA SET  
-                Arguments:
-                files - the list of file from which to extract the features
-            """
-            print("------------------ Extracting audio features from files")
-            self.files = self.files[0]
-            print("List of files is : %s" % self.files)
-            self.features = np.array([self._get_audio_features(wav_file) for wav_file in tqdm(self.files)])
-            self.show_pic(self.features[0])
-            self.features = self._reshape_features(self.features)
-            print("------------------------------------------------------------------------")
-            return self.features, self.files
+            new_features = np.array([])
+            for feature in row:
+                  new_values = np.array([])
+                  for val in feature:
+                        new_values = np.append(new_values, values=val)
+                  new_features = np.append(new_features, new_values)
+            return new_features
 
 #%%
 

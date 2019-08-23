@@ -10,12 +10,21 @@ except:
 import numpy as np
 import tensorflow as tf
 
-from data_producers import Data_Producer_Train_Test
-from data_producers import Data_Producer_Inference
+from hand_crafted_data_producers import Data_Producer_Hand_Crafted_Train_Test
+from hand_crafted_data_producers import Data_Producer_Hand_Crafted_Inference
+from end_to_end_data_producers import Data_Producer_End_to_End_Train_Test
+from end_to_end_data_producers import Data_Producer_End_to_End_Inference
+
+flag_end_to_end = 0
+
+# from conv_reader import Data_Producer_Train_Test_Auto
 
 class SER_Data_Producer(object):
       def __init__(self, config):
-            self.dp = Data_Producer_Train_Test(config)
+            if flag_end_to_end:
+                  self.dp = Data_Producer_End_to_End_Train_Test(config)
+            else:
+                  self.dp = Data_Producer_Hand_Crafted_Train_Test(config)
 
       def import_data(self, session): 
             """ CALLS THE PRODUCE_DATA FUNCTION OF THE DATA_PRODUCER
@@ -42,9 +51,9 @@ class Speech_Emotion_Recognizer(object):
             self._is_training = is_training
             self._is_inference = is_inference
 
-            self._hidden_size = 75
+            self._hidden_size = 128
             self._emotion_nr = 5
-            self._learning_rate = 0.003
+            self._learning_rate = 0.001
             self._keep_prob = 0.7
             self.model_op_name = model_op_name
             self.init = tf.random_normal_initializer(-0.1, 0.1)
@@ -97,7 +106,7 @@ class Speech_Emotion_Recognizer(object):
             """ CREATES A RNN LAYER BASED ON A LSTM CELL AND A INITIAL ZERO STATE
             """
             lstm_cell = self.make_lstm_cell(hidden_size)
-            initial_zero_state = lstm_cell.zero_state(1, tf.float64)
+            initial_zero_state = lstm_cell.zero_state(1, tf.float32)
 
             inputs = tf.expand_dims(inputs, axis=0)
             _, states = tf.nn.dynamic_rnn(lstm_cell, inputs, initial_state=initial_zero_state)
@@ -109,8 +118,8 @@ class Speech_Emotion_Recognizer(object):
                 Returns:
                 The weighted sum of all the emotion predictions of all frames  
             """
-            W = tf.get_variable("Attention_Weights", dtype=tf.float64, shape=[self._emotion_nr, 1])
-            b = tf.get_variable("Attention_Bias", dtype=tf.float64, shape=[1])
+            W = tf.get_variable("Attention_Weights", dtype=tf.float32, shape=[self._emotion_nr, 1])
+            b = tf.get_variable("Attention_Bias", dtype=tf.float32, shape=[1])
             
             alpha = tf.matmul(frame_predictions, W) + b
             alpha = tf.nn.softmax(alpha, axis=0)
@@ -195,12 +204,13 @@ class RAVDESS_Config(object):
       train_test_slice = 0.8
 
 class MULTIPLE_DATA_SETS_Config(object):
-      dir_name = ['EMO-DB', 'SAVEE', 'RAVDESS']
-      data_set_name = ['EMO-DB', 'SAVEE', 'RAVDESS']
+      dir_name = ['EMO-DB', 'RAVDESS']
+      data_set_name = ['EMO-DB', 'RAVDESS']
       train_test_slice = 0.8
 
 class Inference_Config(object):
       dir_name = ['Inference']
+
 #%%
 def main():
       ses = tf.Session()
@@ -223,7 +233,7 @@ def main():
       merged_summaries = tf.summary.merge_all()
 
       ser_train_model.initialize_variables(ses)
-      epochs = 10
+      epochs = 5
       for epoch in range(epochs):
             print("\n-----------> Epoch %d" % epoch)
             ser_train_model.run_model(ses, writer, merged_summaries)
@@ -240,14 +250,18 @@ if __name__ == '__main__':
 def inference():
       ses = tf.Session()
 
-      ser_dp_inference = Data_Producer_Inference(Inference_Config())
+      if flag_end_to_end:
+            ser_dp_inference = Data_Producer_End_to_End_Inference(Inference_Config())
+      else:
+            ser_dp_inference = Data_Producer_Hand_Crafted_Inference(Inference_Config())
+
       infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
 
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       merged_summaries = tf.summary.merge_all()
 
       ser_inference_model = Speech_Emotion_Recognizer(
-      inputs=infr_inputs, op_length=inference_length, model_op_name="Inference", is_training=False, is_inference=True)
+      inputs=infr_inputs, op_length=inference_length, model_op_name="Testing", is_training=False, is_inference=True)
 
       ser_inference_model.create_saver()
       ser_inference_model.restore_model(ses, "/tmp/model.ckpt")
@@ -259,3 +273,4 @@ def inference():
 
 inference()
 #%%
+
