@@ -70,8 +70,8 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
 
             X_train = iterator_train_inputs.get_next()
             y_train = iterator_train_targets.get_next()
-            X_test = iterator_train_inputs.get_next()
-            y_test = iterator_train_targets.get_next()
+            X_test = iterator_test_inputs.get_next()
+            y_test = iterator_test_targets.get_next()
 
             return (X_train, y_train), (X_test, y_test), (self._train_length, self._test_length)
 #%%

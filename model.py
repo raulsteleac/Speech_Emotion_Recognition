@@ -51,7 +51,7 @@ class Speech_Emotion_Recognizer(object):
             self._is_training = is_training
             self._is_inference = is_inference
 
-            self._hidden_size = 128
+            self._hidden_size = 256
             self._emotion_nr = 5
             self._learning_rate = 0.001
             self._keep_prob = 0.7
@@ -65,8 +65,9 @@ class Speech_Emotion_Recognizer(object):
             """
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse = tf.AUTO_REUSE, initializer=self.init):
                   rnn_layer_1 = self.create_LSTM_layer(self._inputs, self._hidden_size)
-                  fully_connected_layer = tf.layers.dense(rnn_layer_1, self._emotion_nr, name="Output_Layer")
-                  predictions = self.create_attention_layer(fully_connected_layer)
+                  attention_layer_output = self.create_attention_layer(rnn_layer_1, self._hidden_size)
+                  predictions = tf.layers.dense(attention_layer_output, self._emotion_nr, name="Output_Layer")
+                  predictions = tf.reduce_sum(predictions, axis = 0)
 
                   targets_raw_ = tf.nn.sigmoid(predictions)
                   targets_ = tf.round(targets_raw_)
@@ -112,18 +113,18 @@ class Speech_Emotion_Recognizer(object):
             _, states = tf.nn.dynamic_rnn(lstm_cell, inputs, initial_state=initial_zero_state)
             return states[0]
 
-      def create_attention_layer(self, frame_predictions):
+      def create_attention_layer(self, frame_predictions, weigths_dim):
             """ CREATES THE ATTENTION LAYER IN ORDER TO OBTAIN A WEIGHTED POOL LAYER BASED ON THE
                 EMOTION IN EACH FRAME
                 Returns:
                 The weighted sum of all the emotion predictions of all frames  
             """
-            W = tf.get_variable("Attention_Weights", dtype=tf.float32, shape=[self._emotion_nr, 1])
+            W = tf.get_variable("Attention_Weights", dtype=tf.float32, shape=[weigths_dim, 1])
             b = tf.get_variable("Attention_Bias", dtype=tf.float32, shape=[1])
             
             alpha = tf.matmul(frame_predictions, W) + b
             alpha = tf.nn.softmax(alpha, axis=0)
-            return tf.reduce_sum(tf.multiply(frame_predictions, alpha[: tf.newaxis]), axis = 0)
+            return tf.multiply(frame_predictions, alpha[: tf.newaxis])
 
       @property
       def running_ops(self):
@@ -169,7 +170,7 @@ class Speech_Emotion_Recognizer(object):
                               emotions = ['Anger', 'Happines', 'Sadness', 'Fear', 'Natural']
                               index = np.argmax(vals["predictions"])
                               print(" -------------- Emotion for file %s =  %s \n" % (files[i],emotions[index]))
-                              print(" -------------- Raw predictions for file %s =  %s \n" % (files[i],vals["predictions_raw"]))
+                              print(" -------------- Raw predictions for file %s =  %s \n" % (files[i], list(map('{:.8f}'.format, vals["predictions_raw"]))))
                               print("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>< \n\n")
             
       def debug_print(self, session):

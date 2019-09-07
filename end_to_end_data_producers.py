@@ -92,8 +92,8 @@ class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
 
             X_train = iterator_train_inputs.get_next()
             y_train = iterator_train_targets.get_next()
-            X_test = iterator_train_inputs.get_next()
-            y_test = iterator_train_targets.get_next()
+            X_test = iterator_test_inputs.get_next()
+            y_test = iterator_test_targets.get_next()
 
             X_train = self._convolutional_feature_extractor(X_train)
             X_test = self._convolutional_feature_extractor(X_test)
