@@ -15,10 +15,6 @@ from hand_crafted_data_producers import Data_Producer_Hand_Crafted_Inference
 from end_to_end_data_producers import Data_Producer_End_to_End_Train_Test
 from end_to_end_data_producers import Data_Producer_End_to_End_Inference
 
-flag_end_to_end = 0
-
-# from conv_reader import Data_Producer_Train_Test_Auto
-
 class SER_Data_Producer(object):
       def __init__(self, config):
             if flag_end_to_end:
@@ -44,19 +40,21 @@ class SER_Data_Producer(object):
             return self.test_inputs, self.test_targets, self.test_length
 
 class Speech_Emotion_Recognizer(object):
-      def __init__(self, inputs, targets = None, op_length = 1, model_op_name = "", is_training=False, is_inference=False):
-            self._inputs = inputs
-            self._targets = targets
-            self._op_length = op_length
+      def __init__(self, model_op_name = "", is_training=False, is_inference=False):
             self._is_training = is_training
             self._is_inference = is_inference
 
-            self._hidden_size = 256
+            self._hidden_size = 256 if flag_end_to_end==0 else 1024 
             self._emotion_nr = 5
             self._learning_rate = 0.001
             self._keep_prob = 0.7
             self.model_op_name = model_op_name
             self.init = tf.random_normal_initializer(-0.1, 0.1)
+
+      def set_inputs_targets_length(self, inputs, targets=None, op_length=1):
+            self._inputs = inputs
+            self._targets = targets
+            self._op_length = op_length            
 
       def model(self):
             """ MAIN FUNCTION OF THE CLASS, RESPONSIBLE FOR CREATING THE MODEL
@@ -64,8 +62,9 @@ class Speech_Emotion_Recognizer(object):
                 will be share using the tf.virtual_scope.
             """
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse = tf.AUTO_REUSE, initializer=self.init):
-                  rnn_layer_1 = self.create_LSTM_layer(self._inputs, self._hidden_size)
-                  attention_layer_output = self.create_attention_layer(rnn_layer_1, self._hidden_size)
+                  rnn_layer_1 = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
+                  rnn_layer_2 = self.create_LSTM_layer(rnn_layer_1, self._hidden_size, "rnn_layer2")
+                  attention_layer_output = self.create_attention_layer(rnn_layer_2, self._hidden_size)
                   predictions = tf.layers.dense(attention_layer_output, self._emotion_nr, name="Output_Layer")
                   predictions = tf.reduce_sum(predictions, axis = 0)
 
@@ -103,14 +102,14 @@ class Speech_Emotion_Recognizer(object):
                   cell = tf.contrib.rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
             return cell
 
-      def create_LSTM_layer(self, inputs, hidden_size):
+      def create_LSTM_layer(self, inputs, hidden_size, name=None):
             """ CREATES A RNN LAYER BASED ON A LSTM CELL AND A INITIAL ZERO STATE
             """
-            lstm_cell = self.make_lstm_cell(hidden_size)
-            initial_zero_state = lstm_cell.zero_state(1, tf.float32)
-
-            inputs = tf.expand_dims(inputs, axis=0)
-            _, states = tf.nn.dynamic_rnn(lstm_cell, inputs, initial_state=initial_zero_state)
+            with tf.variable_scope(name):
+                  lstm_cell = self.make_lstm_cell(hidden_size)
+                  initial_zero_state = lstm_cell.zero_state(1, tf.float32)
+                  inputs = tf.expand_dims(inputs, axis=0)
+                  _, states = tf.nn.dynamic_rnn(lstm_cell, inputs, initial_state=initial_zero_state)
             return states[0]
 
       def create_attention_layer(self, frame_predictions, weigths_dim):
@@ -193,27 +192,34 @@ class EMO_DB_Config(object):
       dir_name = ['EMO-DB']
       data_set_name = ['EMO-DB']
       train_test_slice = 0.8
+      target_domain = dir_name
 
 class SAVEE_Config(object):
       dir_name = ['SAVEE']
       data_set_name = ['SAVEE']
       train_test_slice = 0.8
+      target_domain = dir_name
 
 class RAVDESS_Config(object):
       dir_name = ['RAVDESS']
       data_set_name = ['RAVDESS']
       train_test_slice = 0.8
+      target_domain = dir_name
 
 class MULTIPLE_DATA_SETS_Config(object):
       dir_name = ['EMO-DB', 'RAVDESS']
       data_set_name = ['EMO-DB', 'RAVDESS']
       train_test_slice = 0.8
+      target_domain = ['EMO-DB']
 
 class Inference_Config(object):
       dir_name = ['Inference']
 
 #%%
+flag_end_to_end = 0
+
 def main():
+      tf.reset_default_graph()
       ses = tf.Session()
 
       ser_dp = SER_Data_Producer(EMO_DB_Config())
@@ -222,8 +228,11 @@ def main():
       train_inputs, train_targets, train_length = ser_dp.train_data
       test_inputs, test_targets, test_length = ser_dp.test_data
 
-      ser_train_model = Speech_Emotion_Recognizer(train_inputs, train_targets, train_length, "Training", True)
-      ser_test_model  = Speech_Emotion_Recognizer(test_inputs, test_targets, test_length, "Testing")
+      ser_train_model = Speech_Emotion_Recognizer( "Training", True)
+      ser_test_model  = Speech_Emotion_Recognizer( "Testing")
+
+      ser_train_model.set_inputs_targets_length(train_inputs, train_targets, train_length)
+      ser_test_model.set_inputs_targets_length(test_inputs, test_targets, test_length)
 
       ser_train_model.model()
       ser_test_model.model()
@@ -234,11 +243,11 @@ def main():
       merged_summaries = tf.summary.merge_all()
 
       ser_train_model.initialize_variables(ses)
-      epochs = 5
+      epochs = 10
       for epoch in range(epochs):
             print("\n-----------> Epoch %d" % epoch)
             ser_train_model.run_model(ses, writer, merged_summaries)
-      ser_train_model.save_model(ses, "/tmp/model.ckpt")
+      ser_train_model.save_model(ses, "./model/model.ckpt")
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       ser_test_model.run_model(ses, writer, merged_summaries)
 
@@ -256,16 +265,15 @@ def inference():
       else:
             ser_dp_inference = Data_Producer_Hand_Crafted_Inference(Inference_Config())
 
+      ser_inference_model = Speech_Emotion_Recognizer(model_op_name="Inference", is_training=False, is_inference=True)
+      ser_inference_model.create_saver()
+      ser_inference_model.restore_model(ses, "./model/model.ckpt")      
       infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
+
+      ser_inference_model.set_inputs_targets_length(inputs=infr_inputs, op_length=inference_length)
 
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       merged_summaries = tf.summary.merge_all()
-
-      ser_inference_model = Speech_Emotion_Recognizer(
-      inputs=infr_inputs, op_length=inference_length, model_op_name="Testing", is_training=False, is_inference=True)
-
-      ser_inference_model.create_saver()
-      ser_inference_model.restore_model(ses, "/tmp/model.ckpt")
 
       ser_inference_model.model()
       ser_inference_model.run_model(ses, writer, merged_summaries, files)
@@ -274,4 +282,3 @@ def inference():
 
 inference()
 #%%
-

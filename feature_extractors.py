@@ -16,6 +16,9 @@ import tensorflow as tf
 from tqdm import tqdm
 # %%
 class Feature_Extractor(object):
+      _dae = None
+      _target_domain = None
+
       def __init__(self, directory_name_list):
             print(
                 "------------------ Starting extracting featuers for data set : %s " % ' '.join(directory_name_list))
@@ -124,18 +127,13 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
                 rollof -  measures of the frequency that falls under some percentage (cutoff) of the total energy of the spectrum
             """
             signal, rate = librosa.load(wav_file, 16000)
-            mfcc = librosa.feature.mfcc(
-                y=signal, sr=rate, hop_length=260, n_mfcc=20)
+            mfcc = librosa.feature.mfcc(y=signal, sr=rate, hop_length=260, n_mfcc=20)
             delta = librosa.feature.delta(mfcc)
             delta_deltas = librosa.feature.delta(delta)
-            rms = librosa.feature.rms(
-                y=signal, frame_length=640, hop_length=260)
-            zcr = librosa.feature.zero_crossing_rate(
-                y=signal, frame_length=640, hop_length=260)
-            chroma = librosa.feature.chroma_stft(
-                y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
-            rolloff = librosa.feature.spectral_rolloff(
-                y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
+            rms = librosa.feature.rms(y=signal, frame_length=640, hop_length=260)
+            zcr = librosa.feature.zero_crossing_rate(y=signal, frame_length=640, hop_length=260)
+            chroma = librosa.feature.chroma_stft(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
+            rolloff = librosa.feature.spectral_rolloff(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
 
             features = [mfcc, delta, delta_deltas, rms, zcr, chroma, rolloff]
             return features
@@ -150,25 +148,3 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
                         new_values = np.append(new_values, values=val)
                   new_features = np.append(new_features, new_values)
             return new_features
-
-#%%
-
-# class Inference_Config(object):
-#       dir_name = ['Inference']
-
-# ses = tf.Session()
-
-# dp = Data_Producer_Inference(Inference_Config())
-# inputs, length = dp.produce_data(ses)
-
-# print(ses.run(inputs).shape)
-# print(ses.run(inputs)[0].shape)
-# print(ses.run(inputs)[0][0].shape)
-
-# ses.close()
-
-
-#%%
-
-
-#%%

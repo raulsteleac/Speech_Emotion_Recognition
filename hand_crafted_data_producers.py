@@ -18,11 +18,13 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
       def __init__(self, config):
             self._feature_extractor = Feature_Extractor_Hand_Crafted_Training_Testing(config.dir_name, config.data_set_name)
             self._train_test_slice = config.train_test_slice
+            self._target_domain = config.target_domain[0]
 
-      def _import_data(self):
+      def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
             """
-            self._inputs, self._targets, self._feature_count = self._feature_extractor.get_featurs_and_targets()
+      def _import_data(self, session):
+            self._inputs, self._targets, self._feature_count = self._feature_extractor.get_featurs_and_targets(self._target_domain, session)
 
       def _separate_train_from_test(self):
             """ REGROUP DATA INTO TRAIN DATA AND TEST DATA
@@ -46,7 +48,7 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
                 (X_test, y_test) - pair representing one instance of the train data
                 (self._train_length, self._test_length) - pair representing the length of the train and test data                
             """
-            self._import_data()
+            self._import_data(session)
             self._separate_train_from_test()
 
             self._train_inputs_dt = tf.data.Dataset.from_generator(
@@ -79,10 +81,10 @@ class Data_Producer_Hand_Crafted_Inference(object):
       def __init__(self, config):
             self._feature_extractor = Feature_Extractor_Hand_Crafted_Inference(config.dir_name)
 
-      def _import_data(self):
+      def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
             """
-            self._features, self._files = self._feature_extractor.get_features_and_files()
+            self._features, self._files = self._feature_extractor.get_featurs_and_targets(session)
 
       def produce_data(self, session, name=None):
             """ CONSTRUCTING TF.DATASETS BASED ON THE FEATURES EXTRACTED
@@ -91,7 +93,7 @@ class Data_Producer_Hand_Crafted_Inference(object):
                 (X_test, y_test) - pair representing one instance of the train data
                 (self._train_length, self._test_length) - pair representing the length of the train and test data                
             """
-            self._import_data()
+            self._import_data(session)
             print(self._features.shape)
             print(self._features[0].shape)
             print(self._features[0].shape)
