@@ -17,22 +17,18 @@ from end_to_end_extractor import Feature_Extractor_End_to_End_Inference
 
 class Data_Producer_End_to_End(object):
       def conv_layer(self, input_data, filter_size, channels_in, channels_out, strides, name="Conv"):
-            W = tf.get_variable("Weights_Fully_Connected_Layer"+name, dtype=tf.float32,
-                                shape=[filter_size, filter_size, channels_in, channels_out])
-            b = tf.get_variable("Biases_Fully_Connected_Layer" +
-                                name, dtype=tf.float32, shape=[channels_out])
-            return tf.nn.conv2d(input=input_data, filter=W, strides=strides, padding='SAME') + b
+            W = tf.get_variable("Weights_Fully_Connected_Layer"+name, dtype=tf.float32, shape=[filter_size, filter_size, channels_in, channels_out])
+            return tf.nn.conv2d(input=input_data, filter=W, strides=strides, padding='SAME')
 
       def _convolutional_feature_extractor(self, stft):
-        self.init = tf.random_normal_initializer(-0.1, 0.1)
-        with tf.variable_scope("Convbb", reuse=tf.AUTO_REUSE, initializer=self.init):
-            conv1 = self.conv_layer(input_data=stft, filter_size=128, channels_in=1 , channels_out=32, strides=[1, 2, 2, 1], name="conv1")
-            conv2 = self.conv_layer(input_data=conv1, filter_size=64, channels_in=32, channels_out=32, strides=[1, 2, 2, 1], name="conv2")
-            conv3 = self.conv_layer(input_data=conv2, filter_size=64, channels_in=32, channels_out=32, strides=[1, 1, 1, 1], name="conv3")
-            conv4 = self.conv_layer(input_data=conv3, filter_size=32, channels_in=32, channels_out=32, strides=[1, 8, 4, 1], name="conv4")
-            conv_out = tf.reshape(conv4, (-1, 1024))
-            outputs = tf.layers.dense(conv_out, 1024, activation=tf.nn.relu, name="Forth_Fully_Connected_Layer")
-        return outputs
+            self.init = tf.random_normal_initializer(-0.1, 0.1)
+            with tf.variable_scope("Convbb", reuse=tf.AUTO_REUSE, initializer=self.init):
+                  conv1 = self.conv_layer(input_data=stft, filter_size=8, channels_in=1, channels_out=32, strides=[1, 2, 2, 1], name="conv1")
+                  conv2 = tf.nn.max_pool(conv1, [1,2,2,1], [1,2,2,1], padding="SAME")
+                  conv3 = self.conv_layer(input_data=conv2, filter_size=4, channels_in=32, channels_out=16, strides=[1, 2, 2, 1], name="conv3")
+                  conv3 = tf.nn.max_pool(conv3, [1,2,2,1], [1,2,2,1], padding="SAME")
+                  conv_out = tf.reshape(conv3, (-1, 1024))
+            return conv_out
 
 class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
       def __init__(self, config):
@@ -43,11 +39,6 @@ class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
       def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
             """
-            print(self._target_domain)
-            print(self._target_domain)
-            print(self._target_domain)
-            print(self._target_domain)
-            print(self._target_domain)
             self._inputs, self._targets, self.feature_shape = self._feature_extractor.get_featurs_and_targets(self._target_domain, session)
 
       def _separate_train_from_test(self):
@@ -131,3 +122,6 @@ class Data_Producer_End_to_End_Inference(Data_Producer_End_to_End):
             inputs = self._convolutional_feature_extractor(inputs)
 
             return inputs, inference_length, self._files
+
+
+#%%

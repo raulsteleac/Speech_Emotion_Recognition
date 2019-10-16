@@ -46,9 +46,8 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
             stft = np.transpose(stft)
             window_nr = (stft.shape[0] // window_length + 1) * window_length
             pad_size = window_nr - stft.shape[0]
-            stft = np.pad(stft, ((0, pad_size), (0, 0)), 'edge')
-            conv_frames = np.array([stft[i * 128:(i+1) * 128]
-                                    for i in range(int(stft.shape[0]/(stft.shape[1])+1))])
+            stft = np.pad(stft, ((0, pad_size), (0, 1)), 'edge')
+            conv_frames = np.array(([stft[i * 128:(i+1) * 128] for i in range(int(stft.shape[0]/(stft.shape[1]) + 1))]))
             return conv_frames[:, :, 0:128]
 
       def show_pic(self, feature):
@@ -73,7 +72,7 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
             """
             signal, rate = librosa.load(wav_file, 16000)
             librosa.core.time_to_frames
-            stft = np.abs(librosa.stft(signal, n_fft=256,win_length=128, hop_length=32, center=False))
+            stft = librosa.feature.melspectrogram(signal, n_fft=256, win_length=128, hop_length=32, center=False)
             return stft
 
 class Feature_Extractor_Hand_Crafted(Feature_Extractor):

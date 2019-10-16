@@ -6,8 +6,6 @@ try:
 except:
     pass
 
-import librosa
-import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -90,13 +88,6 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
                   self.inputs = np.append(self.inputs, self.features)
 
                   if target_domain == ds_name:
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
-                        print("!!!!!!!!!!!!")
                         autoencoder_train_input = self.features
 
             print(self.features.shape)
@@ -107,10 +98,10 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
             print(self.features[2].shape)
             print(self.features[3].shape)
             
-            Feature_Extractor._dae = DAE(fit_inputs=autoencoder_train_input, hidden_layer_dimension=120)
-            Feature_Extractor._dae.autoencoder_model()
-            Feature_Extractor._dae.autoencoder_fit(12, session)
-            self.inputs = Feature_Extractor._dae.autoencoder_transform(self.inputs, session)
+            # Feature_Extractor._dae = DAE(fit_inputs=autoencoder_train_input, hidden_layer_dimension=120)
+            # Feature_Extractor._dae.autoencoder_model()
+            # Feature_Extractor._dae.autoencoder_fit(250, session)
+            # self.inputs = Feature_Extractor._dae.autoencoder_transform(self.inputs, session)
             
             self.targets = np.reshape(self.targets, (-1, self.emotion_number))
             self.inputs, self.targets = self._shuffle_data(self.inputs, self.targets)
@@ -149,8 +140,8 @@ class Feature_Extractor_End_to_End_Inference(Feature_Extractor_End_to_End):
             self.show_pic(sfeature_print)
             print(
                 "------------------------------------------------------------------------")
-            Feature_Extractor._dae.autoencoder_model()
-            self.features = Feature_Extractor._dae.autoencoder_transform(self.features, session)
+            # Feature_Extractor._dae.autoencoder_model()
+            # self.features = Feature_Extractor._dae.autoencoder_transform(self.features, session)
             return self.features, self.files
 
 

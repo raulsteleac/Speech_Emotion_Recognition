@@ -54,16 +54,26 @@ class Speech_Emotion_Recognizer(object):
       def set_inputs_targets_length(self, inputs, targets=None, op_length=1):
             self._inputs = inputs
             self._targets = targets
-            self._op_length = op_length            
+            self._op_length = op_length
+
+      def batch_normalization(self, batch):
+            """ COMPUTE BATCH NORMALIZAION ON THE BATCH GIVEN AS INPUT TO EACH HIDDEN LAYER
+                Return:
+                Returns the transformed batch with mean 0 and stdev 1  
+            """
+            means = tf.reduce_mean(batch, 0)
+            stdev = tf.reduce_mean(np.power((batch - means), 2), 0) + 0.00001
+            return (batch - means) / (tf.sqrt(stdev))
 
       def model(self):
             """ MAIN FUNCTION OF THE CLASS, RESPONSIBLE FOR CREATING THE MODEL
                 The weights, and all the other necessary parameters for all the models,
                 will be share using the tf.virtual_scope.
             """
-            with tf.variable_scope("Speech_Emotion_Recognizer", reuse = tf.AUTO_REUSE, initializer=self.init):
+            with tf.variable_scope("Speech_Emotion_Recognizer", reuse = tf.AUTO_REUSE, initializer=self.init):                  
                   rnn_layer_1 = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
                   rnn_layer_2 = self.create_LSTM_layer(rnn_layer_1, self._hidden_size, "rnn_layer2")
+
                   attention_layer_output = self.create_attention_layer(rnn_layer_2, self._hidden_size)
                   predictions = tf.layers.dense(attention_layer_output, self._emotion_nr, name="Output_Layer")
                   predictions = tf.reduce_sum(predictions, axis = 0)
@@ -97,7 +107,7 @@ class Speech_Emotion_Recognizer(object):
                 of this LSTM cell are shared in the model's variable_scope
             """
             print("=========Create LSTM Cell")
-            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True)
+            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True)#, activation = tf.nn.elu)
             if self._is_training and self._keep_prob < 1:
                   cell = tf.contrib.rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
             return cell
@@ -161,7 +171,8 @@ class Speech_Emotion_Recognizer(object):
                         if instance != 0 and instance % sample_size == 0:
                               print("-----------> Instance number : %d Current Accuracy : %f" % (instance / sample_size, sample_accuray / sample_size))
                               sample_accuray = 0.0
-                  print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))
+                  print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))                
+
             else:
                   for i in range(self._op_length):
                         if files[i] != 'Inference/Blank_WAV_file.wav':
@@ -171,7 +182,7 @@ class Speech_Emotion_Recognizer(object):
                               print(" -------------- Emotion for file %s =  %s \n" % (files[i],emotions[index]))
                               print(" -------------- Raw predictions for file %s =  %s \n" % (files[i], list(map('{:.8f}'.format, vals["predictions_raw"]))))
                               print("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>< \n\n")
-            
+
       def debug_print(self, session):
             print(type(self._inputs))
             print(self._inputs)
@@ -197,7 +208,7 @@ class EMO_DB_Config(object):
 class SAVEE_Config(object):
       dir_name = ['SAVEE']
       data_set_name = ['SAVEE']
-      train_test_slice = 0.8
+      train_test_slice = 0.8 
       target_domain = dir_name
 
 class RAVDESS_Config(object):
@@ -215,7 +226,6 @@ class MULTIPLE_DATA_SETS_Config(object):
 class Inference_Config(object):
       dir_name = ['Inference']
 
-#%%
 flag_end_to_end = 0
 
 def main():
