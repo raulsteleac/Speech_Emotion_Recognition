@@ -10,10 +10,10 @@ except:
 import numpy as np
 import tensorflow as tf
 
-from hand_crafted_data_producers import Data_Producer_Hand_Crafted_Train_Test
-from hand_crafted_data_producers import Data_Producer_Hand_Crafted_Inference
-from end_to_end_data_producers import Data_Producer_End_to_End_Train_Test
-from end_to_end_data_producers import Data_Producer_End_to_End_Inference
+from feature_extractors.hand_crafted_data_producers import Data_Producer_Hand_Crafted_Train_Test
+from feature_extractors.hand_crafted_data_producers import Data_Producer_Hand_Crafted_Inference
+from feature_extractors.end_to_end_data_producers import Data_Producer_End_to_End_Train_Test
+from feature_extractors.end_to_end_data_producers import Data_Producer_End_to_End_Inference
 
 class SER_Data_Producer(object):
       def __init__(self, config):
@@ -24,6 +24,8 @@ class SER_Data_Producer(object):
 
       def import_data(self, session): 
             """ CALLS THE PRODUCE_DATA FUNCTION OF THE DATA_PRODUCER
+                    -Arguments:
+                        session: the tf.Session() the model is running on
             """
             (self.train_inputs, self.train_targets), (self.test_inputs, self.test_targets), (self.train_length, self.test_length) = self.dp.produce_data(session)
       
@@ -58,8 +60,10 @@ class Speech_Emotion_Recognizer(object):
 
       def batch_normalization(self, batch):
             """ COMPUTE BATCH NORMALIZAION ON THE BATCH GIVEN AS INPUT TO EACH HIDDEN LAYER
-                Return:
-                Returns the transformed batch with mean 0 and stdev 1  
+                  -Arguments:
+                        batch: the batch of data to be normalized
+                  -Return:
+                        Returns the transformed batch with mean 0 and stdev 1  
             """
             means = tf.reduce_mean(batch, 0)
             stdev = tf.reduce_mean(np.power((batch - means), 2), 0) + 0.00001
@@ -67,8 +71,8 @@ class Speech_Emotion_Recognizer(object):
 
       def model(self):
             """ MAIN FUNCTION OF THE CLASS, RESPONSIBLE FOR CREATING THE MODEL
-                The weights, and all the other necessary parameters for all the models,
-                will be share using the tf.virtual_scope.
+                  -The weights, and all the other necessary parameters for all the models,
+                        will be share using the tf.virtual_scope.
             """
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse = tf.AUTO_REUSE, initializer=self.init):                  
                   rnn_layer_1 = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
@@ -102,18 +106,24 @@ class Speech_Emotion_Recognizer(object):
 
       def make_lstm_cell(self, hidden_size):
             """ CREATES THE LSTM CELL BASED ON THE REQUESTE HIDDEN LAYER SIZE AND KEEP PROBABILITY
-                Returns:
-                The created lstm cell using tf.contrib.rnn.LSTMCell. The weights of the hidden layer
-                of this LSTM cell are shared in the model's variable_scope
+                  -Arguments:
+                        hidden_size: the size of the internal layers of the RNN cell
+                  -Returns:
+                        The created lstm cell using tf.contrib.rnn.LSTMCell. The weights of the hidden layer
+                        of this LSTM cell are shared in the model's variable_scope
             """
             print("=========Create LSTM Cell")
-            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True)#, activation = tf.nn.elu)
+            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True, activation = tf.nn.elu)
             if self._is_training and self._keep_prob < 1:
                   cell = tf.contrib.rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
             return cell
 
       def create_LSTM_layer(self, inputs, hidden_size, name=None):
             """ CREATES A RNN LAYER BASED ON A LSTM CELL AND A INITIAL ZERO STATE
+                  -Arguments:
+                        hidden_size: the size of the internal layers of the RNN cell
+                  -Returns:
+                        states[0]:the outputs of each state in the RNN sequence
             """
             with tf.variable_scope(name):
                   lstm_cell = self.make_lstm_cell(hidden_size)
@@ -125,8 +135,11 @@ class Speech_Emotion_Recognizer(object):
       def create_attention_layer(self, frame_predictions, weigths_dim):
             """ CREATES THE ATTENTION LAYER IN ORDER TO OBTAIN A WEIGHTED POOL LAYER BASED ON THE
                 EMOTION IN EACH FRAME
-                Returns:
-                The weighted sum of all the emotion predictions of all frames  
+                  -Arguments:
+                        frame_predictions: the outputs of the model for each frame
+                        weights_dim: size of the attenention layer's weigth
+                  -Returns:
+                        The weighted sum of all the emotion predictions of all frames  
             """
             W = tf.get_variable("Attention_Weights", dtype=tf.float32, shape=[weigths_dim, 1])
             b = tf.get_variable("Attention_Bias", dtype=tf.float32, shape=[1])
@@ -157,7 +170,11 @@ class Speech_Emotion_Recognizer(object):
 
       def run_model(self, session, writer, merged_summaries, files = None):
             """ RUNNING MODEL ON CURRENT CONFIGURATION 
-                This method is computing training, validation or testing depending on what model is calling it.
+                  This method is computing training, validation or testing depending on what model is calling it.
+                  -Arguments:
+                        session: the tf.Session() the model is running on
+                        writer: the tf.summary.FileWriter used to save the graphs
+                        merged_summaries: the summaries use to see the evolution of the model
             """
             print("\n %s just started ! \n" % self.model_op_name)
             if not self._is_inference:
@@ -200,25 +217,25 @@ class Speech_Emotion_Recognizer(object):
             self.saver.restore(ses, path)
 
 class EMO_DB_Config(object):
-      dir_name = ['EMO-DB']
+      dir_name = ['data_sets/EMO-DB']
       data_set_name = ['EMO-DB']
       train_test_slice = 0.8
       target_domain = dir_name
 
 class SAVEE_Config(object):
-      dir_name = ['SAVEE']
+      dir_name = ['data_sets/SAVEE']
       data_set_name = ['SAVEE']
       train_test_slice = 0.8 
       target_domain = dir_name
 
 class RAVDESS_Config(object):
-      dir_name = ['RAVDESS']
+      dir_name = ['data_sets/RAVDESS']
       data_set_name = ['RAVDESS']
       train_test_slice = 0.8
       target_domain = dir_name
 
 class MULTIPLE_DATA_SETS_Config(object):
-      dir_name = ['EMO-DB', 'RAVDESS']
+      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS']
       data_set_name = ['EMO-DB', 'RAVDESS']
       train_test_slice = 0.8
       target_domain = ['EMO-DB']
@@ -226,7 +243,7 @@ class MULTIPLE_DATA_SETS_Config(object):
 class Inference_Config(object):
       dir_name = ['Inference']
 
-flag_end_to_end = 0
+flag_end_to_end = 1
 
 def main():
       tf.reset_default_graph()
@@ -253,7 +270,7 @@ def main():
       merged_summaries = tf.summary.merge_all()
 
       ser_train_model.initialize_variables(ses)
-      epochs = 10
+      epochs = 30
       for epoch in range(epochs):
             print("\n-----------> Epoch %d" % epoch)
             ser_train_model.run_model(ses, writer, merged_summaries)

@@ -11,8 +11,9 @@ import tensorflow as tf
 
 from tqdm import tqdm
 
-from hand_crafted_extractor import Feature_Extractor_Hand_Crafted_Training_Testing
-from hand_crafted_extractor import Feature_Extractor_Hand_Crafted_Inference
+from feature_extractors.hand_crafted_extractor import Feature_Extractor_Hand_Crafted_Training_Testing
+from feature_extractors.hand_crafted_extractor import Feature_Extractor_Hand_Crafted_Inference
+from util import *
 
 class Data_Producer_Hand_Crafted_Train_Test(object):
       def __init__(self, config):
@@ -43,22 +44,24 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
 
       def produce_data(self, session, name=None):
             """ CONSTRUCTING TF.DATASETS BASED ON THE FEATURES EXTRACTED
-                Returns:
-                (X_train, y_train) - pair representing one instance of the train data
-                (X_test, y_test) - pair representing one instance of the train data
-                (self._train_length, self._test_length) - pair representing the length of the train and test data                
+                    -Arguments:
+                        session: the tf.Session() the model is running on
+                    -Returns:
+                        (X_train, y_train) - pair representing one instance of the train data
+                        (X_test, y_test) - pair representing one instance of the train data
+                        (self._train_length, self._test_length) - pair representing the length of the train and test data                
             """
             self._import_data(session)
             self._separate_train_from_test()
 
             self._train_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: self._train_inputs, tf.float32, output_shapes=[None, self._feature_count])
+                lambda: generator_shuffle(self._train_inputs, 1), tf.float32, output_shapes=[None, self._feature_count])
             self._train_targets_dt = tf.data.Dataset.from_generator(
-                lambda: self._train_targets, tf.float32, output_shapes=[None])
+                lambda: generator_shuffle(self._train_targets, 0), tf.float32, output_shapes=[None])
             self._test_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: self._test_inputs, tf.float32, output_shapes=[None, self._feature_count])
+                lambda: generator_shuffle(self._test_inputs, 0), tf.float32, output_shapes=[None, self._feature_count])
             self._test_targets_dt = tf.data.Dataset.from_generator(
-                lambda: self._test_targets, tf.float32, output_shapes=[None])
+                lambda: generator_shuffle(self._test_targets, 0), tf.float32, output_shapes=[None])
 
             self._train_inputs_dt = self._train_inputs_dt.repeat()
             self._train_targets_dt = self._train_targets_dt.repeat()
@@ -82,23 +85,22 @@ class Data_Producer_Hand_Crafted_Inference(object):
             self._feature_extractor = Feature_Extractor_Hand_Crafted_Inference(config.dir_name)
 
       def _import_data(self, session):
-            """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
+            """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR
+                    -Arguments:
+                        session: the tf.Session() the model is running on
             """
             self._features, self._files = self._feature_extractor.get_featurs_and_targets(session)
 
       def produce_data(self, session, name=None):
             """ CONSTRUCTING TF.DATASETS BASED ON THE FEATURES EXTRACTED
-                Returns:
-                (X_train, y_train) - pair representing one instance of the train data
-                (X_test, y_test) - pair representing one instance of the train data
-                (self._train_length, self._test_length) - pair representing the length of the train and test data                
+                    -Arguments:
+                        session: the tf.Session() the model is running on
+                    -Returns:
+                        inputs - the features extracted from the convolutional layers
+                        inference_length - the number of files in the inference folder
+                        self._files - the names of the files in the inference folder to pretty print               
             """
             self._import_data(session)
-            print(self._features.shape)
-            print(self._features[0].shape)
-            print(self._features[0].shape)
-            print(self._features[0][0].shape)
-
             inference_length = self._features.shape[0]
             feature_count = self._features[0].shape[1]
             self._features_dt = tf.data.Dataset.from_generator(
