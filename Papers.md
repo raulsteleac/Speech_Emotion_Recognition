@@ -61,4 +61,6 @@ file:///home/raulslab/Downloads/On_Acoustic_Emotion_Recognition_Compensating_for
 
 
 2020:
+--
 http://proceedings.mlr.press/v32/graves14.pdf
+https://ibug.doc.ic.ac.uk/media/uploads/documents/08070966.pdf
