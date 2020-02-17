@@ -22,11 +22,10 @@ class DAE(object):
                   self.autoencoder_input = tf.placeholder(tf.float64, shape)
                   autoencoder_input_noisy = self.autoencoder_input + 1.0 * tf.random_normal(tf.shape(self.autoencoder_input), dtype=tf.float64)
                   self.encoder_layer_1 = tf.layers.dense(autoencoder_input_noisy,  self._hidden_layer_dimension, name="First_Encoder_Layer")
-                  self.encoder_output = tf.layers.dense(self.encoder_layer_1,self._hidden_layer_dimension, name="Second_Encoder_Layer")
+                  self.encoder_output = tf.layers.dense(self.encoder_layer_1, self._hidden_layer_dimension, name="Second_Encoder_Layer")
 
                   self.decoder_layer_1 = tf.layers.dense(self.encoder_output, self._hidden_layer_dimension, name="First_Decoder_Layer")
-                  #if I add relu it works for end to end but stucks at 0.8 accuracy for hand_crafted
-                  self.decoder_output = tf.layers.dense(self.decoder_layer_1, self.autoencoder_input.shape[1], name="Output_Decoder_Layer" )
+                  self.decoder_output = tf.layers.dense(self.decoder_layer_1, self.autoencoder_input.shape[1], name="Output_Decoder_Layer")
 
                   reconstruction_loss = tf.reduce_mean(tf.square(self.decoder_output - self.autoencoder_input))
                   self.autoencoder_optimizer = tf.train.AdamOptimizer(0.001).minimize(reconstruction_loss)
@@ -34,7 +33,7 @@ class DAE(object):
       def autoencoder_fit(self, epochs, session):
             print("---------- Autoencoder fitting")
             session.run(tf.global_variables_initializer())
-            for _ in range(epochs):
+            for e in range(epochs):
                   for frame_inputs in self._fit_inputs:
                         session.run(self.autoencoder_optimizer, feed_dict={self.autoencoder_input: frame_inputs})
 

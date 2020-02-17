@@ -30,7 +30,6 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
             files = [wav_file for wav_file in files if wav_file[self.emotion_letter_position] in self.e_to_n_mapping.keys()]
             print(files[0])
             self.features = np.array([self.reshape_frames(self._get_audio_features(wav_file), 128) for wav_file in tqdm(files)])
-            self.feature_print = self._get_audio_features(files[0])
             targets = [wav_file[self.emotion_letter_position] for wav_file in files]
             self.targets = np.append(self.targets, one_hotizize(targets, self.e_to_n_mapping, self.emotion_number))
     
@@ -46,21 +45,19 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
             print("------------------ Processing audio files")
             self.targets = np.array([[]])
             self.inputs = np.array([[]])
-            autoencoder_train_input = ""
 
             for files, ds_name in zip(self.files, self._data_set_name_list):
                   self._set_data_set_config(ds_name)
                   self._transform_wave_files(files)
-                  show_pic([self.feature_print], self.feature_names, (60, 20))
                   self.features = np.array([np.reshape(stft, (stft.shape[0], stft[0].shape[0],  stft[0].shape[1])) for stft in self.features])
                   self.inputs = np.append(self.inputs, self.features)
 
                   if target_domain == ds_name:
                         autoencoder_train_input = self.features
-            
-            # Feature_Extractor._dae = DAE(fit_inputs=autoencoder_train_input, hidden_layer_dimension=120)
+
+            # Feature_Extractor._dae = DAE(fit_inputs=self.inputs, hidden_layer_dimension=120)
             # Feature_Extractor._dae.autoencoder_model()
-            # Feature_Extractor._dae.autoencoder_fit(250, session)
+            # Feature_Extractor._dae.autoencoder_fit(100, session)
             # self.inputs = Feature_Extractor._dae.autoencoder_transform(self.inputs, session)
             
             self.targets = np.reshape(self.targets, (-1, self.emotion_number))
@@ -85,13 +82,8 @@ class Feature_Extractor_End_to_End_Inference(Feature_Extractor_End_to_End):
             print("List of files is : %s" % self.files)
             self.features = np.array([self.reshape_frames(self._get_audio_features(wav_file), 128) for wav_file in tqdm(self.files)])
             self.features = np.array([np.reshape(stft, (stft.shape[0], stft[0].shape[0],  stft[0].shape[1])) for stft in self.features])
-            sfeature_print = self._get_audio_features(self.files[0]) 
-            self.show_pic(sfeature_print)
-            print(
-                "------------------------------------------------------------------------")
             # Feature_Extractor._dae.autoencoder_model()
             # self.features = Feature_Extractor._dae.autoencoder_transform(self.features, session)
             return self.features, self.files
-
 
 #%%

@@ -21,7 +21,7 @@ class Data_Producer_End_to_End(object):
             """  CREATES CONVOLUTIONAL LAYER WITH GIVEN FILTER SIZE AND CHANNELS NUMBERS
             """
             W = tf.get_variable("Weights_Fully_Connected_Layer"+name, dtype=tf.float32, shape=[filter_size, filter_size, channels_in, channels_out])
-            return tf.nn.conv2d(input=input_data, filter=W, strides=strides, padding='SAME')
+            return tf.nn.elu(tf.nn.conv2d(input=input_data, filter=W, strides=strides, padding='SAME'))
 
       def _convolutional_feature_extractor(self, stft):
             """ THE FUNCTION BUILDS THE END-TO-END FEATURE EXTRACTION COMPONENT CONSISTING
@@ -138,5 +138,16 @@ class Data_Producer_End_to_End_Inference(Data_Producer_End_to_End):
 
             return inputs, inference_length, self._files
 
+##%%
+# def main():
+#       session = tf.Session()
+#       dp = Data_Producer_End_to_End_Train_Test(select_config(1))
+#       conv1, conv2, conv3, conv4 = session.run(dp.test_produce_data(session))
+#       print(conv1.shape)
+#       print(conv2.shape)
+#       print(conv3.shape)
+#       print(conv4.shape)
 
-#%%
+# if __name__ == "__main__":
+#     main()
+
