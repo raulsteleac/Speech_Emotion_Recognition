@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 import matplotlib.pyplot as plt
 import librosa.display
 from PyQt5 import QtCore
@@ -28,6 +29,18 @@ def one_hotizize(targets, target_class_vector, target_class_number):
             """
             targets = [target_class_vector[emotion] for emotion in targets]
             return np.eye(target_class_number)[targets]
+
+
+def batch_normalization(batch):
+      """ COMPUTE BATCH NORMALIZAION ON THE BATCH GIVEN AS INPUT TO EACH HIDDEN LAYER
+            -Arguments:
+                  batch: the batch of data to be normalized
+            -Return:
+                  Returns the transformed batch with mean 0 and stdev 1  
+      """
+      means = tf.reduce_mean(batch, 0)
+      stdev = tf.reduce_mean(np.power((batch - means), 2), 0) + 0.00001
+      return (batch - means) / (tf.sqrt(stdev))
 
 def shuffle_data(inputs, targets):
             """ SHUFFLE BOTH THE INPUTS AND THE TARGETS IN THE SAME MANNER

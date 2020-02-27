@@ -4,9 +4,10 @@ import atexit
 import threading
 import pyaudio
 import wave
+import webrtcvad
 
 class MicrophoneRecorder(object):
-      def __init__(self, rate=48000, chunksize=128):
+      def __init__(self, rate=48000, chunksize=960):
             self.rate = rate
             self.chunksize = chunksize
             self.p = pyaudio.PyAudio()
@@ -23,15 +24,20 @@ class MicrophoneRecorder(object):
             self.frames = []
             self._print_frames = np.array([])
             self._print_frames_count = 0
+            self.vad = webrtcvad.Vad()
+            self.vad.set_mode(2)
             atexit.register(self.close)
 
       def new_frame(self, data, frame_count, time_info, status):
             data = np.frombuffer(data, dtype=np.int16)
             with self.lock:
-                  self.frames.append(data)
-                  if self._print_frames_count == 94:
+                  if self.vad.is_speech(data, self.rate):
+                        self.frames.append(data)
+                  print(np.array(self.frames).shape)
+                  if self._print_frames_count == 10:
                         self.thread.print_recording_signal.emit(self._print_frames)
                         # Here we call the emotion processing function
+
                         self._print_frames = np.array([])
                         self._print_frames_count = 0
                   else:
