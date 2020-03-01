@@ -30,7 +30,8 @@ class SER_Data_Producer(object):
                     -Arguments:
                         session: the tf.Session() the model is running on
             """
-            (self.train_inputs, self.train_targets), (self.test_inputs, self.test_targets), (self.train_length, self.test_length) = self.dp.produce_data(session)
+            (self.train_inputs, self.train_targets), self.train_length = self.dp.produce_data_train(session)
+            (self.test_inputs, self.test_targets), self.test_length = self.dp.produce_data_test(session)
       
       @property
       def train_data(self):
@@ -54,37 +55,30 @@ class Speech_Emotion_Recognizer(object):
             self._learning_rate = 0.001
             self._keep_prob = 0.8
             self.model_op_name = model_op_name
-            self.init = tf.random_normal_initializer(-0.1, 0.1)
+            self.init = tf.random_normal_initializer(-0.1, 0.1, seed = 17)
 
       def set_inputs_targets_length(self, inputs, targets=None, op_length=1):
             self._inputs = inputs
             self._targets = targets
             self._op_length = op_length
-
-      def batch_normalization(self, batch):
-            """ COMPUTE BATCH NORMALIZAION ON THE BATCH GIVEN AS INPUT TO EACH HIDDEN LAYER
-                  -Arguments:
-                        batch: the batch of data to be normalized
-                  -Return:
-                        Returns the transformed batch with mean 0 and stdev 1  
-            """
-            means = tf.reduce_mean(batch, 0)
-            stdev = tf.reduce_mean(np.power((batch - means), 2), 0) + 0.00001
-            return (batch - means) / (tf.sqrt(stdev))
-
+            
       def model(self):
             """ MAIN FUNCTION OF THE CLASS, RESPONSIBLE FOR CREATING THE MODEL
                   -The weights, and all the other necessary parameters for all the models,
                         will be share using the tf.virtual_scope.
             """
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse=tf.AUTO_REUSE, initializer=self.init):
+                  # self._inputs = batch_normalization(self._inputs)
                   rnn_layer = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
+                  # rnn_layer = batch_normalization(rnn_layer)
 
                   attention_layer_output = self.create_attention_layer(rnn_layer, self._hidden_size)
                   predictions_1 = tf.layers.dense(attention_layer_output, self._emotion_nr, name="Output_Layer")
                   predictions = tf.reduce_sum(predictions_1, axis=0)
 
                   targets_raw_ = tf.nn.softmax(predictions, axis=0)
+
+                  # targets_ = tf.cast(tf.equal(targets_raw_, tf.reduce_max(targets_raw_)), tf.float32)
                   targets_ = tf.round(targets_raw_)
 
                   if self._is_inference:
@@ -92,10 +86,14 @@ class Speech_Emotion_Recognizer(object):
                         self.predictions = targets_raw_
                         return
                   
-                  cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels = self._targets, logits = predictions)
+                  cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels = self._targets, logits = targets_raw_)
+
+                  self._label_pred = tf.argmax(targets_)
+                  self._label_true = tf.argmax(self._targets)
+
+                  # self.accuracy = tf.cast(tf.equal(self._label_pred, self._label_true), tf.float32)
                   is_correct = tf.equal(targets_, self._targets)
                   self.accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
-
                   if not self._is_training:
                         return
 
@@ -165,11 +163,15 @@ class Speech_Emotion_Recognizer(object):
                   if self._is_training:
                         return {
                         "accuracy": self.accuracy,
-                        "optimizer": self.optimizer
+                        "optimizer": self.optimizer,
+                        "label_pred": self._label_pred,
+                        "label_true": self._label_true
                         }
                   else:
                         return {
-                        "accuracy": self.accuracy
+                        "accuracy": self.accuracy,
+                        "label_pred": self._label_pred,
+                        "label_true": self._label_true
                         }
 
       def run_model(self, session, writer, merged_summaries, files = None, file_to_show=None, thread = None, feed_dict=None):
@@ -181,17 +183,21 @@ class Speech_Emotion_Recognizer(object):
                         merged_summaries: the summaries use to see the evolution of the model
             """
             print("\n %s just started ! \n" % self.model_op_name)
+            self.accuracy_matrix = np.zeros((self._emotion_nr, self._emotion_nr))            
             if not self._is_inference:
                   total_accuracy = 0.0
                   sample_accuray = 0.0
                   print_accuracy = 0.0
                   sample_size = (self._op_length // 10)
                   print_rate = (self._op_length // 10)
+
                   for instance in range(self._op_length):
                         vals = session.run(self.running_ops)
                         total_accuracy += vals["accuracy"]
                         sample_accuray += vals["accuracy"]
                         print_accuracy += vals["accuracy"]
+
+                        self.accuracy_matrix[vals["label_pred"]][vals["label_true"]] += 1
                         if self._is_training and thread != None and instance != 0 and instance % print_rate == 0:
                               thread.print_accuracy_signal.emit(print_accuracy / print_rate)
                               print_accuracy = 0.0
@@ -205,12 +211,11 @@ class Speech_Emotion_Recognizer(object):
                         if thread != None and thread.stopFlag == True:
                               return
                   if thread == None:
-                        print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
+                        print("############### %s Total Accurac y = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
                   else:
                         print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
                         thread.print_stats.emit(str("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length))))
-
-
+                        thread.print_matrix.emit(self.accuracy_matrix)
             else:
                   predictions = []
                   if files is None:
@@ -220,6 +225,7 @@ class Speech_Emotion_Recognizer(object):
                         if files[i] == file_to_show:
                               predictions =  vals["predictions_raw"]
                   return predictions
+            print(self.accuracy_matrix)
 
       def debug_print(self, session):
             print(type(self._inputs))

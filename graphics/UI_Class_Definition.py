@@ -262,6 +262,46 @@ class Ui_MainWindow(object):
         self.line_2.setObjectName("line_2")
         self.verticalLayout_2.addWidget(self.line_2)
 
+        self.tabs = QtWidgets.QTabWidget()
+        self.tableWidget = QtWidgets.QTableWidget()
+        self.tableWidget.setRowCount(5)
+        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setHorizontalHeaderLabels(["Angry", "Happy", "Sad", "Normal", " Total "])
+        self.tableWidget.setVerticalHeaderLabels(["Angry", "Happy", "Sad", "Normal", "Total"])
+
+        self.tableWidget.setItem(0,0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0,1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0,2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1,0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1,1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1,2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1, 3, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1, 4, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2,0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2,1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2,2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2, 3, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2, 4, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3,0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3,1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3,2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3, 3, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3, 4, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(4, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(4, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(4, 2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(4, 3, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(4, 4, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.item(4, 4).setBackground(QtGui.QColor(102, 140, 255))
+        self.tableWidget.item(3, 3).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(2, 2).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(1, 1).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(0, 0).setBackground(QtGui.QColor(125, 125, 125))
+
+        self.tabs.resize(650, 400)
+
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setMinimumSize(QtCore.QSize(600, 400))
         self.label_7.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
@@ -277,7 +317,22 @@ class Ui_MainWindow(object):
         self.label_7.setOpenExternalLinks(False)
         self.label_7.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByMouse)
         self.label_7.setObjectName("label_7")
-        self.verticalLayout_2.addWidget(self.label_7)
+
+        self.verticalLayoutTable = QtWidgets.QVBoxLayout()
+        self.verticalLayoutTable.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.verticalLayoutTable.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayoutTable.setSpacing(6)
+        self.verticalLayoutTable.setObjectName("verticalLayoutTable")
+        
+        self.tab2 = QtWidgets.QWidget()
+        self.tabs.addTab(self.label_7, "Tab 1")
+        self.tabs.addTab(self.tab2, "Tab 2")
+
+        self.tab2.layout = self.verticalLayoutTable
+        self.tab2.layout.addWidget(self.tableWidget)
+        self.tab2.setLayout(self.tab2.layout)
+
+        self.verticalLayout_2.addWidget(self.tabs)
         self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -392,6 +447,21 @@ class Ui_MainWindow(object):
     def print_stats_model(self, string):
         print_in_label_7(self, string)
 
+    def print_accuracy_matrix(self, matrix):
+        for i in range(matrix.shape[0]):
+            for j in range(matrix.shape[1]):
+                self.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(matrix[i][j])))
+        for i in range(4):
+            self.tableWidget.setItem(4, i, QtWidgets.QTableWidgetItem(str(np.sum(matrix[:,i]))))
+            self.tableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(str(np.sum(matrix[i]))))
+        self.tableWidget.setItem(4, 4, QtWidgets.QTableWidgetItem(str(np.sum(np.diag(matrix)))))
+        self.tableWidget.item(4, 4).setBackground(QtGui.QColor(102, 140, 255))
+        self.tableWidget.item(3, 3).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(2, 2).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(1, 1).setBackground(QtGui.QColor(125, 125, 125))
+        self.tableWidget.item(0, 0).setBackground(QtGui.QColor(125, 125, 125))
+        
+
 map_config = {
     "EMO-DB": 1,
     "SAVE": 2,
@@ -439,6 +509,7 @@ def on_button_clicked(app):
         thread_1 = Train_App(app)
         thread_1.print_accuracy_signal.connect(app.print_accuracy_graph)
         thread_1.print_stats.connect(app.print_stats_model)
+        thread_1.print_matrix.connect(app.print_accuracy_matrix)
         thread_1.start()
     elif app.radioButton_2.isChecked():  # inference
         global ses, ser_inference_model, files
@@ -525,6 +596,7 @@ def play_recording(file="output.wav"):
 class Train_App(QtCore.QThread):
     print_accuracy_signal = QtCore.pyqtSignal(float)
     print_stats = QtCore.pyqtSignal(str)
+    print_matrix = QtCore.pyqtSignal(object)
     stopFlag = False
     def __init__(self, app_rnning, parent=None):
         QtCore.QThread.__init__(self, parent)

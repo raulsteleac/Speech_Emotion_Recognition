@@ -55,7 +55,7 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
                   if target_domain == ds_name:
                         autoencoder_train_input = self.features
 
-            # Feature_Extractor._dae = DAE(fit_inputs=self.inputs, hidden_layer_dimension=120)
+            # Feature_Extractor._dae = DAE(fit_inputs=autoencoder_train_input, hidden_layer_dimension=120)
             # Feature_Extractor._dae.autoencoder_model()
             # Feature_Extractor._dae.autoencoder_fit(100, session)
             # self.inputs = Feature_Extractor._dae.autoencoder_transform(self.inputs, session)
