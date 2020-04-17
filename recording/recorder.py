@@ -5,6 +5,7 @@ import threading
 import pyaudio
 import wave
 import webrtcvad
+import sys
 
 class MicrophoneRecorder(object):
       def __init__(self, rate=48000, chunksize=960):
@@ -13,6 +14,7 @@ class MicrophoneRecorder(object):
             self.p = pyaudio.PyAudio()
             self.channels = 1
             self.sample_format = pyaudio.paInt16
+
             self.stream = self.p.open(format=self.sample_format,
                                     channels=self.channels,
                                     rate=self.rate,
@@ -27,6 +29,15 @@ class MicrophoneRecorder(object):
             self.vad = webrtcvad.Vad()
             self.vad.set_mode(2)
             atexit.register(self.close)
+      
+      def check_device_availability(self):
+            try:
+                  self.p.get_default_input_device_info()
+            except IOError:
+                self.thread.app_rnning.open_alert_dialog(
+                    title="Missing input device alert", text="We could not identify any audio input device.", info="Please try and reconnec the device and restart the app.")
+                return False
+            return True
 
       def new_frame(self, data, frame_count, time_info, status):
             data = np.frombuffer(data, dtype=np.int16)
@@ -36,8 +47,6 @@ class MicrophoneRecorder(object):
                   print(np.array(self.frames).shape)
                   if self._print_frames_count == 10:
                         self.thread.print_recording_signal.emit(self._print_frames)
-                        # Here we call the emotion processing function
-
                         self._print_frames = np.array([])
                         self._print_frames_count = 0
                   else:

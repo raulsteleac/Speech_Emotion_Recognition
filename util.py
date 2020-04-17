@@ -38,9 +38,10 @@ def batch_normalization(batch):
             -Return:
                   Returns the transformed batch with mean 0 and stdev 1  
       """
-      means = tf.reduce_mean(batch, 0)
-      stdev = tf.reduce_mean(np.power((batch - means), 2), 0) + 0.00001
+      means = tf.reduce_mean(batch)
+      stdev = tf.reduce_mean(np.power((batch - means), 2)) + 1e-6
       return (batch - means) / (tf.sqrt(stdev))
+      # return tf.nn.batch_normalization(batch, mean = means, variance=stdev, offset=0, scale=1, variance_epsilon=1e-6)
 
 def shuffle_data(inputs, targets):
             """ SHUFFLE BOTH THE INPUTS AND THE TARGETS IN THE SAME MANNER
@@ -53,6 +54,11 @@ def shuffle_data(inputs, targets):
             inputs = inputs[shuffle]
             targets = targets[shuffle]
             return inputs, targets
+
+def empty_dir(dir_name):
+      onlyfiles = [os.path.join(dir_name, f) for f in os.listdir(dir_name) if os.path.isfile(os.path.join(dir_name, f))]
+      for file_ in onlyfiles:
+            os.remove(file_)
 
 def show_pic(features, names, fig_size):
             """ LOG FUNCTION THAT PRINTS A PLOT FOR EACH FEATURE (MFCC, ZCR,.etc) OF ONE FILE
@@ -72,60 +78,68 @@ def generator_shuffle(data, change):
       global seed_
       seed_ += change
       np.random.seed(seed_)
-      indexes = np.arange(data.shape[0])
-      # np.random.shuffle(indexes)
+      splits_count = 1
+      indexes = np.arange(splits_count)
+      np.random.shuffle(indexes)
       for i in indexes:
-            yield data[i]
+            for j in range(data.shape[0] // splits_count):
+                  yield data[i * (data.shape[0] // splits_count) + j]
 
 class EMO_DB_Config(object):
-      dir_name = ['data_sets/EMO-DB']
-      data_set_name = ['EMO-DB']
+      dir_name = ['data_sets/EMO-DB', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['EMO-DB', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
 
 class SAVEE_Config(object):
-      dir_name = ['data_sets/SAVEE']
-      data_set_name = ['SAVEE']
+      dir_name = ['data_sets/SAVEE', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['SAVEE', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
 
 class RAVDESS_Config(object):
-      dir_name = ['data_sets/RAVDESS']
-      data_set_name = ['RAVDESS']
+      dir_name = ['data_sets/RAVDESS', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['RAVDESS', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
 class ENTERFACE_Config(object):
-      dir_name = ['data_sets/ENTERFACE']
-      data_set_name = ['ENTERFACE']
+      dir_name = ['data_sets/ENTERFACE', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['ENTERFACE', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
 class EMOVO_Config(object):
-      dir_name = ['data_sets/EMOVO']
-      data_set_name = ['EMOVO']
+      dir_name = ['data_sets/EMOVO', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['EMOVO', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
 class MAV_Config(object):
-      dir_name = ['data_sets/MONTREAL_AFFECTIVE_VOICE']
-      data_set_name = ['MAV']
+      dir_name = ['data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['MAV', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
 
-class URDU_Config(object):
-      dir_name = ['data_sets/URDU']
-      data_set_name = ['URDU']
+class MELD_Config(object):
+      dir_name = ['data_sets/MELD', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['MELD', 'InrP']
       train_test_slice = 0.8
-      target_domain = dir_name
+      target_domain = ['InrP']
+
+class JL_Config(object):
+      dir_name = ['data_sets/JL', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['JL', 'InrP']
+      train_test_slice = 0.8
+      target_domain = ['InrP']
 
 class MULTIPLE_DATA_SETS_Config(object):
-      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', 'data_sets/EMOVO', 'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE']
-      data_set_name = ['EMO-DB', 'RAVDESS', 'EMOVO', 'MAV', 'ENTERFACE']
+      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', 'data_sets/EMOVO', 'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 'data_sets/JL', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['EMO-DB', 'RAVDESS', 'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
       train_test_slice = 0.8
-      target_domain = ['EMO-DB']
+      target_domain = ['InrP']
 
 
 class Inference_Config(object):
@@ -139,7 +153,8 @@ def select_config(id_config):
           4: ENTERFACE_Config(),
           5: EMOVO_Config(),
           6: MAV_Config(),
-          7: URDU_Config(),
-          8: MULTIPLE_DATA_SETS_Config()
+          7: MELD_Config(),
+          8: JL_Config(),
+          9: MULTIPLE_DATA_SETS_Config()
       }
       return switcher[id_config]

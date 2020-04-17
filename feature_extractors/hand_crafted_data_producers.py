@@ -42,7 +42,7 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
             self._test_inputs = self._inputs[-self._test_length:]
             self._test_targets = self._targets[-self._test_length:]
 
-      def produce_data(self, session, name=None):
+      def produce_data_train(self, session, name=None):
             """ CONSTRUCTING TF.DATASETS BASED ON THE FEATURES EXTRACTED
                     -Arguments:
                         session: the tf.Session() the model is running on
@@ -58,27 +58,45 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
                 lambda: generator_shuffle(self._train_inputs, 1), tf.float32, output_shapes=[None, self._feature_count])
             self._train_targets_dt = tf.data.Dataset.from_generator(
                 lambda: generator_shuffle(self._train_targets, 0), tf.float32, output_shapes=[None])
+
+            self._train_inputs_dt = self._train_inputs_dt.repeat()
+            self._train_targets_dt = self._train_targets_dt.repeat()
+
+            iterator_train_inputs = self._train_inputs_dt.make_one_shot_iterator()
+            iterator_train_targets = self._train_targets_dt.make_one_shot_iterator()
+
+            X_train = iterator_train_inputs.get_next()
+            y_train = iterator_train_targets.get_next()
+
+            return (X_train, y_train), self._train_length
+
+      def produce_data_test(self, session, name=None):
+            """ CONSTRUCTING TF.DATASETS BASED ON THE FEATURES EXTRACTED
+                    -Arguments:
+                        session: the tf.Session() the model is running on
+                    -Returns:
+                        (X_train, y_train) - pair representing one instance of the train data
+                        (X_test, y_test) - pair representing one instance of the train data
+                        (self._train_length, self._test_length) - pair representing the length of the train and test data                
+            """
+            self._import_data(session)
+            self._separate_train_from_test()
+
             self._test_inputs_dt = tf.data.Dataset.from_generator(
                 lambda: generator_shuffle(self._test_inputs, 0), tf.float32, output_shapes=[None, self._feature_count])
             self._test_targets_dt = tf.data.Dataset.from_generator(
                 lambda: generator_shuffle(self._test_targets, 0), tf.float32, output_shapes=[None])
 
-            self._train_inputs_dt = self._train_inputs_dt.repeat()
-            self._train_targets_dt = self._train_targets_dt.repeat()
             self._test_inputs_dt = self._test_inputs_dt.repeat()
             self._test_targets_dt = self._test_targets_dt.repeat()
-
-            iterator_train_inputs = self._train_inputs_dt.make_one_shot_iterator()
-            iterator_train_targets = self._train_targets_dt.make_one_shot_iterator()
+            
             iterator_test_inputs = self._test_inputs_dt.make_one_shot_iterator()
             iterator_test_targets = self._test_targets_dt.make_one_shot_iterator()
 
-            X_train = iterator_train_inputs.get_next()
-            y_train = iterator_train_targets.get_next()
             X_test = iterator_test_inputs.get_next()
             y_test = iterator_test_targets.get_next()
 
-            return (X_train, y_train), (X_test, y_test), (self._train_length, self._test_length)
+            return (X_test, y_test), self._test_length
 #%%
 class Data_Producer_Hand_Crafted_Inference(object):
       def __init__(self, config):

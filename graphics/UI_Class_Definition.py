@@ -7,11 +7,11 @@
 # WARNING! All changes made in this file will be lost!
 import os
 try:
-    os.chdir(os.path.join(
-        os.getcwd(), 'Speech_Emotion_Recognition'))
+    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
     print(os.getcwd())
 except:
-    pass
+      print("Can't change the Current Working Directory")
+      pass
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model import main, inference, online, init_inference_model, close_inference_model, init_online_model
@@ -19,6 +19,7 @@ from util import *
 from pyqtgraph import PlotWidget
 from recording.recorder import MicrophoneRecorder
 import time
+import sys
 
 class Ui_MainWindow(object):
     accuracy_vals = []
@@ -95,6 +96,18 @@ class Ui_MainWindow(object):
         self.progressBar_4.setProperty("value", 0)
         self.progressBar_4.setObjectName("progressBar_4")
 
+        self.label_6 = QtWidgets.QLabel(self.groupBox_4)
+        self.label_6.setGeometry(QtCore.QRect(30, 640, 400, 20))
+        self.label_6.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.label_6.setObjectName("label_6")
+
+        # self.progressBar_5 = QtWidgets.QProgressBar(self.groupBox_4)
+        # self.progressBar_5.setGeometry(QtCore.QRect(30, 660, 500, 40))
+        # self.progressBar_5.setMinimumSize(QtCore.QSize(500, 40))
+        # self.progressBar_5.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        # self.progressBar_5.setProperty("value", 0)
+        # self.progressBar_5.setObjectName("progressBar_5")
+
         self.line_3 = QtWidgets.QFrame(self.groupBox_4)
         self.line_3.setGeometry(QtCore.QRect(10, 390, 531, 16))
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
@@ -163,11 +176,6 @@ class Ui_MainWindow(object):
         self.radioButton_4.setGeometry(QtCore.QRect(100, 60, 111, 21))
         self.radioButton_4.setObjectName("radioButton_4")
 
-        self.pushButtonLoad = QtWidgets.QPushButton(self.groupBox_2)
-        self.pushButtonLoad.setGeometry(QtCore.QRect(250, 60, 100, 25))
-        self.pushButtonLoad.setIconSize(QtCore.QSize(16, 16))
-        self.pushButtonLoad.setObjectName("pushButtonLoad")
-
         self.label_8 = QtWidgets.QLabel(self.groupBox_2)
         self.label_8.setGeometry(QtCore.QRect(10, 30, 94, 23))
         self.label_8.setObjectName("label_8")
@@ -183,6 +191,7 @@ class Ui_MainWindow(object):
         self.comboBox.setMaxVisibleItems(10)
         self.comboBox.setIconSize(QtCore.QSize(16, 16))
         self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
@@ -266,34 +275,48 @@ class Ui_MainWindow(object):
         self.tableWidget = QtWidgets.QTableWidget()
         self.tableWidget.setRowCount(5)
         self.tableWidget.setColumnCount(5)
-        self.tableWidget.setHorizontalHeaderLabels(["Angry", "Happy", "Sad", "Normal", " Total "])
-        self.tableWidget.setVerticalHeaderLabels(["Angry", "Happy", "Sad", "Normal", "Total"])
+        self.tableWidget.setHorizontalHeaderLabels(
+            ["Angry", "Happy", "Sad", "Normal", " Total "])  # ,"Fear"
+        self.tableWidget.setVerticalHeaderLabels(
+            ["Angry", "Happy", "Sad", "Normal", "Total"])  # "Fear",
 
-        self.tableWidget.setItem(0,0, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(0,1, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(0,2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(1,0, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(1,1, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(1,2, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(1, 2, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(1, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(1, 4, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(2,0, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(2,1, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(2,2, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(1, 5, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(2, 2, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(2, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(2, 4, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(3,0, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(3,1, QtWidgets.QTableWidgetItem("0"))
-        self.tableWidget.setItem(3,2, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(2, 5, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(3, 2, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(3, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(3, 4, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(3, 5, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(4, 0, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(4, 1, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(4, 2, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(4, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(4, 4, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(4, 5, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 0, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 1, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 2, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 3, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 4, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.setItem(5, 5, QtWidgets.QTableWidgetItem("0"))
+        # self.tableWidget.item(5, 5).setBackground(QtGui.QColor(102, 140, 255))
         self.tableWidget.item(4, 4).setBackground(QtGui.QColor(102, 140, 255))
         self.tableWidget.item(3, 3).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(2, 2).setBackground(QtGui.QColor(125, 125, 125))
@@ -363,10 +386,10 @@ class Ui_MainWindow(object):
         self.pushButton.clicked.connect(lambda: on_button_clicked(self))
         self.pushButtonStop.clicked.connect(lambda: on_buttonStop_clicked(self))
         self.pushButtonRecord.clicked.connect(lambda: on_buttonRecord_clicked(self))
-        self.pushButtonPlay.clicked.connect(lambda: play_recording())
-        self.pushButtonInfPlay.clicked.connect(lambda: play_recording(self.comboBox_2.currentText()))
+        self.pushButtonPlay.clicked.connect(lambda: play_recording(self))
+        self.pushButtonInfPlay.clicked.connect(lambda: play_recording(self, self.comboBox_2.currentText()))
         self.pushButtonStopRecord.clicked.connect(lambda: on_buttonStopRecord_clicked(self))
-        self.lineEdit_2.textChanged.connect(lambda: fill_file(self))
+        self.lineEdit_2.returnPressed.connect(lambda: fill_file(self))
         self.radioButton_2.toggled.connect(lambda: init_inference(self))
         self.print_accuracy_graph(0)
 
@@ -393,6 +416,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Happy"))
         self.label_4.setText(_translate("MainWindow", "Sad"))
         self.label_5.setText(_translate("MainWindow", "Neutral"))
+        # self.label_6.setText(_translate("MainWindow", "Neutral"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Pick a file to classify"))
         self.label_9.setText(_translate("MainWindow", "Folder path:"))
         self.label_10.setText(_translate("MainWindow", "File"))
@@ -400,7 +424,6 @@ class Ui_MainWindow(object):
         self.groupBox_2.setTitle(_translate("MainWindow", "Model settings"))
         self.radioButton_3.setText(_translate("MainWindow", "End-to-end"))
         self.radioButton_4.setText(_translate("MainWindow", "Hand-Crafted"))
-        self.pushButtonLoad.setText(_translate("MainWindow", "Load"))
         self.label_8.setText(_translate("MainWindow", "Epochs:"))
         self.comboBox.setItemText(0, _translate("MainWindow", "EMO-DB"))
         self.comboBox.setItemText(1, _translate("MainWindow", "SAVE"))
@@ -408,8 +431,9 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(3, _translate("MainWindow", "ENTERFACE"))
         self.comboBox.setItemText(4, _translate("MainWindow", "EMOVO"))
         self.comboBox.setItemText(5, _translate("MainWindow", "MAV"))
-        self.comboBox.setItemText(6, _translate("MainWindow", "URDU"))
-        self.comboBox.setItemText(7, _translate("MainWindow", "MULTIPLE"))
+        self.comboBox.setItemText(6, _translate("MainWindow", "MELD"))
+        self.comboBox.setItemText(7, _translate("MainWindow", "JL"))
+        self.comboBox.setItemText(8, _translate("MainWindow", "MULTIPLE"))
         self.label.setText(_translate("MainWindow", "Select dataset:"))
         self.groupBox.setTitle(_translate("MainWindow", "Actions"))
         self.radioButton.setToolTip(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
@@ -455,12 +479,22 @@ class Ui_MainWindow(object):
             self.tableWidget.setItem(4, i, QtWidgets.QTableWidgetItem(str(np.sum(matrix[:,i]))))
             self.tableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(str(np.sum(matrix[i]))))
         self.tableWidget.setItem(4, 4, QtWidgets.QTableWidgetItem(str(np.sum(np.diag(matrix)))))
+        # self.tableWidget.item(5, 5).setBackground(QtGui.QColor(102, 140, 255))
         self.tableWidget.item(4, 4).setBackground(QtGui.QColor(102, 140, 255))
         self.tableWidget.item(3, 3).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(2, 2).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(1, 1).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(0, 0).setBackground(QtGui.QColor(125, 125, 125))
-        
+
+    def open_alert_dialog(self, title="Alert", text="...", info="..."):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+
+        msg.setWindowTitle(title)
+        msg.setText(text)
+        msg.setInformativeText(info)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg.exec_()
 
 map_config = {
     "EMO-DB": 1,
@@ -469,15 +503,10 @@ map_config = {
     "ENTERFACE": 4,
     "EMOVO": 5,
     "MAV": 6,
-    "URDU": 7,
-    "MULTIPLE": 8,
+    "MELD": 7,
+    "JL": 8,
+    "MULTIPLE": 9,
 }
-
-def fill_file(app):
-    files = get_files_from_directory(app.lineEdit_2.text())
-    app.comboBox_2.clear()
-    for file in files:
-        app.comboBox_2.addItem(file)
 
 ses = 0
 ser_inference_model = 0
@@ -485,14 +514,36 @@ files = []
 
 ses_online = 0
 ses_online_model = 0
+
+def fill_file(app):
+    global ses, ser_inference_model, files, ses_online, ses_online_model
+    files = get_files_from_directory(app.lineEdit_2.text())
+    app.comboBox_2.clear()
+    for file in files:
+        app.comboBox_2.addItem(file)
+    if app.radioButton_2.isChecked() :  # inference
+        app.pushButton.setEnabled(True)
+        app.pushButtonInfPlay.setEnabled(True)
+        ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked(), app.lineEdit_2.text())
+        if ser_inference_model == None:
+            app.open_alert_dialog(title="Missing Inference Files Alert", text="We could no find any files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
+            app.pushButton.setEnabled(False)
+            app.pushButtonInfPlay.setEnabled(False)
+        ses_online, ses_online_model = init_online_model()
+    
 def init_inference(app):
     global ses, ser_inference_model, files, ses_online, ses_online_model
     if app.radioButton_2.isChecked():  # inference
         app.pushButtonRecord.setEnabled(True)
         app.pushButtonInfPlay.setEnabled(True)
-        ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked())
+        ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked(), app.lineEdit_2.text())
+        if ser_inference_model == None:
+            app.open_alert_dialog(title="Missing Inference Files Alert", text="We could no find any files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
+            app.pushButton.setEnabled(False)
+            app.pushButtonInfPlay.setEnabled(False)
         ses_online, ses_online_model = init_online_model()
     elif ses != 0 and app.radioButton.isChecked():
+        app.pushButton.setEnabled(True)
         app.pushButtonRecord.setEnabled(False)
         app.pushButtonInfPlay.setEnabled(False)
         app.pushButtonStopRecord.setEnabled(False)
@@ -504,6 +555,7 @@ def on_button_clicked(app):
     if app.radioButton.isChecked():  # training
         app.pushButton.setEnabled(False)
         app.pushButtonStop.setEnabled(True)
+        app.radioButton_2.setEnabled(False)
         app.refresh_label_7()
         app.refresh_graphics_view()
         thread_1 = Train_App(app)
@@ -518,6 +570,7 @@ def on_button_clicked(app):
         app.progressBar_2.setValue(vals[1])
         app.progressBar_3.setValue(vals[2])
         app.progressBar_4.setValue(vals[3])
+        # app.progressBar_5.setValue(vals[4])
         print_in_label_7(app, str(list(map('{:.8f}'.format, vals))))
     pass
 
@@ -532,10 +585,13 @@ def on_buttonRecord_clicked(app):
       app.refresh_rec_graphics_view()
       global mr, recorder_thread
       mr = MicrophoneRecorder()
+      if not mr.check_device_availability():
+          return
       recorder_thread = Record_App(app, mr)
       recorder_thread.print_recording_signal.connect(app.print_recording_graph)
       recorder_thread.start()
       app.pushButtonStopRecord.setEnabled(True)
+      app.pushButton.setEnabled(False)
 
 def on_buttonStopRecord_clicked(app):
         import librosa
@@ -555,6 +611,7 @@ def on_buttonStopRecord_clicked(app):
         app.progressBar_3.setValue(vals[2])
         app.progressBar_4.setValue(vals[3])
         print_in_label_7(app, str(list(map('{:.8f}'.format, vals))))
+        app.pushButton.setEnabled(True)
         app.pushButtonRecord.setEnabled(True)
         app.pushButtonStopRecord.setEnabled(False)
 
@@ -574,24 +631,11 @@ def print_in_label_7(app, str):
 import time
 
 
-def play_recording(file="output.wav"):
-    import wave
-    import pyaudio
-    chunk = 128
-
-    f = wave.open(file, "rb")
-    p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paInt16,
-                    channels=1,
-                    rate=48000,
-                    output=True)
-    data = f.readframes(chunk)
-    while data:
-        stream.write(data)
-        data = f.readframes(chunk)
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
+play_th = 1
+def play_recording(app, file="output.wav"):
+        global play_th
+        play_th = Play_App(app, file)
+        play_th.start()
 
 class Train_App(QtCore.QThread):
     print_accuracy_signal = QtCore.pyqtSignal(float)
@@ -607,6 +651,7 @@ class Train_App(QtCore.QThread):
         main(self, int(self.app_rnning.lineEdit.text()),map_config[self.app_rnning.comboBox.currentText()], self.app_rnning.radioButton_3.isChecked())
         self.app_rnning.pushButton.setEnabled(True)
         self.app_rnning.pushButtonStop.setEnabled(False)
+        self.app_rnning.radioButton_2.setEnabled(True)
 
 
 class Record_App(QtCore.QThread):
@@ -620,3 +665,43 @@ class Record_App(QtCore.QThread):
 
     def run(self):
         self.mr.start(self)
+
+
+class Play_App(QtCore.QThread):
+    print_recording_signal = QtCore.pyqtSignal(object)
+
+    def __init__(self, app_rnning, file, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        self.app_rnning = app_rnning
+        self.file = file
+        self.pushButtonInfPlayState = self.app_rnning.pushButtonPlay.isEnabled()
+        self.app_rnning.pushButtonInfPlay.setEnabled(False)
+        self.app_rnning.pushButtonPlay.setEnabled(False)
+
+    def run(self):
+        import wave
+        import pyaudio
+        chunk = 128
+        f = wave.open(self.file, "rb")
+        p = pyaudio.PyAudio()
+
+        try:
+                p.get_default_output_device_info()
+        except IOError:
+                print("\n\n No out device found. \n\n")
+                self.app_rnning.open_alert_dialog(title="Missing output device alert", text="We could not identify any audio output device.", info="Please try and reconnec the device and restart the app.")
+                return
+
+        stream = p.open(format=pyaudio.paInt16,
+                        channels=1,
+                        rate=48000,
+                        output=True)
+        data = f.readframes(chunk)
+        while data:
+            stream.write(data)
+            data = f.readframes(chunk)
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        self.app_rnning.pushButtonInfPlay.setEnabled(True)
+        self.app_rnning.pushButtonPlay.setEnabled(self.pushButtonInfPlayState)

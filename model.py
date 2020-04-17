@@ -1,11 +1,12 @@
 #%%
 import os
 try:
-    os.chdir(os.path.join(
-        os.getcwd(), 'Speech_Emotion_Recognition'))
+    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
     print(os.getcwd())
 except:
-    pass
+      print("Can't change the Current Working Directory")
+      pass
+
 
 import numpy as np
 import tensorflow as tf
@@ -50,12 +51,12 @@ class Speech_Emotion_Recognizer(object):
             self._is_training = is_training
             self._is_inference = is_inference
 
-            self._hidden_size = 256 if flag_end_to_end==0 else 1024 
+            self._hidden_size = 256 if flag_end_to_end==0 else 256 
             self._emotion_nr = 4
-            self._learning_rate = 0.001
-            self._keep_prob = 0.8
+            self._learning_rate = 0.0001
+            self._keep_prob = 0.5
             self.model_op_name = model_op_name
-            self.init = tf.random_normal_initializer(-0.1, 0.1, seed = 17)
+            self.init = tf.glorot_normal_initializer()
 
       def set_inputs_targets_length(self, inputs, targets=None, op_length=1):
             self._inputs = inputs
@@ -68,38 +69,36 @@ class Speech_Emotion_Recognizer(object):
                         will be share using the tf.virtual_scope.
             """
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse=tf.AUTO_REUSE, initializer=self.init):
-                  # self._inputs = batch_normalization(self._inputs)
                   rnn_layer = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
-                  # rnn_layer = batch_normalization(rnn_layer)
 
-                  attention_layer_output = self.create_attention_layer(rnn_layer, self._hidden_size)
+                  attention_layer_output = self.create_attention_layer(rnn_layer, self._hidden_size*2)
                   predictions_1 = tf.layers.dense(attention_layer_output, self._emotion_nr, name="Output_Layer")
                   predictions = tf.reduce_sum(predictions_1, axis=0)
 
                   targets_raw_ = tf.nn.softmax(predictions, axis=0)
 
-                  # targets_ = tf.cast(tf.equal(targets_raw_, tf.reduce_max(targets_raw_)), tf.float32)
-                  targets_ = tf.round(targets_raw_)
+                  targets_ = tf.cast(tf.equal(targets_raw_, tf.reduce_max(targets_raw_)), tf.float32)
 
                   if self._is_inference:
                         self.predictions_raw = targets_
                         self.predictions = targets_raw_
                         return
                   
-                  cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels = self._targets, logits = targets_raw_)
+                  cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(labels=self._targets, logits=predictions)
 
                   self._label_pred = tf.argmax(targets_)
                   self._label_true = tf.argmax(self._targets)
 
-                  # self.accuracy = tf.cast(tf.equal(self._label_pred, self._label_true), tf.float32)
-                  is_correct = tf.equal(targets_, self._targets)
-                  self.accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
+                  self.accuracy = tf.cast(tf.equal(self._label_pred, self._label_true), tf.float32)
                   if not self._is_training:
                         return
 
                   tf.summary.scalar('Accuracy', self.accuracy)
                   adam_opt = tf.train.AdamOptimizer(self._learning_rate)
                   self.optimizer = adam_opt.minimize(cross_entropy)
+                  # gvs = adam_opt.compute_gradients(cross_entropy)
+                  # capped_gvs = [(tf.clip_by_value(grad, -1., 1.), var) for grad, var in gvs]
+                  # self.optimizer = adam_opt.apply_gradients(capped_gvs)
 
       def initialize_variables(self, session):
             session.run(tf.global_variables_initializer())
@@ -113,9 +112,9 @@ class Speech_Emotion_Recognizer(object):
                         of this LSTM cell are shared in the model's variable_scope
             """
             print("=========Create LSTM Cell")
-            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True, activation = tf.nn.elu)
+            cell = tf.contrib.rnn.LSTMCell(num_units=hidden_size, use_peepholes=True, initializer=tf.glorot_uniform_initializer())
             if self._is_training and self._keep_prob < 1:
-                  cell = tf.contrib.rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
+                  cell = tf.contrib.rnn.DropoutWrapper(cell, input_keep_prob=self._keep_prob, output_keep_prob=self._keep_prob, variational_recurrent=True, dtype=tf.float32, input_size=hidden_size)
             return cell
 
       def create_LSTM_layer(self, inputs, hidden_size, name=None):
@@ -126,13 +125,17 @@ class Speech_Emotion_Recognizer(object):
                         states[0]:the outputs of each state in the RNN sequence
             """
             with tf.variable_scope(name):
-                  lstm_cells = [self.make_lstm_cell(hidden_size) for _ in range(1)]
-                  multi_cell = tf.contrib.rnn.MultiRNNCell(lstm_cells, state_is_tuple=True)
-                  initial_zero_state = multi_cell.zero_state(1, tf.float32)
+                  lstm_cells_fw = [self.make_lstm_cell(hidden_size) for _ in range(1)]
+                  lstm_cells_bw = [self.make_lstm_cell(hidden_size) for _ in range(1)]
+                  multi_cell_fw = tf.contrib.rnn.MultiRNNCell(lstm_cells_fw, state_is_tuple=True)
+                  multi_cell_bw = tf.contrib.rnn.MultiRNNCell(lstm_cells_bw, state_is_tuple=True)
+                  initial_zero_state_fw = multi_cell_fw.zero_state(1, tf.float32)
+                  initial_zero_state_bw = multi_cell_bw.zero_state(1, tf.float32)
                   inputs = tf.expand_dims(inputs, axis=0)
-                  outputs, states = tf.nn.dynamic_rnn(
-                      multi_cell, inputs, initial_state=initial_zero_state)
-            return outputs[0]
+                  outputs, _ = tf.nn.bidirectional_dynamic_rnn(multi_cell_fw, multi_cell_bw, inputs, initial_state_fw=initial_zero_state_fw, initial_state_bw=initial_zero_state_bw)
+                  # outputs, _ = tf.nn.dynamic_rnn(multi_cell_fw, inputs, initial_state=initial_zero_state_fw)
+            return tf.concat(outputs, 2)[0]
+            # return outputs[0]
 
       def create_attention_layer(self, frame_predictions, weigths_dim):
             """ CREATES THE ATTENTION LAYER IN ORDER TO OBTAIN A WEIGHTED POOL LAYER BASED ON THE
@@ -216,6 +219,8 @@ class Speech_Emotion_Recognizer(object):
                         print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
                         thread.print_stats.emit(str("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length))))
                         thread.print_matrix.emit(self.accuracy_matrix)
+                  if total_accuracy / self._op_length > 0.8:
+                        return 0
             else:
                   predictions = []
                   if files is None:
@@ -244,6 +249,7 @@ class Speech_Emotion_Recognizer(object):
             self.saver.restore(ses, path)
 #%%
 def main(thread=None, epochs=10, id_config=1, flag_end_to_end = 1):
+      empty_dir('./model')
       tf.reset_default_graph()
       ses = tf.Session()
 
@@ -268,33 +274,43 @@ def main(thread=None, epochs=10, id_config=1, flag_end_to_end = 1):
       merged_summaries = tf.summary.merge_all()
 
       ser_train_model.initialize_variables(ses)
-      # print_accuracy_graph(thread, 0)
       for epoch in range(epochs):
             print("-----------> Epoch " + str(epoch))
-            ser_train_model.run_model(ses, writer, merged_summaries, thread=thread)
+            x = ser_train_model.run_model(ses, writer, merged_summaries, thread=thread)
+            if x == 1:
+                  break
+            if epoch % 5 == 0:
+                  print("----------------------------------------------------------------")
+                  ser_test_model.run_model(ses, writer, merged_summaries, thread=None)
+                  print("----------------------------------------------------------------")
       ser_train_model.save_model(ses, "./model/model.ckpt")
       writer = tf.summary.FileWriter('./graphs', ses.graph)
+      thread.stopFlag = 0
+      thread.print_stats.emit("############### Trainig finished!")
       ser_test_model.run_model(ses, writer, merged_summaries, thread=thread)
 
-      # clear_accuracy_vals()
       ses.close()
-#%%
-def init_inference_model(flag_end_to_end=1):
-      ses = tf.Session()
 
+def init_inference_model(flag_end_to_end=1, dir_name="Inference"):
+      ses = tf.Session()
+      inf_config = Inference_Config()
+      inf_config.dir_name=[dir_name]
       if flag_end_to_end:
             ser_dp_inference = Data_Producer_End_to_End_Inference(
-                Inference_Config())
+                inf_config)
       else:
             ser_dp_inference = Data_Producer_Hand_Crafted_Inference(
-                Inference_Config())
+                inf_config)
 
       ser_inference_model = Speech_Emotion_Recognizer(
           model_op_name="Inference", is_training=False, is_inference=True)
 
       infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
-      ser_inference_model.set_inputs_targets_length(
-          inputs=infr_inputs, op_length=inference_length)
+
+      if inference_length == 0:
+            return None, None, []
+
+      ser_inference_model.set_inputs_targets_length(inputs=infr_inputs, op_length=inference_length)
 
       ser_inference_model.model()
       ser_inference_model.create_saver()
@@ -304,8 +320,9 @@ def init_inference_model(flag_end_to_end=1):
       return ses, ser_inference_model, files
 
 def close_inference_model(ses):
+      if ses == None:
+            return
       ses.close()
-
 
 def inference(ses, ser_inference_model, files, file_to_show):
       writer = tf.summary.FileWriter('./graphs', ses.graph)
@@ -313,7 +330,7 @@ def inference(ses, ser_inference_model, files, file_to_show):
       list_vars = ser_inference_model.run_model(ses, writer, merged_summaries, files, file_to_show)
       return list_vars
 
-infr_inputs = tf.placeholder(tf.float32, (None, 1024))
+infr_inputs = tf.placeholder(tf.float32, (None, 256))
 inference_length = tf.placeholder(tf.float32, None)      
 def init_online_model():
       global infr_inputs, inference_length
@@ -346,42 +363,3 @@ def online(ses, ser_inference_model, frames, org_rt):
 if __name__ == "__main__":
     main(epochs=30)
 
-
-#%%
-
-
-# def inference_work(flag_end_to_end=1):
-#       ses = tf.Session()
-
-#       if flag_end_to_end:
-#             ser_dp_inference = Data_Producer_End_to_End_Inference(
-#                 Inference_Config())
-#       else:
-#             ser_dp_inference = Data_Producer_Hand_Crafted_Inference(
-#                 Inference_Config())
-
-#       ser_inference_model = Speech_Emotion_Recognizer(
-#           model_op_name="Inference", is_training=False, is_inference=True)
-#       ser_inference_model.create_saver()
-#       ser_inference_model.restore_model(ses, "./model/model.ckpt")
-#       infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
-
-#       ser_inference_model.set_inputs_targets_length(
-#           inputs=infr_inputs, op_length=inference_length)
-
-#       writer = tf.summary.FileWriter('./graphs', ses.graph)
-#       merged_summaries = tf.summary.merge_all()
-
-#       ser_inference_model.model()
-#       ser_inference_model.run_model(ses, writer, merged_summaries, files)
-
-#       ses.close()
-
-
-# inference_work()
-
-
-# #%%
-
-
-#%%

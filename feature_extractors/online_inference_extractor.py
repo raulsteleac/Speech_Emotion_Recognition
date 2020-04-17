@@ -77,6 +77,6 @@ class Online_Data_Producer_End_to_End_Inference(Data_Producer_End_to_End):
                                                                None, self._features[0].shape[1], self._features[0].shape[2], 1]).repeat()
             features = self._features_dt.make_one_shot_iterator()
             inputs = features.get_next()
-            inputs = self._convolutional_feature_extractor(inputs)
+            inputs = self._convolutional_feature_extractor(inputs, 1.0)
 
             return inputs, inference_length

@@ -1,11 +1,11 @@
 # %%
 import os
 try:
-    os.chdir(os.path.join(
-        os.getcwd(), 'Speech_Emotion_Recognition'))
+    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
     print(os.getcwd())
 except:
-    pass
+      print("Can't change the Current Working Directory")
+      pass
 
 import librosa
 import numpy as np
@@ -46,43 +46,59 @@ class Feature_Extractor(object):
             if data_set_name == 'MAV':
                   self.set_MAV_Config()
 
-            if data_set_name == 'URDU':
-                  self.set_URDU_Config()
+            if data_set_name == 'MELD':
+                  self.set_MELD_Config()
+
+            if data_set_name == 'JL':
+                  self.set_JL_Config()
+
+            if data_set_name == 'InrP':
+                  self.set_InrP_Config()
 
       def set_EMO_DB_config(self):
-            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}
+            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}  # 'A': 3,
             self.emotion_number = 4
             self.emotion_letter_position = -6
 
       def set_SAVEE_config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}  # 'f': 3,
             self.emotion_number = 4
             self.emotion_letter_position = 9
 
       def set_RAVDESS_config(self):
-            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3}
+            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3}  # '6': 3,
             self.emotion_number = 4
             self.emotion_letter_position = -17
 
       def set_ENTERFACE_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n':3}
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}  # 'f':3,
             self.emotion_number = 4
             self.emotion_letter_position = -8
 
       def set_EMOVO_Config(self):
-            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3}
+            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3}  # 'p': 3,
             self.emotion_number = 4
             self.emotion_letter_position = -13
 
       def set_MAV_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 4}  # 'f':3,
             self.emotion_number = 4
             self.emotion_letter_position = 3
 
-      def set_URDU_Config(self):
+      def set_MELD_Config(self):
+            self.e_to_n_mapping = {'a': 0, 'j': 1, 's': 2, 'n': 3}
+            self.emotion_number = 4
+            self.emotion_letter_position = 26
+
+      def set_JL_Config(self):
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}
+            self.emotion_number = 4
+            self.emotion_letter_position = 16
+
+      def set_InrP_Config(self):
             self.e_to_n_mapping = {'A': 0, 'H': 1, 'S': 2, 'N': 3}
             self.emotion_number = 4
-            self.emotion_letter_position = -8
+            self.emotion_letter_position = -5
 
       def show_pic(self, feature):
             pass
@@ -121,7 +137,7 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
             """
             signal, _ = librosa.load(wav_file, 16000)
             librosa.core.time_to_frames
-            stft = librosa.feature.melspectrogram(signal, n_fft=256, win_length=128, hop_length=32, center=False)
+            stft = librosa.feature.melspectrogram(signal, n_fft=512, win_length=128, hop_length=32, center=False)
             return stft
 
 class Feature_Extractor_Hand_Crafted(Feature_Extractor):
