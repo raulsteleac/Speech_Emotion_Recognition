@@ -48,23 +48,13 @@ class Feature_Extractor_Hand_Crafted_Training_Testing(Feature_Extractor_Hand_Cra
             print("------------------ Processing audio files")
             self.inputs = np.array([])
             self.targets = np.array([[]])
-            autoencoder_train_input = ""
 
             for files, ds_name in zip(self.files, self._data_set_name_list):
                 self._set_data_set_config(ds_name)
                 self._transform_wave_files(files)
-                #show_pic(self.features[0], self.feature_names, (30, 20))
                 self.features = self._reshape_features(self.features)
                 self.inputs = np.append(self.inputs, self.features)
 
-                if target_domain == ds_name:
-                    autoencoder_train_input = self.features
-
-            # Feature_Extractor._dae = DAE(fit_inputs=autoencoder_train_input, hidden_layer_dimension=73)
-            # Feature_Extractor._dae.autoencoder_model()
-            # Feature_Extractor._dae.autoencoder_fit(250, session)
-            # self.inputs = Feature_Extractor._dae.autoencoder_transform(self.inputs, session)
-            
             self.targets = np.reshape(self.targets, (-1, self.emotion_number))
             self.inputs, self.targets = shuffle_data(self.inputs, self.targets)
             return self.inputs, self.targets, self.inputs[0].shape[1]
@@ -85,11 +75,7 @@ class Feature_Extractor_Hand_Crafted_Inference(Feature_Extractor_Hand_Crafted):
             self.files = self.files[0]
             print("List of files is : %s" % self.files)
             self.features = np.array([self._get_audio_features(wav_file) for wav_file in tqdm(self.files)])
-            #self.show_pic(self.features[0])
             self.features = self._reshape_features(self.features)
-
-            # Feature_Extractor._dae.autoencoder_model()
-            # self.features = Feature_Extractor._dae.autoencoder_transform(self.features, session)
             print("------------------------------------------------------------------------")
             return self.features, self.files
 

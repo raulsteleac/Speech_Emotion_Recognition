@@ -31,7 +31,6 @@ class Data_Producer_End_to_End(object):
                     -Returns:
                         conv_out: the features "extracted" after filtering the melspectogram through the convolutional layers   
             """
-            # self.init = tf.random_normal_initializer(-0.1, 0.1)
             self.init = tf.glorot_normal_initializer()
             with tf.variable_scope("Convbb", reuse=tf.AUTO_REUSE, initializer=self.init):
                   stft = batch_normalization(stft)
@@ -45,22 +44,22 @@ class Data_Producer_End_to_End(object):
             return conv_out
 
 class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
-      def __init__(self, config):
-            self._feature_extractor = Feature_Extractor_End_to_End_Train_Test(config.dir_name, config.data_set_name)
-            self._train_test_slice = config.train_test_slice
-            self._target_domain = config.target_domain[0]
+      def __init__(self, config, train_ratio, thread):
+            self._feature_extractor = Feature_Extractor_End_to_End_Train_Test(config.dir_name, config.data_set_name, thread)
+            self._train_test_slice = train_ratio
 
       def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
                     -Arguments:
                         session: the tf.Session() the model is running on
             """
-            self._inputs, self._targets, self.feature_shape = self._feature_extractor.get_featurs_and_targets(self._target_domain, session)
+            self._inputs, self._targets, self.feature_shape = self._feature_extractor.get_featurs_and_targets(session)
 
       def _separate_train_from_test(self):
             """ REGROUP DATA INTO TRAIN DATA AND TEST DATA
                     - given the small number of sample the validation phase is ignored
             """
+            print(self._train_test_slice)
             self._train_length = int(self._inputs.shape[0]*self._train_test_slice)
             self._test_length = int(self._inputs.shape[0]*(1-self._train_test_slice))
 
@@ -96,9 +95,6 @@ class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
             X_train = iterator_train_inputs.get_next()
             y_train = iterator_train_targets.get_next()
 
-            # X_train = Feature_Extractor._dae.autoencoder_fit_supervised(X_train)
-            # print(X_train)
-
             X_train = self._convolutional_feature_extractor(X_train, 1.0)
             session.run(tf.global_variables_initializer())
 
@@ -116,8 +112,6 @@ class Data_Producer_End_to_End_Train_Test(Data_Producer_End_to_End):
 
             X_test = iterator_test_inputs.get_next()
             y_test = iterator_test_targets.get_next()
-
-            # X_test = Feature_Extractor._dae.autoencoder_fit_supervised(X_test)
 
             X_test = self._convolutional_feature_extractor(X_test, 1.0)
             session.run(tf.global_variables_initializer())
@@ -160,53 +154,3 @@ class Data_Producer_End_to_End_Inference(Data_Producer_End_to_End):
             inputs = self._convolutional_feature_extractor(inputs, 1.0)
 
             return inputs, inference_length, self._files
-
-# #%%
-# def main():
-#       session = tf.Session()
-#       dp = Data_Producer_End_to_End_Train_Test(select_config(1))
-#       (X_train, y_train), _ = dp.produce_data_train(session)
-#       (X_train, y_train), _= dp.produce_data_test(session)
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print("------------------------------------------------------------------------------------------------------------------------------------------------------------")
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print("------------------------------------------------------------------------------------------------------------------------------------------------------------")
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print("------------------------------------------------------------------------------------------------------------------------------------------------------------")
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-#       print(session.run(X_train))
-#       print(session.run(y_train))
-
-
-# if __name__ == "__main__":
-#     main()
-

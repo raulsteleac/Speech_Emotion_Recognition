@@ -13,7 +13,7 @@ def get_files_from_directory(dir_name):
             dir_name - path to the directory where the *.wav files are stored
       """
       list_of_files = np.array([])
-      for root, dirs, files in os.walk(dir_name):
+      for root, _, files in os.walk(dir_name):
             for f in files:
                   if f.endswith(".wav"):
                               list_of_files = np.append(
@@ -86,60 +86,42 @@ def generator_shuffle(data, change):
                   yield data[i * (data.shape[0] // splits_count) + j]
 
 class EMO_DB_Config(object):
-      dir_name = ['data_sets/EMO-DB', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['EMO-DB', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/EMO-DB']
+      data_set_name = ['EMO-DB']
 
 
 class SAVEE_Config(object):
-      dir_name = ['data_sets/SAVEE', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['SAVEE', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/SAVEE']
+      data_set_name = ['SAVEE']
 
 
 class RAVDESS_Config(object):
-      dir_name = ['data_sets/RAVDESS', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['RAVDESS', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/RAVDESS']
+      data_set_name = ['RAVDESS']
 
 class ENTERFACE_Config(object):
-      dir_name = ['data_sets/ENTERFACE', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['ENTERFACE', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/ENTERFACE']
+      data_set_name = ['ENTERFACE']
 
 class EMOVO_Config(object):
-      dir_name = ['data_sets/EMOVO', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['EMOVO', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/EMOVO']
+      data_set_name = ['EMOVO']
 
 class MAV_Config(object):
-      dir_name = ['data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['MAV', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/MONTREAL_AFFECTIVE_VOICE']
+      data_set_name = ['MAV']
 
 class MELD_Config(object):
-      dir_name = ['data_sets/MELD', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['MELD', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/MELD']
+      data_set_name = ['MELD']
 
 class JL_Config(object):
-      dir_name = ['data_sets/JL', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['JL', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
+      dir_name = ['data_sets/JL']
+      data_set_name = ['JL']
 
 class MULTIPLE_DATA_SETS_Config(object):
       dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', 'data_sets/EMOVO', 'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 'data_sets/JL', 'data_sets/Inregistrari_Proprii']
       data_set_name = ['EMO-DB', 'RAVDESS', 'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
-      train_test_slice = 0.8
-      target_domain = ['InrP']
 
 
 class Inference_Config(object):

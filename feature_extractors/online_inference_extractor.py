@@ -40,7 +40,6 @@ class Online_Feature_Extractor_End_to_End(Feature_Extractor):
             return conv_frames[:, :, 0:window_length]
 
       def _get_audio_features(self, frames, org_rt):
-            # signal = librosa.resample(np.array(frames), 16000, org_rt)
             librosa.core.time_to_frames
             stft = librosa.feature.melspectrogram(
                 frames, n_fft=256, win_length=128, hop_length=32, center=False)
@@ -69,12 +68,11 @@ class Online_Data_Producer_End_to_End_Inference(Data_Producer_End_to_End):
                         self._files - the names of the files in the inference folder to pretty print              
             """
             self._import_data(session, frames, org_rt)
-            self._features = np.array([_inputs.reshape(
-                [_inputs.shape[0], _inputs.shape[1], _inputs.shape[2], 1]) for _inputs in self._features])
+            self._features = np.array([_inputs.reshape([_inputs.shape[0], _inputs.shape[1], _inputs.shape[2]]) for _inputs in self._features])
 
             inference_length = self._features.shape[0]
             self._features_dt = tf.data.Dataset.from_generator(lambda: self._features, tf.float32, output_shapes=[
-                                                               None, self._features[0].shape[1], self._features[0].shape[2], 1]).repeat()
+                                                               None, self._features[0].shape[1], self._features[0].shape[2]]).repeat()
             features = self._features_dt.make_one_shot_iterator()
             inputs = features.get_next()
             inputs = self._convolutional_feature_extractor(inputs, 1.0)

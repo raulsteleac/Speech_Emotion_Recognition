@@ -18,13 +18,15 @@ class Feature_Extractor(object):
       _dae = None
       _target_domain = None
 
-      def __init__(self, directory_name_list):
+      def __init__(self, directory_name_list, thread):
             """  FETCH THE .WAV FILES FROM ALL THE DATASET DIRECTORIES ORIGINATING FROM THIS ONE
                   -Arguments:
                         directory_name_list : list of directories containing the datasets
             """
+            self.thread = thread
             print("------------------ Starting extracting featuers for data set : %s " % ' '.join(directory_name_list))
             self.files = [get_files_from_directory(directory_name) for directory_name in directory_name_list]
+            self.thread = thread
 
       def _set_data_set_config(self, data_set_name):
             """ SET CONFIGURATION DEPENDING ON THE DATA SET GIVEN BY THE ARGUMENT OF THIS FUNCTION
@@ -56,37 +58,37 @@ class Feature_Extractor(object):
                   self.set_InrP_Config()
 
       def set_EMO_DB_config(self):
-            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}  # 'A': 3,
+            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = -6
 
       def set_SAVEE_config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}  # 'f': 3,
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = 9
 
       def set_RAVDESS_config(self):
-            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3}  # '6': 3,
+            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = -17
 
       def set_ENTERFACE_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}  # 'f':3,
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = -8
 
       def set_EMOVO_Config(self):
-            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3}  # 'p': 3,
+            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = -13
 
       def set_MAV_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 4}  # 'f':3,
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
             self.emotion_number = 4
             self.emotion_letter_position = 3
 
       def set_MELD_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'j': 1, 's': 2, 'n': 3}
+            self.e_to_n_mapping = {'a': 0, 'j': 1, 's': 2,'n': 3}
             self.emotion_number = 4
             self.emotion_letter_position = 26
 
@@ -107,8 +109,8 @@ class Feature_Extractor(object):
             pass
 
 class Feature_Extractor_End_to_End(Feature_Extractor):
-      def __init__(self, directory_name_list):
-            super().__init__(directory_name_list)
+      def __init__(self, directory_name_list, thread):
+            super().__init__(directory_name_list, thread)
             self.feature_names = ['STFT']
 
       def reshape_frames(self, stft, window_length):
@@ -181,6 +183,8 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
                         (N, 75), where N represents the number of frames, differing for each audio file.  
             """
             print("------------------ Reshaping features regarding the audio file's frames")
+            if self.thread != None:
+                  self.thread.print_stats.emit("------------------ Reshaping features regarding the audio file's frames")
             files_features = np.array([[np.transpose(feature) for feature in file_features] for file_features in files_features])
             return np.array([self._reshape_features_for_one_file(file_features) for file_features in tqdm(files_features)])
 

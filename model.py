@@ -20,11 +20,11 @@ from util import *
 from PyQt5 import QtCore
 
 class SER_Data_Producer(object):
-      def __init__(self, config, flag_end_to_end=1):
+      def __init__(self, config, train_ratio, flag_end_to_end=1, thread=None):
             if flag_end_to_end:
-                  self.dp = Data_Producer_End_to_End_Train_Test(config)
+                  self.dp = Data_Producer_End_to_End_Train_Test(config, train_ratio, thread)
             else:
-                  self.dp = Data_Producer_Hand_Crafted_Train_Test(config)
+                  self.dp = Data_Producer_Hand_Crafted_Train_Test(config, train_ratio, thread)
 
       def import_data(self, session): 
             """ CALLS THE PRODUCE_DATA FUNCTION OF THE DATA_PRODUCER
@@ -47,14 +47,14 @@ class SER_Data_Producer(object):
             return self.test_inputs, self.test_targets, self.test_length
 
 class Speech_Emotion_Recognizer(object):
-      def __init__(self, model_op_name = "", is_training=False, is_inference=False, flag_end_to_end = 1):
+      def __init__(self, model_op_name = "", keep_prob= 1, learning_rate=0.0001, is_training=False, is_inference=False, flag_end_to_end = 1):
             self._is_training = is_training
             self._is_inference = is_inference
 
-            self._hidden_size = 256 if flag_end_to_end==0 else 256 
+            self._hidden_size = 75 if flag_end_to_end==0 else 256 
             self._emotion_nr = 4
-            self._learning_rate = 0.0001
-            self._keep_prob = 0.5
+            self._learning_rate = learning_rate
+            self._keep_prob = keep_prob
             self.model_op_name = model_op_name
             self.init = tf.glorot_normal_initializer()
 
@@ -68,6 +68,7 @@ class Speech_Emotion_Recognizer(object):
                   -The weights, and all the other necessary parameters for all the models,
                         will be share using the tf.virtual_scope.
             """
+            print(self._learning_rate)
             with tf.variable_scope("Speech_Emotion_Recognizer", reuse=tf.AUTO_REUSE, initializer=self.init):
                   rnn_layer = self.create_LSTM_layer(self._inputs, self._hidden_size, "rnn_layer1")
 
@@ -96,9 +97,6 @@ class Speech_Emotion_Recognizer(object):
                   tf.summary.scalar('Accuracy', self.accuracy)
                   adam_opt = tf.train.AdamOptimizer(self._learning_rate)
                   self.optimizer = adam_opt.minimize(cross_entropy)
-                  # gvs = adam_opt.compute_gradients(cross_entropy)
-                  # capped_gvs = [(tf.clip_by_value(grad, -1., 1.), var) for grad, var in gvs]
-                  # self.optimizer = adam_opt.apply_gradients(capped_gvs)
 
       def initialize_variables(self, session):
             session.run(tf.global_variables_initializer())
@@ -125,8 +123,8 @@ class Speech_Emotion_Recognizer(object):
                         states[0]:the outputs of each state in the RNN sequence
             """
             with tf.variable_scope(name):
-                  lstm_cells_fw = [self.make_lstm_cell(hidden_size) for _ in range(1)]
-                  lstm_cells_bw = [self.make_lstm_cell(hidden_size) for _ in range(1)]
+                  lstm_cells_fw = [self.make_lstm_cell(hidden_size) for _ in range(2)]
+                  lstm_cells_bw = [self.make_lstm_cell(hidden_size) for _ in range(2)]
                   multi_cell_fw = tf.contrib.rnn.MultiRNNCell(lstm_cells_fw, state_is_tuple=True)
                   multi_cell_bw = tf.contrib.rnn.MultiRNNCell(lstm_cells_bw, state_is_tuple=True)
                   initial_zero_state_fw = multi_cell_fw.zero_state(1, tf.float32)
@@ -185,7 +183,10 @@ class Speech_Emotion_Recognizer(object):
                         writer: the tf.summary.FileWriter used to save the graphs
                         merged_summaries: the summaries use to see the evolution of the model
             """
-            print("\n %s just started ! \n" % self.model_op_name)
+            print("\n %s just started ! \n" % self.model_op_name) 
+            if thread:
+                  thread.print_stats.emit(str("\n %s just started ! \n" % self.model_op_name))
+            print(self._keep_prob)
             self.accuracy_matrix = np.zeros((self._emotion_nr, self._emotion_nr))            
             if not self._is_inference:
                   total_accuracy = 0.0
@@ -232,13 +233,6 @@ class Speech_Emotion_Recognizer(object):
                   return predictions
             print(self.accuracy_matrix)
 
-      def debug_print(self, session):
-            print(type(self._inputs))
-            print(self._inputs)
-            print(self._targets)
-            print(session.run(self._inputs).shape)
-            print(session.run(self._targets).shape)
-
       def create_saver(self):
             self.saver = tf.train.Saver()
 
@@ -248,18 +242,21 @@ class Speech_Emotion_Recognizer(object):
       def restore_model(self, ses, path):
             self.saver.restore(ses, path)
 #%%
-def main(thread=None, epochs=10, id_config=1, flag_end_to_end = 1):
+end_to_end_flag = 1
+def main(thread=None, epochs=10, keep_prob=0.5, train_ratio = 0.8, lr = 0.0001, id_config=1, flag_end_to_end = 1):
+      global end_to_end_flag
       empty_dir('./model')
       tf.reset_default_graph()
       ses = tf.Session()
-
-      ser_dp = SER_Data_Producer(select_config(id_config), flag_end_to_end=flag_end_to_end)
+      end_to_end_flag = flag_end_to_end
+      
+      ser_dp = SER_Data_Producer(select_config(id_config), train_ratio, flag_end_to_end=flag_end_to_end, thread=thread)
       ser_dp.import_data(ses)
 
       train_inputs, train_targets, train_length = ser_dp.train_data
       test_inputs, test_targets, test_length = ser_dp.test_data
 
-      ser_train_model = Speech_Emotion_Recognizer( "Training", True, flag_end_to_end=flag_end_to_end)
+      ser_train_model = Speech_Emotion_Recognizer( "Training", keep_prob, lr, True, flag_end_to_end=flag_end_to_end)
       ser_test_model  = Speech_Emotion_Recognizer( "Testing",  flag_end_to_end=flag_end_to_end)
 
       ser_train_model.set_inputs_targets_length(train_inputs, train_targets, train_length)
@@ -276,6 +273,8 @@ def main(thread=None, epochs=10, id_config=1, flag_end_to_end = 1):
       ser_train_model.initialize_variables(ses)
       for epoch in range(epochs):
             print("-----------> Epoch " + str(epoch))
+            if thread:
+                  thread.print_epoch.emit(str(epoch))
             x = ser_train_model.run_model(ses, writer, merged_summaries, thread=thread)
             if x == 1:
                   break
@@ -330,7 +329,7 @@ def inference(ses, ser_inference_model, files, file_to_show):
       list_vars = ser_inference_model.run_model(ses, writer, merged_summaries, files, file_to_show)
       return list_vars
 
-infr_inputs = tf.placeholder(tf.float32, (None, 256))
+infr_inputs = tf.placeholder(tf.float32, (None, 256 if end_to_end_flag else 75))
 inference_length = tf.placeholder(tf.float32, None)      
 def init_online_model():
       global infr_inputs, inference_length
@@ -362,4 +361,3 @@ def online(ses, ser_inference_model, frames, org_rt):
 
 if __name__ == "__main__":
     main(epochs=30)
-

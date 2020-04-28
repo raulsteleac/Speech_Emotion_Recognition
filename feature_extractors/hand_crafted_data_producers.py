@@ -16,10 +16,9 @@ from feature_extractors.hand_crafted_extractor import Feature_Extractor_Hand_Cra
 from util import *
 
 class Data_Producer_Hand_Crafted_Train_Test(object):
-      def __init__(self, config):
+      def __init__(self, config, train_ratio):
             self._feature_extractor = Feature_Extractor_Hand_Crafted_Training_Testing(config.dir_name, config.data_set_name)
-            self._train_test_slice = config.train_test_slice
-            self._target_domain = config.target_domain[0]
+            self._train_test_slice = train_ratio
 
       def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
@@ -79,8 +78,6 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
                         (X_test, y_test) - pair representing one instance of the train data
                         (self._train_length, self._test_length) - pair representing the length of the train and test data                
             """
-            self._import_data(session)
-            self._separate_train_from_test()
 
             self._test_inputs_dt = tf.data.Dataset.from_generator(
                 lambda: generator_shuffle(self._test_inputs, 0), tf.float32, output_shapes=[None, self._feature_count])
