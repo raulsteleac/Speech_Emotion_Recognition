@@ -1,0 +1,2816 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+  \entry{stft3}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=BPJ}{%
+         family={Bavel},
+         familyi={B\bibinitperiod},
+         given={P.\bibnamedelima J.},
+         giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BPJ1}
+    \strng{fullhash}{BPJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Fourier Transform}
+    \verb{url}
+    \verb http://www.thefouriertransform.com/
+    \endverb
+  \endentry
+
+  \entry{stft4}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Transformata Fourier}
+    \verb{url}
+    \verb https://ro.wikipedia.org/wiki/Transformata_Fourier
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{stft1}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SJ}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={Julius},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SJ1}
+    \strng{fullhash}{SJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Spectral Audio Signal Processing}
+    \field{month}{01}
+    \field{year}{2008}
+  \endentry
+
+  \entry{stft5}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Short-time Fourier transform}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Short-time_Fourier_transform
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{mfcc1}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=LJ}{%
+         family={Lyons},
+         familyi={L\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LJ1}
+    \strng{fullhash}{LJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Mel Frequency Cepstral Coefficient (MFCC) tutorial}
+    \verb{url}
+    \verb http://practicalcryptography.com/miscellaneous/machine-learning/guide
+    \verb -mel-frequency-cepstral-coefficients-mfccs//#computing-the-mel-filter
+    \verb bank
+    \endverb
+    \field{year}{2013}
+  \endentry
+
+  \entry{mfcc2}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=FH}{%
+         family={Fayek},
+         familyi={F\bibinitperiod},
+         given={Haytham},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FH1}
+    \strng{fullhash}{FH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Speech Processing for Machine Learning: Filter banks,
+  Mel-Frequency Cepstral Coefficients (MFCCs) and What's In-Between}
+    \verb{url}
+    \verb https://haythamfayek.com/2016/04/21/speech-processing-for-machine-lea
+    \verb rning.html
+    \endverb
+    \field{year}{2016}
+  \endentry
+
+  \entry{mfcc3}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Mel-frequency cepstrum}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Mel-frequency_cepstrum
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{mfcc4}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Mel scale}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Mel_scale
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{mfcc5}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Periodogram}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Periodogram
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{vad}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=WJ}{%
+         family={Wiseman},
+         familyi={W\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WJ1}
+    \strng{fullhash}{WJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Py-webrtcvad}
+    \verb{url}
+    \verb https://github.com/wiseman/py-webrtcvad
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{qdarkgraystyle}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Stuttgart},
+         familyi={S\bibinitperiod},
+         given={Michell},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{qdarkgraystyle}
+    \verb{url}
+    \verb https://github.com/mstuttgart/qdarkgraystyle
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{10.5555/1162264}{book}{}
+    \name{author}{1}{}{%
+      {{hash=BCM}{%
+         family={Bishop},
+         familyi={B\bibinitperiod},
+         given={Christopher\bibnamedelima M.},
+         giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer-Verlag}%
+    }
+    \strng{namehash}{BCM1}
+    \strng{fullhash}{BCM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{0387310738}
+    \field{title}{Pattern Recognition and Machine Learning (Information Science
+  and Statistics)}
+    \list{location}{1}{%
+      {Berlin, Heidelberg}%
+    }
+    \field{year}{2006}
+  \endentry
+
+  \entry{10.5555/2380985}{book}{}
+    \name{author}{1}{}{%
+      {{hash=MKP}{%
+         family={Murphy},
+         familyi={M\bibinitperiod},
+         given={Kevin\bibnamedelima P.},
+         giveni={K\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The MIT Press}%
+    }
+    \strng{namehash}{MKP1}
+    \strng{fullhash}{MKP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{0262018020}
+    \field{title}{Machine Learning: A Probabilistic Perspective}
+    \field{year}{2012}
+  \endentry
+
+  \entry{blanton}{article}{}
+    \name{author}{1}{}{%
+      {{hash=BS}{%
+         family={Blanton},
+         familyi={B\bibinitperiod},
+         given={Smiley},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BS1}
+    \strng{fullhash}{BS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1080/00335631509360475
+    \endverb
+    \field{pages}{154\bibrangedash 172}
+    \field{title}{The voice and the emotions}
+    \field{volume}{1}
+    \field{journaltitle}{Quarterly Journal of Speech - QUART J SPEECH}
+    \field{month}{01}
+    \field{year}{1915}
+  \endentry
+
+  \entry{leviholler}{article}{}
+    \name{author}{2}{}{%
+      {{hash=LS}{%
+         family={Levinson},
+         familyi={L\bibinitperiod},
+         given={Stephen},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HJ}{%
+         family={Holler},
+         familyi={H\bibinitperiod},
+         given={Judith},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LSHJ1}
+    \strng{fullhash}{LSHJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1098/rstb.2013.0302
+    \endverb
+    \field{title}{The origin of human multi-modal communication}
+    \field{volume}{369}
+    \field{journaltitle}{Philosophical transactions of the Royal Society of
+  London. Series B, Biological sciences}
+    \field{month}{09}
+    \field{year}{2014}
+  \endentry
+
+  \entry{chriskirbi}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CM}{%
+         family={Christiansen},
+         familyi={C\bibinitperiod},
+         given={Morten},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Kirby},
+         familyi={K\bibinitperiod},
+         given={Simon},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CMKS1}
+    \strng{fullhash}{CMKS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/S1364-6613(03)00136-0
+    \endverb
+    \field{pages}{300\bibrangedash 307}
+    \field{title}{Language Evolution: Consensus and Controversies}
+    \field{volume}{7}
+    \field{journaltitle}{Trends in cognitive sciences}
+    \field{month}{08}
+    \field{year}{2003}
+  \endentry
+
+  \entry{dellaert}{article}{}
+    \name{author}{3}{}{%
+      {{hash=DF}{%
+         family={Dellaert},
+         familyi={D\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=PT}{%
+         family={Polzin},
+         familyi={P\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=WA}{%
+         family={Waibel},
+         familyi={W\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DFPTWA1}
+    \strng{fullhash}{DFPTWA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Recognizing Emotion In Speech}
+    \field{volume}{3}
+    \field{journaltitle}{International Conference on Spoken Language
+  Processing, ICSLP, Proceedings}
+    \field{month}{12}
+    \field{year}{1996}
+  \endentry
+
+  \entry{huahu}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=HX}{%
+         family={Huahu},
+         familyi={H\bibinitperiod},
+         given={Xu},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=JY}{%
+         family={Jian},
+         familyi={J\bibinitperiod},
+         given={Yuan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=JG}{%
+         family={Jue},
+         familyi={J\bibinitperiod},
+         given={Gao},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HXJYJG1}
+    \strng{fullhash}{HXJYJG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/AICI.2010.118
+    \endverb
+    \field{pages}{537 \bibrangedash  541}
+    \field{title}{Application of Speech Emotion Recognition in Intelligent
+  Household Robot}
+    \field{month}{11}
+    \field{year}{2010}
+  \endentry
+
+  \entry{gupta}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=GP}{%
+         family={Gupta},
+         familyi={G\bibinitperiod},
+         given={Purnima},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=RN}{%
+         family={Rajput},
+         familyi={R\bibinitperiod},
+         given={Nitendra},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GPRN1}
+    \strng{fullhash}{GPRN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{2241\bibrangedash 2244}
+    \field{title}{Two-stream emotion recognition for call center monitoring.}
+    \field{month}{01}
+    \field{year}{2007}
+  \endentry
+
+  \entry{szwoch}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=SM}{%
+         family={Szwoch},
+         familyi={S\bibinitperiod},
+         given={Mariusz},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SW}{%
+         family={Szwoch},
+         familyi={S\bibinitperiod},
+         given={Wioleta},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SMSW1}
+    \strng{fullhash}{SMSW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-319-10662-5_28
+    \endverb
+    \field{isbn}{978-3-319-10661-8}
+    \field{pages}{227\bibrangedash 236}
+    \field{title}{Emotion Recognition for Affect Aware Video Games}
+    \field{month}{01}
+    \field{year}{2015}
+  \endentry
+
+  \entry{lancker}{article}{}
+    \name{author}{3}{}{%
+      {{hash=VLSD}{%
+         family={Van Lancker\bibnamedelima Sidtis},
+         familyi={V\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim
+  S\bibinitperiod},
+         given={Diana},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Cornelius},
+         familyi={C\bibinitperiod},
+         given={Cathleen},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kreiman},
+         familyi={K\bibinitperiod},
+         given={Jody},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VLSDCCKJ1}
+    \strng{fullhash}{VLSDCCKJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1080/87565648909540433
+    \endverb
+    \field{pages}{207\bibrangedash 226}
+    \field{title}{Recognition of emotional‐prosodic meanings in speech by
+  autistic, schizophrenic, and normal children}
+    \field{volume}{5}
+    \field{journaltitle}{Developmental Neuropsychology - DEVELOP NEUROPSYCHOL}
+    \field{month}{01}
+    \field{year}{1989}
+  \endentry
+
+  \entry{bjorn1}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SB1}
+    \strng{fullhash}{SB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1145/3129340
+    \endverb
+    \field{pages}{90\bibrangedash 99}
+    \field{title}{Speech emotion recognition: Two decades in a nutshell,
+  benchmarks, and ongoing trends}
+    \field{volume}{61}
+    \field{journaltitle}{Communications of the ACM}
+    \field{month}{04}
+    \field{year}{2018}
+  \endentry
+
+  \entry{meld}{misc}{}
+    \name{author}{6}{}{%
+      {{hash=PS}{%
+         family={Poria},
+         familyi={P\bibinitperiod},
+         given={Soujanya},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HD}{%
+         family={Hazarika},
+         familyi={H\bibinitperiod},
+         given={Devamanyu},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=MN}{%
+         family={Majumder},
+         familyi={M\bibinitperiod},
+         given={Navonil},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=NG}{%
+         family={Naik},
+         familyi={N\bibinitperiod},
+         given={Gautam},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CE}{%
+         family={Cambria},
+         familyi={C\bibinitperiod},
+         given={Erik},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Mihalcea},
+         familyi={M\bibinitperiod},
+         given={Rada},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PS+1}
+    \strng{fullhash}{PSHDMNNGCEMR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{MELD: A Multimodal Multi-Party Dataset for Emotion
+  Recognition in Conversations}
+    \field{month}{10}
+    \field{year}{2018}
+  \endentry
+
+  \entry{koolagudi}{article}{}
+    \name{author}{1}{}{%
+      {{hash=KS}{%
+         family={Koolagudi},
+         familyi={K\bibinitperiod},
+         given={Shashidhar},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KS1}
+    \strng{fullhash}{KS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s10772-011-9125-1
+    \endverb
+    \field{title}{Emotion recognition from speech: A review}
+    \field{volume}{15}
+    \field{journaltitle}{International Journal of Speech Technology}
+    \field{month}{06}
+    \field{year}{2012}
+  \endentry
+
+  \entry{spnorm}{article}{}
+    \name{author}{7}{}{%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=VB}{%
+         family={Vlasenko},
+         familyi={V\bibinitperiod},
+         given={Bogdan},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=EF}{%
+         family={Eyben},
+         familyi={E\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wöllmer},
+         familyi={W\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Stuhlsatz},
+         familyi={S\bibinitperiod},
+         given={Andre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=WA}{%
+         family={Wendemuth},
+         familyi={W\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RG}{%
+         family={Rigoll},
+         familyi={R\bibinitperiod},
+         given={Gerhard},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SB+1}
+    \strng{fullhash}{SBVBEFWMSAWARG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/T-AFFC.2010.8
+    \endverb
+    \field{pages}{119\bibrangedash 131}
+    \field{title}{Cross-Corpus Acoustic Emotion Recognition: Variances and
+  Strategies}
+    \field{volume}{1}
+    \field{journaltitle}{IEEE Transactions on Affective Computing}
+    \field{month}{07}
+    \field{year}{2010}
+  \endentry
+
+  \entry{hcf2}{article}{}
+    \name{author}{3}{}{%
+      {{hash=NT}{%
+         family={Nwe},
+         familyi={N\bibinitperiod},
+         given={Tin},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=FS}{%
+         family={Foo},
+         familyi={F\bibinitperiod},
+         given={S.W.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=DSL}{%
+         family={De\bibnamedelima Silva},
+         familyi={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Liyanage},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NTFSDSL1}
+    \strng{fullhash}{NTFSDSL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/S0167-6393(03)00099-2
+    \endverb
+    \field{pages}{603\bibrangedash 623}
+    \field{title}{Speech Emotion Recognition Using Hidden Markov Models}
+    \field{volume}{41}
+    \field{journaltitle}{Speech Communication}
+    \field{month}{11}
+    \field{year}{2003}
+  \endentry
+
+  \entry{hcf3}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=SM}{%
+         family={Schr{\"o}der},
+         familyi={S\bibinitperiod},
+         given={Marc},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=CR}{%
+         family={Cowie},
+         familyi={C\bibinitperiod},
+         given={Roddy},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SMCR1}
+    \strng{fullhash}{SMCR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Issues in emotion-oriented computing – towards a shared
+  understanding}
+    \field{year}{2006}
+  \endentry
+
+  \entry{graves}{article}{}
+    \name{author}{2}{}{%
+      {{hash=GA}{%
+         family={Graves},
+         familyi={G\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=JN}{%
+         family={Jaitly},
+         familyi={J\bibinitperiod},
+         given={Navdeep},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GAJN1}
+    \strng{fullhash}{GAJN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{1764\bibrangedash 1772}
+    \field{title}{Towards end-to-end speech recognition with recurrent neural
+  networks}
+    \field{volume}{5}
+    \field{journaltitle}{31st International Conference on Machine Learning,
+  ICML 2014}
+    \field{month}{01}
+    \field{year}{2014}
+  \endentry
+
+  \entry{tzir}{article}{}
+    \name{author}{5}{}{%
+      {{hash=TP}{%
+         family={Tzirakis},
+         familyi={T\bibinitperiod},
+         given={Panagiotis},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=TG}{%
+         family={Trigeorgis},
+         familyi={T\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=NM}{%
+         family={Nicolaou},
+         familyi={N\bibinitperiod},
+         given={Mihalis},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zafeiriou},
+         familyi={Z\bibinitperiod},
+         given={Stefanos},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TP+1}
+    \strng{fullhash}{TPTGNMSBZS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/JSTSP.2017.2764438
+    \endverb
+    \field{title}{End-to-End Multimodal Emotion Recognition Using Deep Neural
+  Networks}
+    \field{volume}{PP}
+    \field{journaltitle}{IEEE Journal of Selected Topics in Signal Processing}
+    \field{month}{04}
+    \field{year}{2017}
+  \endentry
+
+  \entry{zhang}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zixing},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=WB}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Bingwen},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZZWBSB1}
+    \strng{fullhash}{ZZWBSB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ICASSP.2019.8682896
+    \endverb
+    \field{pages}{6705\bibrangedash 6709}
+    \field{title}{Attention-augmented End-to-end Multi-task Learning for
+  Emotion Prediction from Speech}
+    \field{month}{05}
+    \field{year}{2019}
+  \endentry
+
+  \entry{yuan}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=LY}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Yuanchao},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZT}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Tianyu},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=KT}{%
+         family={Kawahara},
+         familyi={K\bibinitperiod},
+         given={Tatsuya},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LYZTKT1}
+    \strng{fullhash}{LYZTKT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{INTERSPEECH}
+    \field{title}{Improved End-to-End Speech Emotion Recognition Using Self
+  Attention Mechanism and Multitask Learning}
+    \field{year}{2019}
+  \endentry
+
+  \entry{adieu}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=TG}{%
+         family={Trigeorgis},
+         familyi={T\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=RF}{%
+         family={Ringeval},
+         familyi={R\bibinitperiod},
+         given={Fabien},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=BR}{%
+         family={Brueckner},
+         familyi={B\bibinitperiod},
+         given={Raymond},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=ME}{%
+         family={Marchi},
+         familyi={M\bibinitperiod},
+         given={Erik},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=NM}{%
+         family={Nicolaou},
+         familyi={N\bibinitperiod},
+         given={Mihalis},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zafeiriou},
+         familyi={Z\bibinitperiod},
+         given={Stefanos},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TG+1}
+    \strng{fullhash}{TGRFBRMENMSBZS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ICASSP.2016.7472669
+    \endverb
+    \field{pages}{5200\bibrangedash 5204}
+    \field{title}{Adieu features? End-to-end speech emotion recognition using a
+  deep convolutional recurrent network}
+    \field{month}{03}
+    \field{year}{2016}
+  \endentry
+
+  \entry{e2e}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=TP}{%
+         family={{Tzirakis}},
+         familyi={T\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=ZJ}{%
+         family={{Zhang}},
+         familyi={Z\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SBW}{%
+         family={{Schuller}},
+         familyi={S\bibinitperiod},
+         given={B.\bibnamedelima W.},
+         giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TPZJSBW1}
+    \strng{fullhash}{TPZJSBW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2018 IEEE International Conference on Acoustics, Speech
+  and Signal Processing (ICASSP)}
+    \field{pages}{5089\bibrangedash 5093}
+    \field{title}{End-to-End Speech Emotion Recognition Using Deep Neural
+  Networks}
+    \field{year}{2018}
+  \endentry
+
+  \entry{mehmet}{article}{}
+    \name{author}{2}{}{%
+      {{hash=AB}{%
+         family={Akçay},
+         familyi={A\bibinitperiod},
+         given={Berkehan},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=OK}{%
+         family={Oguz},
+         familyi={O\bibinitperiod},
+         given={Kaya},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ABOK1}
+    \strng{fullhash}{ABOK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/j.specom.2019.12.001
+    \endverb
+    \field{title}{Speech emotion recognition: Emotional models, databases,
+  features, preprocessing methods, supporting modalities, and classifiers}
+    \field{volume}{116}
+    \field{journaltitle}{Speech Communication}
+    \field{month}{01}
+    \field{year}{2020}
+  \endentry
+
+  \entry{misramadi}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=MS}{%
+         family={{Mirsamadi}},
+         familyi={M\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BE}{%
+         family={{Barsoum}},
+         familyi={B\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=ZC}{%
+         family={{Zhang}},
+         familyi={Z\bibinitperiod},
+         given={C.},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSBEZC1}
+    \strng{fullhash}{MSBEZC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2017 IEEE International Conference on Acoustics, Speech
+  and Signal Processing (ICASSP)}
+    \field{pages}{2227\bibrangedash 2231}
+    \field{title}{Automatic speech emotion recognition using recurrent neural
+  networks with local attention}
+    \field{year}{2017}
+  \endentry
+
+  \entry{dae}{article}{}
+    \name{author}{4}{}{%
+      {{hash=CL}{%
+         family={Chao},
+         familyi={C\bibinitperiod},
+         given={Linlin},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=TJ}{%
+         family={Tao},
+         familyi={T\bibinitperiod},
+         given={Jianhua},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=YM}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Minghao},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LY}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Ya},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CL+1}
+    \strng{fullhash}{CLTJYMLY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ISCSLP.2014.6936627
+    \endverb
+    \field{pages}{341\bibrangedash 344}
+    \field{title}{Improving generation performance of speech emotion
+  recognition by denoising autoencoders}
+    \field{journaltitle}{Proceedings of the 9th International Symposium on
+  Chinese Spoken Language Processing, ISCSLP 2014}
+    \field{month}{10}
+    \field{year}{2014}
+  \endentry
+
+  \entry{adae}{article}{}
+    \name{author}{4}{}{%
+      {{hash=DJ}{%
+         family={Deng},
+         familyi={D\bibinitperiod},
+         given={Jun},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zixing},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=EF}{%
+         family={Eyben},
+         familyi={E\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DJ+2}
+    \strng{fullhash}{DJZZEFSB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/LSP.2014.2324759
+    \endverb
+    \field{pages}{1068\bibrangedash 1072}
+    \field{title}{Autoencoder-based Unsupervised Domain Adaptation for Speech
+  Emotion Recognition}
+    \field{volume}{21}
+    \field{journaltitle}{Signal Processing Letters, IEEE}
+    \field{month}{09}
+    \field{year}{2014}
+  \endentry
+
+  \entry{sdae}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=DJ}{%
+         family={{Deng}},
+         familyi={D\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={{Zhang}},
+         familyi={Z\bibinitperiod},
+         given={Z.},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=ME}{%
+         family={{Marchi}},
+         familyi={M\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={{Schuller}},
+         familyi={S\bibinitperiod},
+         given={B.},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DJ+1}
+    \strng{fullhash}{DJZZMESB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2013 Humaine Association Conference on Affective
+  Computing and Intelligent Interaction}
+    \field{pages}{511\bibrangedash 516}
+    \field{title}{Sparse Autoencoder-Based Feature Transfer Learning for Speech
+  Emotion Recognition}
+    \field{year}{2013}
+  \endentry
+
+  \entry{multi-domain}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=MR}{%
+         family={Milner},
+         familyi={M\bibinitperiod},
+         given={Rosanna},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=JMA}{%
+         family={Jalal},
+         familyi={J\bibinitperiod},
+         given={Md\bibnamedelima Asif},
+         giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=NRWM}{%
+         family={Ng},
+         familyi={N\bibinitperiod},
+         given={Raymond W.\bibnamedelima M.},
+         giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Hain},
+         familyi={H\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MR+1}
+    \strng{fullhash}{MRJMANRWMHT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ASRU46091.2019.9003838
+    \endverb
+    \field{title}{A Cross-Corpus Study on Speech Emotion Recognition}
+    \field{month}{12}
+    \field{year}{2019}
+  \endentry
+
+  \entry{covarep}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=DG}{%
+         family={Degottex},
+         familyi={D\bibinitperiod},
+         given={Gilles},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kane},
+         familyi={K\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Drugman},
+         familyi={D\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=RT}{%
+         family={Raitio},
+         familyi={R\bibinitperiod},
+         given={Tuomo},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Scherer},
+         familyi={S\bibinitperiod},
+         given={Stefan},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DG+1}
+    \strng{fullhash}{DGKJDTRTSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ICASSP.2014.6853739
+    \endverb
+    \field{title}{COVAREP: A Collaborative Voice Analysis Repository for Speech
+  Technologies}
+    \field{journaltitle}{ICASSP}
+    \field{month}{05}
+    \field{year}{2014}
+  \endentry
+
+  \entry{rnn1}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=FR}{%
+         family={Fonnegra},
+         familyi={F\bibinitperiod},
+         given={Rubén},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=DG}{%
+         family={Díaz},
+         familyi={D\bibinitperiod},
+         given={Gloria},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FRDG1}
+    \strng{fullhash}{FRDG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-319-76270-8_59
+    \endverb
+    \field{isbn}{978-3-319-76269-2}
+    \field{pages}{882\bibrangedash 892}
+    \field{title}{Speech Emotion Recognition Based on a Recurrent Neural
+  Network Classification Model}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{rnn2}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=LJ}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Jinkyu},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=TI}{%
+         family={Tashev},
+         familyi={T\bibinitperiod},
+         given={Ivan},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LJTI1}
+    \strng{fullhash}{LJTI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{High-level Feature Representation using Recurrent Neural
+  Network for Speech Emotion Recognition}
+    \field{month}{09}
+    \field{year}{2015}
+  \endentry
+
+  \entry{nnspic}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BF}{%
+         family={Bre},
+         familyi={B\bibinitperiod},
+         given={Facundo},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gimenez},
+         familyi={G\bibinitperiod},
+         given={Juan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=FV}{%
+         family={Fachinotti},
+         familyi={F\bibinitperiod},
+         given={Víctor},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BFGJFV1}
+    \strng{fullhash}{BFGJFV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/j.enbuild.2017.11.045
+    \endverb
+    \field{title}{Prediction of wind pressure coefficients on building surfaces
+  using Artificial Neural Networks}
+    \field{volume}{158}
+    \field{journaltitle}{Energy and Buildings}
+    \field{month}{11}
+    \field{year}{2017}
+  \endentry
+
+  \entry{stft6}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=TO}{%
+         family={Trekhleb},
+         familyi={T\bibinitperiod},
+         given={Oleksii},
+         giveni={O\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TO1}
+    \strng{fullhash}{TO1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Playing with Discrete Fourier Transform Algorithm in
+  JavaScript}
+    \verb{url}
+    \verb https://dev.to/trekhleb/playing-with-discrete-fourier-transform-algor
+    \verb ithm-in-javascript-53n5
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{stft2}{incollection}{}
+    \name{author}{1}{}{%
+      {{hash=KN}{%
+         family={Kehtarnavaz},
+         familyi={K\bibinitperiod},
+         given={Nasser},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \name{editor}{1}{}{%
+      {{hash=KN}{%
+         family={Kehtarnavaz},
+         familyi={K\bibinitperiod},
+         given={Nasser},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Academic Press}%
+    }
+    \strng{namehash}{KN1}
+    \strng{fullhash}{KN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Digital Signal Processing System Design (Second Edition)}
+    \verb{doi}
+    \verb https://doi.org/10.1016/B978-0-12-374490-6.00007-6
+    \endverb
+    \field{edition}{Second Edition}
+    \field{isbn}{978-0-12-374490-6}
+    \field{pages}{175 \bibrangedash  196}
+    \field{title}{CHAPTER 7 - Frequency Domain Processing}
+    \verb{url}
+    \verb http://www.sciencedirect.com/science/article/pii/B9780123744906000076
+    \endverb
+    \list{location}{1}{%
+      {Burlington}%
+    }
+    \field{year}{2008}
+  \endentry
+
+  \entry{mcs}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KL}{%
+         family={Kerkeni},
+         familyi={K\bibinitperiod},
+         given={Leila},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Serrestou},
+         familyi={S\bibinitperiod},
+         given={Youssef},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mbarki},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RK}{%
+         family={Raoof},
+         familyi={R\bibinitperiod},
+         given={Kosai},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mahjoub},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KL+1}
+    \strng{fullhash}{KLSYMMRKMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.5220/0006611601750182
+    \endverb
+    \field{pages}{175\bibrangedash 182}
+    \field{title}{Speech Emotion Recognition: Methods and Cases Study}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{librosa}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=MB}{%
+         family={McFee},
+         familyi={M\bibinitperiod},
+         given={Brian},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=RC}{%
+         family={Raffel},
+         familyi={R\bibinitperiod},
+         given={Colin},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=LD}{%
+         family={Liang},
+         familyi={L\bibinitperiod},
+         given={Dawen},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=ED}{%
+         family={Ellis},
+         familyi={E\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mcvicar},
+         familyi={M\bibinitperiod},
+         given={Matt},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BE}{%
+         family={Battenberg},
+         familyi={B\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=NO}{%
+         family={Nieto},
+         familyi={N\bibinitperiod},
+         given={Oriol},
+         giveni={O\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MB+1}
+    \strng{fullhash}{MBRCLDEDMMBENO1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.25080/Majora-7b98e3ed-003
+    \endverb
+    \field{pages}{18\bibrangedash 24}
+    \field{title}{librosa: Audio and Music Signal Analysis in Python}
+    \verb{url}
+    \verb https://librosa.github.io/librosa/
+    \endverb
+    \field{month}{01}
+    \field{year}{2015}
+  \endentry
+
+  \entry{batch_norm}{article}{}
+    \name{author}{2}{}{%
+      {{hash=IS}{%
+         family={Ioffe},
+         familyi={I\bibinitperiod},
+         given={Sergey},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szegedy},
+         familyi={S\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ISSC1}
+    \strng{fullhash}{ISSC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Batch Normalization: Accelerating Deep Network Training by
+  Reducing Internal Covariate Shift}
+    \field{month}{02}
+    \field{year}{2015}
+  \endentry
+
+  \entry{leCun}{article}{}
+    \name{author}{7}{}{%
+      {{hash=LY}{%
+         family={{LeCun}},
+         familyi={L\bibinitperiod},
+         given={Y.},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={{Boser}},
+         familyi={B\bibinitperiod},
+         given={B.},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=DJS}{%
+         family={{Denker}},
+         familyi={D\bibinitperiod},
+         given={J.\bibnamedelima S.},
+         giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=HD}{%
+         family={{Henderson}},
+         familyi={H\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HRE}{%
+         family={{Howard}},
+         familyi={H\bibinitperiod},
+         given={R.\bibnamedelima E.},
+         giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=HW}{%
+         family={{Hubbard}},
+         familyi={H\bibinitperiod},
+         given={W.},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=JLD}{%
+         family={{Jackel}},
+         familyi={J\bibinitperiod},
+         given={L.\bibnamedelima D.},
+         giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LY+1}
+    \strng{fullhash}{LYBBDJSHDHREHWJLD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{541\bibrangedash 551}
+    \field{title}{Backpropagation Applied to Handwritten Zip Code Recognition}
+    \field{volume}{1}
+    \field{journaltitle}{Neural Computation}
+    \field{year}{1989}
+  \endentry
+
+  \entry{cnn_photo}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=PK}{%
+         family={Patel},
+         familyi={P\bibinitperiod},
+         given={Krut},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PK1}
+    \strng{fullhash}{PK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{MNIST Handwritten Digits Classification using a Convolutional
+  Neural Network (CNN)}
+    \verb{url}
+    \verb https://towardsdatascience.com/mnist-handwritten-digits-classificatio
+    \verb n-using-a-convolutional-neural-network-cnn-af5fafbc35e9
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{standord_cnn}{manual}{}
+    \name{author}{4}{}{%
+      {{hash=LFF}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Fei-Fei},
+         giveni={F\bibinithyphendelim F\bibinitperiod},
+      }}%
+      {{hash=KR}{%
+         family={Krishna},
+         familyi={K\bibinitperiod},
+         given={Ranjay},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=XD}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Danfei},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Byun},
+         familyi={B\bibinitperiod},
+         given={Amelie},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LFF+1}
+    \strng{fullhash}{LFFKRXDBA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{CS231n: Convolutional Neural Networks for Visual Recognition}
+    \verb{url}
+    \verb https://cs231n.github.io/convolutional-networks/
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{dpb}{book}{}
+    \name{author}{3}{}{%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=BY}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={Yoshua},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Courville},
+         familyi={C\bibinitperiod},
+         given={Aaron},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{GIBYCA1}
+    \strng{fullhash}{GIBYCA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{\url{http://www.deeplearningbook.org}}
+    \field{title}{Deep Learning}
+    \field{year}{2016}
+  \endentry
+
+  \entry{hands}{book}{}
+    \name{author}{1}{}{%
+      {{hash=GA}{%
+         family={Gron},
+         familyi={G\bibinitperiod},
+         given={Aurlien},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O’Reilly Media, Inc.}%
+    }
+    \strng{namehash}{GA1}
+    \strng{fullhash}{GA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{edition}{1st}
+    \field{isbn}{1491962291}
+    \field{title}{Hands-On Machine Learning with Scikit-Learn and TensorFlow:
+  Concepts, Tools, and Techniques to Build Intelligent Systems}
+    \field{year}{2017}
+  \endentry
+
+  \entry{attention1}{article}{}
+    \name{author}{4}{}{%
+      {{hash=MV}{%
+         family={Mnih},
+         familyi={M\bibinitperiod},
+         given={Volodymyr},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=HN}{%
+         family={Heess},
+         familyi={H\bibinitperiod},
+         given={Nicolas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Graves},
+         familyi={G\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Kavukcuoglu},
+         familyi={K\bibinitperiod},
+         given={Koray},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MV+1}
+    \strng{fullhash}{MVHNGAKK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Recurrent Models of Visual Attention}
+    \field{volume}{3}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
+    \field{month}{06}
+    \field{year}{2014}
+  \endentry
+
+  \entry{tensorflow}{misc}{}
+    \name{author}{40}{}{%
+      {{hash=AM}{%
+         family={Abadi},
+         familyi={A\bibinitperiod},
+         given={Mart\'{\i}n},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=AA}{%
+         family={Agarwal},
+         familyi={A\bibinitperiod},
+         given={Ashish},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BP}{%
+         family={Barham},
+         familyi={B\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=BE}{%
+         family={Brevdo},
+         familyi={B\bibinitperiod},
+         given={Eugene},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=CZ}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Zhifeng},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Citro},
+         familyi={C\bibinitperiod},
+         given={Craig},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=CGS}{%
+         family={Corrado},
+         familyi={C\bibinitperiod},
+         given={Greg\bibnamedelima S.},
+         giveni={G\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Davis},
+         familyi={D\bibinitperiod},
+         given={Andy},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DJ}{%
+         family={Dean},
+         familyi={D\bibinitperiod},
+         given={Jeffrey},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Devin},
+         familyi={D\bibinitperiod},
+         given={Matthieu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Ghemawat},
+         familyi={G\bibinitperiod},
+         given={Sanjay},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Harp},
+         familyi={H\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=IG}{%
+         family={Irving},
+         familyi={I\bibinitperiod},
+         given={Geoffrey},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=IM}{%
+         family={Isard},
+         familyi={I\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=JY}{%
+         family={Jia},
+         familyi={J\bibinitperiod},
+         given={Yangqing},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=JR}{%
+         family={Jozefowicz},
+         familyi={J\bibinitperiod},
+         given={Rafal},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KL}{%
+         family={Kaiser},
+         familyi={K\bibinitperiod},
+         given={Lukasz},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kudlur},
+         familyi={K\bibinitperiod},
+         given={Manjunath},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Levenberg},
+         familyi={L\bibinitperiod},
+         given={Josh},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={Man\'{e}},
+         familyi={M\bibinitperiod},
+         given={Dandelion},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Monga},
+         familyi={M\bibinitperiod},
+         given={Rajat},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Moore},
+         familyi={M\bibinitperiod},
+         given={Sherry},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={Murray},
+         familyi={M\bibinitperiod},
+         given={Derek},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=OC}{%
+         family={Olah},
+         familyi={O\bibinitperiod},
+         given={Chris},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Schuster},
+         familyi={S\bibinitperiod},
+         given={Mike},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Shlens},
+         familyi={S\bibinitperiod},
+         given={Jonathon},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Steiner},
+         familyi={S\bibinitperiod},
+         given={Benoit},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Sutskever},
+         familyi={S\bibinitperiod},
+         given={Ilya},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=TK}{%
+         family={Talwar},
+         familyi={T\bibinitperiod},
+         given={Kunal},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=TP}{%
+         family={Tucker},
+         familyi={T\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=VV}{%
+         family={Vanhoucke},
+         familyi={V\bibinitperiod},
+         given={Vincent},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=VV}{%
+         family={Vasudevan},
+         familyi={V\bibinitperiod},
+         given={Vijay},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=VF}{%
+         family={Vi\'{e}gas},
+         familyi={V\bibinitperiod},
+         given={Fernanda},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=VO}{%
+         family={Vinyals},
+         familyi={V\bibinitperiod},
+         given={Oriol},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=WP}{%
+         family={Warden},
+         familyi={W\bibinitperiod},
+         given={Pete},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wattenberg},
+         familyi={W\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wicke},
+         familyi={W\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=YY}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Yuan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Xiaoqiang},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AM+1}
+  \strng{fullhash}{AMAABPBECZCCCGSDADJDMGSGIHAIGIMJYJRKLKMLJMDMRMSMDOCSMSJSBSITKTPVVVVVFVOWPWMWMYYZX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Software available from tensorflow.org}
+    \field{title}{{TensorFlow}: Large-Scale Machine Learning on Heterogeneous
+  Systems}
+    \verb{url}
+    \verb https://www.tensorflow.org/
+    \endverb
+    \field{year}{2015}
+  \endentry
+
+  \entry{emodb}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=PA}{%
+         family={Paeschke},
+         familyi={P\bibinitperiod},
+         given={Astrid},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kienast},
+         familyi={K\bibinitperiod},
+         given={Miriam},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SWF}{%
+         family={Sendlmeier},
+         familyi={S\bibinitperiod},
+         given={Walter\bibnamedelima F.},
+         giveni={W\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PAKMSWF1}
+    \strng{fullhash}{PAKMSWF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{F0-CONTOURS IN EMOTIONAL SPEECH}
+    \field{year}{1999}
+  \endentry
+
+  \entry{ravdess}{article}{}
+    \name{author}{2}{}{%
+      {{hash=LSR}{%
+         family={Livingstone},
+         familyi={L\bibinitperiod},
+         given={Steven\bibnamedelima R.},
+         giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=RFA}{%
+         family={Russo},
+         familyi={R\bibinitperiod},
+         given={Frank\bibnamedelima A.},
+         giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Public Library of Science}%
+    }
+    \strng{namehash}{LSRRFA1}
+    \strng{fullhash}{LSRRFA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    The RAVDESS is a validated multimodal database of emotional speech and
+  song. The database is gender balanced consisting of 24 professional actors,
+  vocalizing lexically-matched statements in a neutral North American accent.
+  Speech includes calm, happy, sad, angry, fearful, surprise, and disgust
+  expressions, and song contains calm, happy, sad, angry, and fearful emotions.
+  Each expression is produced at two levels of emotional intensity, with an
+  additional neutral expression. All conditions are available in
+  face-and-voice, face-only, and voice-only formats. The set of 7356 recordings
+  were each rated 10 times on emotional validity, intensity, and genuineness.
+  Ratings were provided by 247 individuals who were characteristic of untrained
+  research participants from North America. A further set of 72 participants
+  provided test-retest data. High levels of emotional validity and test-retest
+  intrarater reliability were reported. Corrected accuracy and composite
+  "goodness" measures are presented to assist researchers in the selection of
+  stimuli. All recordings are made freely available under a Creative Commons
+  license and can be downloaded at https://doi.org/10.5281/zenodo.1188976.%
+    }
+    \verb{doi}
+    \verb 10.1371/journal.pone.0196391
+    \endverb
+    \field{number}{5}
+    \field{pages}{1\bibrangedash 35}
+    \field{title}{The Ryerson Audio-Visual Database of Emotional Speech and
+  Song (RAVDESS): A dynamic, multimodal set of facial and vocal expressions in
+  North American English}
+    \verb{url}
+    \verb https://doi.org/10.1371/journal.pone.0196391
+    \endverb
+    \field{volume}{13}
+    \field{journaltitle}{PLOS ONE}
+    \field{month}{05}
+    \field{year}{2018}
+  \endentry
+
+  \entry{emovo}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=CG}{%
+         family={Costantini},
+         familyi={C\bibinitperiod},
+         given={Giovanni},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=II}{%
+         family={Iadarola},
+         familyi={I\bibinitperiod},
+         given={Iacopo},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=P}{%
+         family={Paoloni},
+         familyi={P\bibinitperiod},
+      }}%
+      {{hash=TM}{%
+         family={Todisco},
+         familyi={T\bibinitperiod},
+         given={Massimiliano},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CG+1}
+    \strng{fullhash}{CGIIPTM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{9782951740884}
+    \field{title}{EMOVO Corpus: an Italian Emotional Speech Database}
+    \field{month}{05}
+    \field{year}{2014}
+  \endentry
+
+  \entry{mav}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BP}{%
+         family={Belin},
+         familyi={B\bibinitperiod},
+         given={Pascal},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=FBS}{%
+         family={Fillion-Bilodeau},
+         familyi={F\bibinithyphendelim B\bibinitperiod},
+         given={Sarah},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GF}{%
+         family={Gosselin},
+         familyi={G\bibinitperiod},
+         given={Frédéric},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BPFBSGF1}
+    \strng{fullhash}{BPFBSGF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.3758/BRM.40.2.531
+    \endverb
+    \field{pages}{531\bibrangedash 9}
+    \field{title}{The Montreal Affective Voices: A validated set of nonverbal
+  affect bursts for research on auditory affective processing}
+    \field{volume}{40}
+    \field{journaltitle}{Behavior research methods}
+    \field{month}{05}
+    \field{year}{2008}
+  \endentry
+
+  \entry{enterface}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=MO}{%
+         family={Martin},
+         familyi={M\bibinitperiod},
+         given={O.},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=KI}{%
+         family={Kotsia},
+         familyi={K\bibinitperiod},
+         given={I.},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=MB}{%
+         family={Macq},
+         familyi={M\bibinitperiod},
+         given={Benoit},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=PI}{%
+         family={Pitas},
+         familyi={P\bibinitperiod},
+         given={I.},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MO+1}
+    \strng{fullhash}{MOKIMBPI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ICDEW.2006.145
+    \endverb
+    \field{isbn}{0-7695-2571-7}
+    \field{pages}{8 \bibrangedash  8}
+    \field{title}{The eNTERFACE05 Audio-Visual Emotion Database}
+    \field{month}{02}
+    \field{year}{2006}
+  \endentry
+
+  \entry{JL}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=TL}{%
+         family={Tian},
+         familyi={T\bibinitperiod},
+         given={Li},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TL1}
+    \strng{fullhash}{TL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{JL corpus}
+    \verb{url}
+    \verb https://www.kaggle.com/tli725/jl-corpus
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{iemocap}{article}{}
+    \name{author}{9}{}{%
+      {{hash=BC}{%
+         family={Busso},
+         familyi={B\bibinitperiod},
+         given={Carlos},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Bulut},
+         familyi={B\bibinitperiod},
+         given={Murtaza},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LCC}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Chi-Chun},
+         giveni={C\bibinithyphendelim C\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Kazemzadeh},
+         familyi={K\bibinitperiod},
+         given={Abe},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MPE}{%
+         family={Mower\bibnamedelima Provost},
+         familyi={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+         given={Emily},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Samuel},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CJ}{%
+         family={Chang},
+         familyi={C\bibinitperiod},
+         given={Jeannette},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Sungbok},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=NS}{%
+         family={Narayanan},
+         familyi={N\bibinitperiod},
+         given={Shrikanth},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BC+1}
+    \strng{fullhash}{BCBMLCCKAMPEKSCJLSNS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s10579-008-9076-6
+    \endverb
+    \field{pages}{335\bibrangedash 359}
+    \field{title}{IEMOCAP: Interactive emotional dyadic motion capture
+  database}
+    \field{volume}{42}
+    \field{journaltitle}{Language Resources and Evaluation}
+    \field{month}{12}
+    \field{year}{2008}
+  \endentry
+
+  \entry{adam}{article}{}
+    \name{author}{2}{}{%
+      {{hash=KD}{%
+         family={Kingma},
+         familyi={K\bibinitperiod},
+         given={Diederik},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Ba},
+         familyi={B\bibinitperiod},
+         given={Jimmy},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KDBJ1}
+    \strng{fullhash}{KDBJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Adam: A Method for Stochastic Optimization}
+    \field{journaltitle}{International Conference on Learning Representations}
+    \field{month}{12}
+    \field{year}{2014}
+  \endentry
+
+  \entry{compar1}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KL}{%
+         family={Kerkeni},
+         familyi={K\bibinitperiod},
+         given={Leila},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Serrestou},
+         familyi={S\bibinitperiod},
+         given={Youssef},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mbarki},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RK}{%
+         family={Raoof},
+         familyi={R\bibinitperiod},
+         given={Kosai},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mahjoub},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KL+1}
+    \strng{fullhash}{KLSYMMRKMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.5220/0006611601750182
+    \endverb
+    \field{pages}{175\bibrangedash 182}
+    \field{title}{Speech Emotion Recognition: Methods and Cases Study}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{compar2}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=FR}{%
+         family={Fonnegra},
+         familyi={F\bibinitperiod},
+         given={Rubén},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=DG}{%
+         family={Díaz},
+         familyi={D\bibinitperiod},
+         given={Gloria},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FRDG1}
+    \strng{fullhash}{FRDG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-319-76270-8_59
+    \endverb
+    \field{isbn}{978-3-319-76269-2}
+    \field{pages}{882\bibrangedash 892}
+    \field{title}{Speech Emotion Recognition Based on a Recurrent Neural
+  Network Classification Model}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{compar3}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=LW}{%
+         family={Lim},
+         familyi={L\bibinitperiod},
+         given={Wootaek},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=JD}{%
+         family={Jang},
+         familyi={J\bibinitperiod},
+         given={Daeyoung},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LT}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Taejin},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LWJDLT1}
+    \strng{fullhash}{LWJDLT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/APSIPA.2016.7820699
+    \endverb
+    \field{pages}{1\bibrangedash 4}
+    \field{title}{Speech emotion recognition using convolutional and Recurrent
+  Neural Networks}
+    \field{month}{12}
+    \field{year}{2016}
+  \endentry
+
+  \entry{imbun1}{article}{}
+    \name{author}{4}{}{%
+      {{hash=DJ}{%
+         family={Deng},
+         familyi={D\bibinitperiod},
+         given={Jun},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zixing},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=EF}{%
+         family={Eyben},
+         familyi={E\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DJ+2}
+    \strng{fullhash}{DJZZEFSB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/LSP.2014.2324759
+    \endverb
+    \field{pages}{1068\bibrangedash 1072}
+    \field{title}{Autoencoder-based Unsupervised Domain Adaptation for Speech
+  Emotion Recognition}
+    \field{volume}{21}
+    \field{journaltitle}{Signal Processing Letters, IEEE}
+    \field{month}{09}
+    \field{year}{2014}
+  \endentry
+
+  \entry{imbun3}{article}{}
+    \name{author}{2}{}{%
+      {{hash=uhS}{%
+         prefix={ul},
+         prefixi={u\bibinitperiod},
+         family={haq},
+         familyi={h\bibinitperiod},
+         given={Sana},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=JP}{%
+         family={Jackson},
+         familyi={J\bibinitperiod},
+         given={Philip},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{hSuJP1}
+    \strng{fullhash}{hSuJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.4018/978-1-61520-919-4.ch017
+    \endverb
+    \field{title}{Multimodal Emotion Recognition}
+    \field{journaltitle}{Machine Audition: Principles, Algorithms and Systems}
+    \field{month}{01}
+    \field{year}{2010}
+  \endentry
+
+  \entry{comp1}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KL}{%
+         family={Kerkeni},
+         familyi={K\bibinitperiod},
+         given={Leila},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Serrestou},
+         familyi={S\bibinitperiod},
+         given={Youssef},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mbarki},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RK}{%
+         family={Raoof},
+         familyi={R\bibinitperiod},
+         given={Kosai},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mahjoub},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KL+1}
+    \strng{fullhash}{KLSYMMRKMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.5220/0006611601750182
+    \endverb
+    \field{pages}{175\bibrangedash 182}
+    \field{title}{Speech Emotion Recognition: Methods and Cases Study}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{comp2}{article}{}
+    \name{author}{3}{}{%
+      {{hash=ID}{%
+         family={Issa},
+         familyi={I\bibinitperiod},
+         given={Dias},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=DMF}{%
+         family={Demirci]},
+         familyi={D\bibinitperiod},
+         given={M.\bibnamedelima [Fatih},
+         giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=YA}{%
+         family={Yazici},
+         familyi={Y\bibinitperiod},
+         given={Adnan},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \keyw{Speech emotion recognition, Deep learning, Signal processing}
+    \strng{namehash}{IDDMFYA1}
+    \strng{fullhash}{IDDMFYA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    The speech emotion recognition (or, classification) is one of the most
+  challenging topics in data science. In this work, we introduce a new
+  architecture, which extracts mel-frequency cepstral coefficients, chromagram,
+  mel-scale spectrogram, Tonnetz representation, and spectral contrast features
+  from sound files and uses them as inputs for the one-dimensional
+  Convolutional Neural Network for the identification of emotions using samples
+  from the Ryerson Audio-Visual Database of Emotional Speech and Song
+  (RAVDESS), Berlin (EMO-DB), and Interactive Emotional Dyadic Motion Capture
+  (IEMOCAP) datasets. We utilize an incremental method for modifying our
+  initial model in order to improve classification accuracy. All of the
+  proposed models work directly with raw sound data without the need for
+  conversion to visual representations, unlike some previous approaches. Based
+  on experimental results, our best-performing model outperforms existing
+  frameworks for RAVDESS and IEMOCAP, thus setting the new state-of-the-art.
+  For the EMO-DB dataset, it outperforms all previous works except one but
+  compares favorably with that one in terms of generality, simplicity, and
+  applicability. Specifically, the proposed framework obtains 71.61% for
+  RAVDESS with 8 classes, 86.1% for EMO-DB with 535 samples in 7 classes,
+  95.71% for EMO-DB with 520 samples in 7 classes, and 64.3% for IEMOCAP with 4
+  classes in speaker-independent audio classification tasks.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1016/j.bspc.2020.101894
+    \endverb
+    \field{issn}{1746-8094}
+    \field{pages}{101894}
+    \field{title}{Speech emotion recognition with deep convolutional neural
+  networks}
+    \verb{url}
+    \verb http://www.sciencedirect.com/science/article/pii/S1746809420300501
+    \endverb
+    \field{volume}{59}
+    \field{journaltitle}{Biomedical Signal Processing and Control}
+    \field{year}{2020}
+  \endentry
+
+  \entry{comp3}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ZY}{%
+         family={Zeng},
+         familyi={Z\bibinitperiod},
+         given={Yuni},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MH}{%
+         family={Mao},
+         familyi={M\bibinitperiod},
+         given={Hua},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Peng},
+         familyi={P\bibinitperiod},
+         given={Dezhong},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=YZ}{%
+         family={Yi},
+         familyi={Y\bibinitperiod},
+         given={Zhang},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZY+1}
+    \strng{fullhash}{ZYMHPDYZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s11042-017-5539-3
+    \endverb
+    \field{title}{Spectrogram based multi-task audio classification}
+    \field{volume}{78}
+    \field{journaltitle}{Multimedia Tools and Applications}
+    \field{month}{12}
+    \field{year}{2017}
+  \endentry
+
+  \entry{comp4}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=PA}{%
+         family={Popova},
+         familyi={P\bibinitperiod},
+         given={Anastasiya},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RA}{%
+         family={Rassadin},
+         familyi={R\bibinitperiod},
+         given={Alexandr},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Ponomarenko},
+         familyi={P\bibinitperiod},
+         given={Alexander},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PARAPA1}
+    \strng{fullhash}{PARAPA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-319-66604-4_18
+    \endverb
+    \field{isbn}{978-3-319-66603-7}
+    \field{pages}{117\bibrangedash 124}
+    \field{title}{Emotion Recognition in Sound}
+    \field{volume}{736}
+    \field{journaltitle}{Studies in Computational Intelligence}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{comp5}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=LS}{%
+         family={Latif},
+         familyi={L\bibinitperiod},
+         given={Siddique},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=RR}{%
+         family={Rana},
+         familyi={R\bibinitperiod},
+         given={Rajib},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=YS}{%
+         family={Younis},
+         familyi={Y\bibinitperiod},
+         given={Shahzad},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=QJ}{%
+         family={Qadir},
+         familyi={Q\bibinitperiod},
+         given={Junaid},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=EJ}{%
+         family={Epps},
+         familyi={E\bibinitperiod},
+         given={Julien},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LS+1}
+    \strng{fullhash}{LSRRYSQJEJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.21437/Interspeech.2018-1625
+    \endverb
+    \field{pages}{257\bibrangedash 261}
+    \field{title}{Transfer Learning for Improving Speech Emotion Classification
+  Accuracy}
+    \field{month}{09}
+    \field{year}{2018}
+  \endentry
+
+  \entry{comp6}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SB}{%
+         family={Schuller},
+         familyi={S\bibinitperiod},
+         given={Björn},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SB1}
+    \strng{fullhash}{SB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s10772-011-9090-8
+    \endverb
+    \field{pages}{77\bibrangedash 87}
+    \field{title}{Affective Speaker State Analysis in the Presence of
+  Reverberation}
+    \field{volume}{14}
+    \field{journaltitle}{International Journal of Speech Technology}
+    \field{month}{06}
+    \field{year}{2011}
+  \endentry
+
+  \entry{comp7}{article}{}
+    \name{author}{4}{}{%
+      {{hash=OCS}{%
+         family={Ooi},
+         familyi={O\bibinitperiod},
+         given={Chien\bibnamedelima Shing},
+         giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=SKP}{%
+         family={Seng},
+         familyi={S\bibinitperiod},
+         given={Kah\bibnamedelima Phooi},
+         giveni={K\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=ALM}{%
+         family={Ang},
+         familyi={A\bibinitperiod},
+         given={Li-Minn},
+         giveni={L\bibinithyphendelim M\bibinitperiod},
+      }}%
+      {{hash=CLW}{%
+         family={Chew},
+         familyi={C\bibinitperiod},
+         given={Li\bibnamedelima Wern},
+         giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \keyw{Audio emotion recognition, RBF neural network, Prosodic features,
+  MFCC feature}
+    \strng{namehash}{OCS+1}
+    \strng{fullhash}{OCSSKPALMCLW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    A new architecture of intelligent audio emotion recognition is proposed in
+  this paper. It fully utilizes both prosodic and spectral features in its
+  design. It has two main paths in parallel and can recognize 6 emotions. Path
+  1 is designed based on intensive analysis of different prosodic features.
+  Significant prosodic features are identified to differentiate emotions. Path
+  2 is designed based on research analysis on spectral features. Extraction of
+  Mel-Frequency Cepstral Coefficient (MFCC) feature is then followed by
+  Bi-directional Principle Component Analysis (BDPCA), Linear Discriminant
+  Analysis (LDA) and Radial Basis Function (RBF) neural classification. This
+  path has 3 parallel BDPCA+LDA+RBF sub-paths structure and each handles two
+  emotions. Fusion modules are also proposed for weights assignment and
+  decision making. The performance of the proposed architecture is evaluated on
+  eNTERFACE’05 and RML databases. Simulation results and comparison have
+  revealed good performance of the proposed recognizer.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1016/j.eswa.2014.03.026
+    \endverb
+    \field{issn}{0957-4174}
+    \field{number}{13}
+    \field{pages}{5858 \bibrangedash  5869}
+    \field{title}{A new approach of audio emotion recognition}
+    \verb{url}
+    \verb http://www.sciencedirect.com/science/article/pii/S0957417414001638
+    \endverb
+    \field{volume}{41}
+    \field{journaltitle}{Expert Systems with Applications}
+    \field{year}{2014}
+  \endentry
+\enddatalist
+\endinput

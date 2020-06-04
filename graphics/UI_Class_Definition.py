@@ -5,6 +5,7 @@
 # Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
+from pydub.playback import play
 import os
 try:
     os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
@@ -397,9 +398,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setRowCount(5)
         self.tableWidget.setColumnCount(5)
         self.tableWidget.setHorizontalHeaderLabels(
-            ["Angry", "Happy", "Sad","Fear" , "Normal", " Total "])  # 
+            ["Angry", "Happy", "Sad", "Normal", " Total "])  # 
         self.tableWidget.setVerticalHeaderLabels(
-            ["Angry", "Happy", "Sad", "Fear", "Normal", "Total"])  #
+            ["Angry", "Happy", "Sad", "Normal", "Total"])  #
 
         self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("0"))
@@ -432,6 +433,9 @@ class Ui_MainWindow(object):
         self.tableWidget.item(1, 1).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(0, 0).setBackground(QtGui.QColor(125, 125, 125))
 
+        for i in range(5):
+            for j in range(5):
+                self.tableWidget.item(i, j).setFlags(QtCore.Qt.ItemIsEnabled)
         self.tabs.resize(650, 425)
 
         self.label_7 = QtWidgets.QLabel(self.groupBox_4)
@@ -452,16 +456,20 @@ class Ui_MainWindow(object):
 
         self.verticalLayoutTable = QtWidgets.QVBoxLayout()
         self.verticalLayoutTable.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
-        self.verticalLayoutTable.setContentsMargins(33, 95, 33, 100)
+        self.verticalLayoutTable.setContentsMargins(33, 95, 33, 70)
         self.verticalLayoutTable.setSpacing(9)
         self.verticalLayoutTable.setObjectName("verticalLayoutTable")
+
+        self.label_total = QtWidgets.QLabel(self.groupBox_4)
+        self.label_total.setObjectName("label_nr")
         
         self.tab2 = QtWidgets.QWidget()
-        self.tabs.addTab(self.label_7, "Tab 1")
-        self.tabs.addTab(self.tab2, "Tab 2")
+        self.tabs.addTab(self.label_7, "Logs")
+        self.tabs.addTab(self.tab2, "Confusion matrix")
 
         self.tab2.layout = self.verticalLayoutTable
         self.tab2.layout.addWidget(self.tableWidget)
+        self.tab2.layout.addWidget(self.label_total)
         self.tab2.setLayout(self.tab2.layout)
 
         self.verticalLayout_2.addWidget(self.label_2)
@@ -491,7 +499,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         fill_file(self)
 
-        self.pushButton.clicked.connect(lambda: on_button_clicked(self))
+        self.pushButton.clicked.connect(lambda: on_start_button_clicked(self))
         self.pushButtonStop.clicked.connect(lambda: on_buttonStop_clicked(self))
         self.pushButtonRecord.clicked.connect(lambda: on_buttonRecord_clicked(self))
         self.pushButtonPlay.clicked.connect(lambda: play_recording(self))
@@ -542,14 +550,16 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "1"))
         self.label_17.setText(_translate("MainWindow", "Current epoch:"))
         self.label_19.setText(_translate("MainWindow", "0"))
+        self.label_total.setText(_translate("MainWindow", "Numarul total de intrari = 0"))
         self.comboBox.setItemText(0, _translate("MainWindow", "EMO-DB"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "SAVE"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "SAVEE"))
         self.comboBox.setItemText(2, _translate("MainWindow", "RAVDESS"))
         self.comboBox.setItemText(3, _translate("MainWindow", "ENTERFACE"))
         self.comboBox.setItemText(4, _translate("MainWindow", "EMOVO"))
         self.comboBox.setItemText(5, _translate("MainWindow", "MAV"))
         self.comboBox.setItemText(6, _translate("MainWindow", "MELD"))
         self.comboBox.setItemText(7, _translate("MainWindow", "JL"))
+        self.comboBox.setItemText(7, _translate("MainWindow", "INRP"))
         self.comboBox.setItemText(8, _translate("MainWindow", "MULTIPLE"))
         self.label.setText(_translate("MainWindow", "Select dataset:"))
         self.groupBox.setTitle(_translate("MainWindow", "Actions"))
@@ -616,6 +626,9 @@ class Ui_MainWindow(object):
         self.tableWidget.item(2, 2).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(1, 1).setBackground(QtGui.QColor(125, 125, 125))
         self.tableWidget.item(0, 0).setBackground(QtGui.QColor(125, 125, 125))
+        for i in range(5):
+            for j in range(5):
+                self.tableWidget.item(i, j).setFlags(QtCore.Qt.ItemIsEnabled)
 
     def open_alert_dialog(self, title="Alert", text="...", info="..."):
         msg = QtWidgets.QMessageBox()
@@ -629,14 +642,15 @@ class Ui_MainWindow(object):
 
 map_config = {
     "EMO-DB": 1,
-    "SAVE": 2,
+    "SAVEE": 2,
     "RAVDESS": 3,
     "ENTERFACE": 4,
     "EMOVO": 5,
-    "MAV": 6,
+    "MAV": 6, 
     "MELD": 7,
     "JL": 8,
-    "MULTIPLE": 9,
+    "INRP": 9,
+    "MULTIPLE": 10,
 }
 
 ses = 0
@@ -671,7 +685,17 @@ def fill_file(app):
     
 def init_inference(app):
     global ses, ser_inference_model, files, ses_online, ses_online_model
-    if app.radioButton_2.isChecked():  # inference
+    if app.radioButton_2.isChecked():  # inference        
+        if app.radioButton_4.isChecked():
+            app.open_alert_dialog(title="Inference is not available for hand-crafted extraction", text="Hand-crafted feature extraction is used only as a baseline.", info="Please train your model using the end-to-ed extraction method in order to make inference available.")
+            app.radioButton.setChecked(True)
+            app.radioButton_2.setChecked(False)
+            return
+        if [f for f in os.listdir("model1") if not f.startswith('.')] == []:
+            app.open_alert_dialog(title="Missing model for Inference", text="There is no machine learning model to be loaded.", info="Please use the training mode to train a model before inference.")
+            app.radioButton.setChecked(True)
+            app.radioButton_2.setChecked(False)
+            return
         app.pushButtonRecord.setEnabled(True)
         app.pushButtonInfPlay.setEnabled(True)
         app.progressBar.setEnabled(True)
@@ -718,7 +742,7 @@ def init_inference(app):
         close_inference_model(ses)
 
 thread_1 = 1
-def on_button_clicked(app):
+def on_start_button_clicked(app):
     global thread_1
     if app.radioButton.isChecked():  # training
         app.pushButton.setEnabled(False)
@@ -760,9 +784,12 @@ def on_buttonRecord_clicked(app):
       recorder_thread.start()
       app.pushButtonStopRecord.setEnabled(True)
       app.pushButton.setEnabled(False)
+      app.pushButtonInfPlay.setEnabled(False)
+      app.pushButtonPlay.setEnabled(False)
 
 def on_buttonStopRecord_clicked(app):
         import librosa
+        import pyaudio
         global ses,  mr, ses_online, ses_online_model
         mr.close()
         vals = []
@@ -770,7 +797,7 @@ def on_buttonStopRecord_clicked(app):
             app.pushButtonPlay.setEnabled(True)
             mr.save_to_wav()        
             frames, _ = librosa.load("output.wav", 16000)    
-            vals = online(ses_online, ses_online_model, frames, 48000) * 100
+            vals = online(ses_online, ses_online_model, frames, 44100) * 100
         else:
             app.pushButtonPlay.setEnabled(False)
             vals = [0 for _ in range(4)]
@@ -782,6 +809,8 @@ def on_buttonStopRecord_clicked(app):
         app.pushButton.setEnabled(True)
         app.pushButtonRecord.setEnabled(True)
         app.pushButtonStopRecord.setEnabled(False)
+        app.pushButtonInfPlay.setEnabled(True)
+        app.pushButtonPlay.setEnabled(True)
 
 nr = 0
 def print_in_label_7(app, str):
@@ -852,7 +881,6 @@ class Play_App(QtCore.QThread):
         chunk = 128
         f = wave.open(self.file, "rb")
         p = pyaudio.PyAudio()
-
         try:
                 p.get_default_output_device_info()
         except IOError:
@@ -860,9 +888,9 @@ class Play_App(QtCore.QThread):
                 self.app_rnning.open_alert_dialog(title="Missing output device alert", text="We could not identify any audio output device.", info="Please try and reconnec the device and restart the app.")
                 return
 
-        stream = p.open(format=pyaudio.paInt16,
-                        channels=1,
-                        rate=48000,
+        stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                        channels=f.getnchannels(),
+                        rate= 48000,
                         output=True)
         data = f.readframes(chunk)
         while data:

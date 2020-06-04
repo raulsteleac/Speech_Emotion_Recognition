@@ -18,6 +18,7 @@ def get_files_from_directory(dir_name):
                   if f.endswith(".wav"):
                               list_of_files = np.append(
                                   list_of_files, os.path.join(root, f))
+      # print(list_of_files[0])
       return list_of_files
 
 def one_hotizize(targets, target_class_vector, target_class_number):
@@ -29,7 +30,6 @@ def one_hotizize(targets, target_class_vector, target_class_number):
             """
             targets = [target_class_vector[emotion] for emotion in targets]
             return np.eye(target_class_number)[targets]
-
 
 def batch_normalization(batch):
       """ COMPUTE BATCH NORMALIZAION ON THE BATCH GIVEN AS INPUT TO EACH HIDDEN LAYER
@@ -73,17 +73,25 @@ def show_pic(features, names, fig_size):
                   i = i+1
             plt.show()
 
-seed_ = 1
-def generator_shuffle(data, change):
-      global seed_
-      seed_ += change
-      np.random.seed(seed_)
-      splits_count = 1
-      indexes = np.arange(splits_count)
-      np.random.shuffle(indexes)
-      for i in indexes:
-            for j in range(data.shape[0] // splits_count):
-                  yield data[i * (data.shape[0] // splits_count) + j]
+indexes_used = []
+def init_indexes(train_length):
+      global indexes_used
+      indexes_used = np.arange(train_length)
+
+def get_indexes():
+      global indexes_used
+      return indexes_used
+def shuffle_indexes():
+      global indexes_used
+      np.random.shuffle(indexes_used)
+
+def update_indexes(new_indexes):
+      global indexes_used
+      indexes_used = new_indexes
+
+def generator_shuffle(data, idi, epochs):
+      for i in get_indexes():
+            yield data[i]
 
 class EMO_DB_Config(object):
       dir_name = ['data_sets/EMO-DB']
@@ -93,7 +101,6 @@ class EMO_DB_Config(object):
 class SAVEE_Config(object):
       dir_name = ['data_sets/SAVEE']
       data_set_name = ['SAVEE']
-
 
 class RAVDESS_Config(object):
       dir_name = ['data_sets/RAVDESS']
@@ -119,9 +126,19 @@ class JL_Config(object):
       dir_name = ['data_sets/JL']
       data_set_name = ['JL']
 
-class MULTIPLE_DATA_SETS_Config(object):
-      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', 'data_sets/EMOVO', 'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 'data_sets/JL', 'data_sets/Inregistrari_Proprii']
-      data_set_name = ['EMO-DB', 'RAVDESS', 'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
+
+class Inrp_Config(object):
+      dir_name = ['data_sets/Inregistrari_Proprii']
+      data_set_name = ['InrP']
+
+class MULTIPLE_DATA_SETS_Config(object):      
+      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', #'data_sets/SAVEE',  
+      'data_sets/EMOVO',
+       'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 
+       'data_sets/JL', 
+       'data_sets/Inregistrari_Proprii']
+      data_set_name = ['EMO-DB', 'RAVDESS', #'SAVEE', 
+      'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
 
 
 class Inference_Config(object):
@@ -137,6 +154,7 @@ def select_config(id_config):
           6: MAV_Config(),
           7: MELD_Config(),
           8: JL_Config(),
-          9: MULTIPLE_DATA_SETS_Config()
+          9: Inrp_Config(),
+          10: MULTIPLE_DATA_SETS_Config()
       }
       return switcher[id_config]

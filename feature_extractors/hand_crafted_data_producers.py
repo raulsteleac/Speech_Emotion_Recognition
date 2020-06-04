@@ -16,15 +16,12 @@ from feature_extractors.hand_crafted_extractor import Feature_Extractor_Hand_Cra
 from util import *
 
 class Data_Producer_Hand_Crafted_Train_Test(object):
-      def __init__(self, config, train_ratio):
-            self._feature_extractor = Feature_Extractor_Hand_Crafted_Training_Testing(config.dir_name, config.data_set_name)
+      def __init__(self, config, train_ratio, thread):
+            self._feature_extractor = Feature_Extractor_Hand_Crafted_Training_Testing(config.dir_name, config.data_set_name, thread)
             self._train_test_slice = train_ratio
 
       def _import_data(self, session):
-            """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR  
-            """
-      def _import_data(self, session):
-            self._inputs, self._targets, self._feature_count = self._feature_extractor.get_featurs_and_targets(self._target_domain, session)
+            self._inputs, self._targets, self._feature_count = self._feature_extractor.get_featurs_and_targets(session)
 
       def _separate_train_from_test(self):
             """ REGROUP DATA INTO TRAIN DATA AND TEST DATA
@@ -53,17 +50,19 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
             self._import_data(session)
             self._separate_train_from_test()
 
-            self._train_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: generator_shuffle(self._train_inputs, 1), tf.float32, output_shapes=[None, self._feature_count])
-            self._train_targets_dt = tf.data.Dataset.from_generator(
-                lambda: generator_shuffle(self._train_targets, 0), tf.float32, output_shapes=[None])
+            # self._train_inputs_dt = tf.data.Dataset.from_generator(
+            #     lambda: generator_shuffle(self._train_inputs, 1), tf.float32, output_shapes=[None, self._feature_count])
+            # self._train_targets_dt = tf.data.Dataset.from_generator(
+            #     lambda: generator_shuffle(self._train_targets, 0), tf.float32, output_shapes=[None])
+
+            self._train_inputs_dt = tf.data.Dataset.from_generator(lambda: self._train_inputs, tf.float32, output_shapes=[None, self._feature_count])
+            self._train_targets_dt = tf.data.Dataset.from_generator(lambda: self._train_targets, tf.float32, output_shapes=[None])
 
             self._train_inputs_dt = self._train_inputs_dt.repeat()
             self._train_targets_dt = self._train_targets_dt.repeat()
 
             iterator_train_inputs = self._train_inputs_dt.make_one_shot_iterator()
             iterator_train_targets = self._train_targets_dt.make_one_shot_iterator()
-
             X_train = iterator_train_inputs.get_next()
             y_train = iterator_train_targets.get_next()
 
@@ -79,10 +78,13 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
                         (self._train_length, self._test_length) - pair representing the length of the train and test data                
             """
 
-            self._test_inputs_dt = tf.data.Dataset.from_generator(
-                lambda: generator_shuffle(self._test_inputs, 0), tf.float32, output_shapes=[None, self._feature_count])
-            self._test_targets_dt = tf.data.Dataset.from_generator(
-                lambda: generator_shuffle(self._test_targets, 0), tf.float32, output_shapes=[None])
+            # self._test_inputs_dt = tf.data.Dataset.from_generator(
+            #     lambda: generator_shuffle(self._test_inputs, 0), tf.float32, output_shapes=[None, self._feature_count])
+            # self._test_targets_dt = tf.data.Dataset.from_generator(
+            #     lambda: generator_shuffle(self._test_targets, 0), tf.float32, output_shapes=[None])
+
+            self._test_inputs_dt = tf.data.Dataset.from_generator(lambda: self._test_inputs, tf.float32, output_shapes=[None, self._feature_count])
+            self._test_targets_dt = tf.data.Dataset.from_generator(lambda: self._test_targets, tf.float32, output_shapes=[None])
 
             self._test_inputs_dt = self._test_inputs_dt.repeat()
             self._test_targets_dt = self._test_targets_dt.repeat()
@@ -97,7 +99,7 @@ class Data_Producer_Hand_Crafted_Train_Test(object):
 #%%
 class Data_Producer_Hand_Crafted_Inference(object):
       def __init__(self, config):
-            self._feature_extractor = Feature_Extractor_Hand_Crafted_Inference(config.dir_name)
+            self._feature_extractor = Feature_Extractor_Hand_Crafted_Inference(config.dir_name, None)
 
       def _import_data(self, session):
             """ CALL OF THE GET FUNCTION OF THE FEATURE EXTRACTOR

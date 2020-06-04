@@ -27,7 +27,7 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
                     -Arguments:
                         files - the list of file from which to extract the features
             """
-            print("------------------ Extracting audio features from files")            
+            print("------------------ Extracting audio features from files")    
             files = [wav_file for wav_file in files if wav_file[self.emotion_letter_position] in self.e_to_n_mapping.keys()]
             self.features = np.array([self.reshape_frames(self._get_audio_features(wav_file), 128) for wav_file in tqdm(files)])
             targets = [wav_file[self.emotion_letter_position] for wav_file in files]
@@ -51,6 +51,7 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
                   self._set_data_set_config(ds_name)
                   if self.thread != None:
                         self.thread.print_stats.emit("------------------ Extracting audio features from %s " % ds_name)
+                  print(self.hz)
                   self._transform_wave_files(files)
                   self.features = np.array([np.reshape(stft, (stft.shape[0], stft[0].shape[0],  stft[0].shape[1])) for stft in self.features])
                   self.inputs = np.append(self.inputs, self.features)
@@ -61,6 +62,7 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
 
 class Feature_Extractor_End_to_End_Inference(Feature_Extractor_End_to_End):
       def __init__(self, directory_name_list):
+            self.hz = 16000
             super().__init__(directory_name_list, None)
 
       def get_features_and_files(self, session):

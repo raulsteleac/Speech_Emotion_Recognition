@@ -1,23 +1,94 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {romanian}{}
-\contentsline {chapter}{\numberline {1}Introducere generala}{5}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introducere}{5}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Prezentarea Problemei}{5}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1.1}Importanta Informatiei Emotionale}{5}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1.2}Prezentare SER}{6}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}Motivatia Problemei}{7}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Motivatie aplicativa}{7}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.2}Motivatie Personala}{8}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Obstacole in studiul SER}{8}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.3.1}Impactul bazelor de date}{8}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.3.2}Dificultatea extragerii informatiei emotionale}{9}% 
-\contentsline {chapter}{\numberline {2}Introducere practica}{11}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Analiza stadiului actual în domeniul problemei}{11}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Tipologii arhitecturale in SER}{11}% 
-\contentsline {subsection}{\numberline {2.1.1}Preprocesare}{11}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}Preprocesarea datelor de intrare}{11}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Extragerea Datelor}{12}% 
-\contentsline {subsection}{\numberline {2.1.3}Clasificatorul}{13}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.3}Clasificatorul}{12}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.4}Tehnici de imbunatatire a clasficarii}{13}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Prezentarea unor implementari din SER}{14}% 
-\contentsline {subsection}{\numberline {2.2.1}Cross-corpus \& Multi-domain}{14}% 
-\contentsline {subsection}{\numberline {2.2.2}End-to-end models}{14}% 
-\contentsline {subsection}{\numberline {2.2.3}Recurrent Neural Networks witl Local Attention}{15}% 
-\contentsline {chapter}{\numberline {3}Descrierea Teoretica a Implementarii}{17}% 
-\contentsline {section}{\numberline {3.1}Diagrame Sistem}{17}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.1}A Cross-corpus Study on Speech Emotion Recognition}{14}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.2}Improved End-to-End Speech Emotion Recognition Using Self Attention Mechanism and Multitask Learning}{15}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.3}Automatic speech emotion recognition using recurrent neural networks with local attention}{15}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Prezentarea solutiei propuse}{16}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Bazele teoretice}{19}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Machine learning si retele neuronale artificiale}{19}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Transformata Fourier discreta pe timp scurt}{22}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Hand-crafted features}{24}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.1}Coeficientii Mel cepstrali}{24}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.2}Deltas si delta-deltas}{25}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}End-to-end feature extraction}{26}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.1}Spectograma Mel}{26}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.2}Batch normalization}{27}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.3}Retele neurononale convolutionale}{28}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Retele neuronale recurente}{30}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Mecanismul de atentie}{33}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Descrierea implementarii}{35}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Modului de implementare a sistemului de recunoastere a emotiilor}{35}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.1}Bazele de date folosite}{35}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}Preprocesarea datelor}{37}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.3}Extragerea caracteristicilor de intrare}{38}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.4}Clasificatorul sistemului SER}{40}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Implementarea si utilizarea interfetei grafice}{43}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}Interfata grafica in modul de antrenare}{43}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Interfata grafica in modul de inferferenta}{46}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Rezultate si experimente}{49}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Concluzii}{51}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliografie}{52}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Referinte}{53}% 

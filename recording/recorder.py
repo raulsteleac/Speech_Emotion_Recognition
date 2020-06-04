@@ -27,7 +27,7 @@ class MicrophoneRecorder(object):
             self._print_frames = np.array([])
             self._print_frames_count = 0
             self.vad = webrtcvad.Vad()
-            self.vad.set_mode(2)
+            self.vad.set_mode(1)
             atexit.register(self.close)
       
       def check_device_availability(self):

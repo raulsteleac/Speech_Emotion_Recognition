@@ -36,6 +36,9 @@ class Feature_Extractor(object):
             if data_set_name == 'EMO-DB':
                   self.set_EMO_DB_config()
 
+            if data_set_name == 'SAVEE':
+                  self.set_SAVEE_config()
+
             if data_set_name == 'RAVDESS':
                   self.set_RAVDESS_config()
 
@@ -58,49 +61,58 @@ class Feature_Extractor(object):
                   self.set_InrP_Config()
 
       def set_EMO_DB_config(self):
-            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3} 
+            self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}#, 'E': 4, 'A': 5, 'L': 6} 
             self.emotion_number = 4
             self.emotion_letter_position = -6
+            self.hz = 16000
 
       def set_SAVEE_config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#, 'd':4, 'f': 5, 'u':6} 
             self.emotion_number = 4
-            self.emotion_letter_position = 9
+            self.emotion_letter_position = 19
+            self.hz = 44100
 
       def set_RAVDESS_config(self):
-            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3} 
+            self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3}#, '7':4, '6':5, '2':6, '8':7} 
             self.emotion_number = 4
             self.emotion_letter_position = -17
+            self.hz = 48000
 
       def set_ENTERFACE_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#'d':4, 'f': 5} 
             self.emotion_number = 4
             self.emotion_letter_position = -8
+            self.hz = 44100
 
       def set_EMOVO_Config(self):
-            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3} 
+            self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3}#, 'd':4, 'p': 5, 's': 6} 
             self.emotion_number = 4
             self.emotion_letter_position = -13
+            self.hz = 48000
 
       def set_MAV_Config(self):
-            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3} 
+            self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#, 'd':4, 'f': 5} 
             self.emotion_number = 4
-            self.emotion_letter_position = 3
+            self.emotion_letter_position = 38
+            self.hz = 44100
 
       def set_MELD_Config(self):
             self.e_to_n_mapping = {'a': 0, 'j': 1, 's': 2,'n': 3}
             self.emotion_number = 4
             self.emotion_letter_position = 26
+            self.hz = 16000
 
       def set_JL_Config(self):
             self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}
             self.emotion_number = 4
             self.emotion_letter_position = 16
+            self.hz = 44100
 
       def set_InrP_Config(self):
-            self.e_to_n_mapping = {'A': 0, 'H': 1, 'S': 2, 'N': 3}
+            self.e_to_n_mapping = {'A': 0, 'H': 1, 'S': 2, 'N': 3}  # , 'D': 4, 'F':5}
             self.emotion_number = 4
             self.emotion_letter_position = -5
+            self.hz = 48000
 
       def show_pic(self, feature):
             pass
@@ -120,6 +132,8 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
                   -Returns:
                         The reshaped signal that will be passed to the convolutional layer
             """
+            # if self.thread != None:
+            #       self.thread.print_stats.emit("------------------ Reshaping features regarding the audio file's frames")
             stft = np.transpose(stft)
             window_nr = (stft.shape[0] // window_length + 1) * window_length
             pad_size = window_nr - stft.shape[0]
@@ -137,14 +151,14 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
                   -Returns:
                         stft - -//-
             """
-            signal, _ = librosa.load(wav_file, 16000)
+            signal, _ = librosa.load(wav_file, sr=16000)
             librosa.core.time_to_frames
             stft = librosa.feature.melspectrogram(signal, n_fft=512, win_length=128, hop_length=32, center=False)
             return stft
 
 class Feature_Extractor_Hand_Crafted(Feature_Extractor):
-      def __init__(self, directory_name_list):
-            super().__init__(directory_name_list)
+      def __init__(self, directory_name_list, thread):
+            super().__init__(directory_name_list, thread)
             self.feature_names = ['MFCC', 'Delta', 'Delta-Deltas', 'RMS', 'ZCR', 'Chrmoa', 'Roll-off']
 
       def _flatten_features(self, row):
@@ -182,9 +196,9 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
                         The reshaped version of the initial data-set whose every instance is of the form
                         (N, 75), where N represents the number of frames, differing for each audio file.  
             """
-            print("------------------ Reshaping features regarding the audio file's frames")
-            if self.thread != None:
-                  self.thread.print_stats.emit("------------------ Reshaping features regarding the audio file's frames")
+            # print("------------------ Reshaping features regarding the audio file's frames")
+            # if self.thread != None:
+            #       self.thread.print_stats.emit("------------------ Reshaping features regarding the audio file's frames")
             files_features = np.array([[np.transpose(feature) for feature in file_features] for file_features in files_features])
             return np.array([self._reshape_features_for_one_file(file_features) for file_features in tqdm(files_features)])
 
@@ -204,16 +218,16 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
                         features: list of all the hand-crafted features extracted from the audio file 
             """
             signal, rate = librosa.load(wav_file, 16000)
-            mfcc = librosa.feature.mfcc(y=signal, sr=rate, hop_length=260, n_mfcc=20)
+            mfcc = librosa.feature.mfcc(y=signal, sr=rate, hop_length=400, n_mfcc=20)
             delta = librosa.feature.delta(mfcc)
             delta_deltas = librosa.feature.delta(delta)
-            rms = librosa.feature.rms(y=signal, frame_length=640, hop_length=260)
-            zcr = librosa.feature.zero_crossing_rate(y=signal, frame_length=640, hop_length=260)
-            chroma = librosa.feature.chroma_stft(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
-            rolloff = librosa.feature.spectral_rolloff(y=signal, sr=rate, n_fft=820, win_length=640, hop_length=260)
+            rms = librosa.feature.rms(y=signal, frame_length=1020, hop_length=400)
+            zcr = librosa.feature.zero_crossing_rate(y=signal, frame_length=1020, hop_length=400)
+            chroma = librosa.feature.chroma_stft(y=signal, sr=rate, n_fft=1140, win_length=1020, hop_length=400)
+            rolloff = librosa.feature.spectral_rolloff(y=signal, sr=rate, n_fft=1140, win_length=1020, hop_length=400)
 
             features = [mfcc, delta, delta_deltas, rms, zcr, chroma, rolloff]
-            return features
-
+            return features 
+            # return np.reshape(np.transpose(features),(-1,60))
 
 #%%
