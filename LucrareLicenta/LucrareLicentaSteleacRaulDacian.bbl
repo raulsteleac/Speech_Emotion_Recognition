@@ -178,6 +178,22 @@
     \field{year}{2019}
   \endentry
 
+  \entry{ooda}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=}{%
+         family={...},
+         familyi={\bibinitperiod},
+      }}%
+    }
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{OODA loop}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/OODA_loop
+    \endverb
+    \field{year}{2020}
+  \endentry
+
   \entry{vad}{manual}{}
     \name{author}{1}{}{%
       {{hash=WJ}{%
@@ -1289,6 +1305,104 @@
   Network for Speech Emotion Recognition}
     \field{month}{09}
     \field{year}{2015}
+  \endentry
+
+  \entry{rnn3}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BY}{%
+         family={{Bengio}},
+         familyi={B\bibinitperiod},
+         given={Y.},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={{Simard}},
+         familyi={S\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=FP}{%
+         family={{Frasconi}},
+         familyi={F\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BYSPFP1}
+    \strng{fullhash}{BYSPFP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{157\bibrangedash 166}
+    \field{title}{Learning long-term dependencies with gradient descent is
+  difficult}
+    \field{volume}{5}
+    \field{journaltitle}{IEEE Transactions on Neural Networks}
+    \field{year}{1994}
+  \endentry
+
+  \entry{rnn4}{article}{}
+    \name{author}{2}{}{%
+      {{hash=HS}{%
+         family={Hochreiter},
+         familyi={H\bibinitperiod},
+         given={Sepp},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Schmidhuber},
+         familyi={S\bibinitperiod},
+         given={Jürgen},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HSSJ1}
+    \strng{fullhash}{HSSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1162/neco.1997.9.8.1735
+    \endverb
+    \field{pages}{1735\bibrangedash 80}
+    \field{title}{Long Short-term Memory}
+    \field{volume}{9}
+    \field{journaltitle}{Neural computation}
+    \field{month}{12}
+    \field{year}{1997}
+  \endentry
+
+  \entry{rnn5}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=HS}{%
+         family={Hochreiter},
+         familyi={H\bibinitperiod},
+         given={Sepp},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=YA}{%
+         family={Younger},
+         familyi={Y\bibinitperiod},
+         given={Arthur},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={Conwell},
+         familyi={C\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HSYACP1}
+    \strng{fullhash}{HSYACP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/3-540-44668-0_13
+    \endverb
+    \field{pages}{87\bibrangedash 94}
+    \field{title}{Learning To Learn Using Gradient Descent}
+    \field{month}{09}
+    \field{year}{2001}
   \endentry
 
   \entry{nnspic}{article}{}

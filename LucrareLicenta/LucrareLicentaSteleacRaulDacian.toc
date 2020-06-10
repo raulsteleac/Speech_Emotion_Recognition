@@ -59,13 +59,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4.1}Spectograma Mel}{26}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.2}Batch normalization}{27}% 
+\contentsline {subsection}{\numberline {3.4.2}Batch normalization}{26}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.3}Retele neurononale convolutionale}{28}% 
+\contentsline {subsection}{\numberline {3.4.3}Retele neurononale convolutionale}{27}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}Retele neuronale recurente}{30}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.6}Mecanismul de atentie}{33}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.7}Cicluri OODA}{34}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Descrierea implementarii}{35}% 
 \defcounter {refsection}{0}\relax 

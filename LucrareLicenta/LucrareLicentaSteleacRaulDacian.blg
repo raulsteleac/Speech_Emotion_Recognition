@@ -16,11 +16,16 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated field_info (elt_size=4) to 13757 items from 5000.
+Reallocated field_info (elt_size=4) to 14313 items from 5000.
 Database file #1: LucrareLicentaSteleacRaulDacian-blx.bib
 Database file #2: Bibliography.bib
+Repeated entry---line 50 of file Bibliography.bib
+ : @manual{mfcc4
+ :              ,
+I'm skipping whatever remains of this entry
 Warning--entry type for "meld" isn't style-file defined
---line 175 of file Bibliography.bib
+--line 188 of file Bibliography.bib
+Warning--I didn't find a database entry for "mulți-domain"
 Biblatex version: 3.11
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, Massimiliano" has a comma at the end for entry emovo
@@ -44,45 +49,45 @@ Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, M
 while executing---line 2774 of file biblatex.bst
 Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, Massimiliano" has a comma at the end for entry emovo
 while executing---line 2774 of file biblatex.bst
-You've used 76 entries,
+You've used 80 entries,
             6304 wiz_defined-function locations,
-            1578 strings with 25624 characters,
-and the built_in function-call counts, 490993 in all, are:
-= -- 36028
-> -- 8181
-< -- 1673
-+ -- 13700
-- -- 3208
-* -- 34565
-:= -- 57143
+            1601 strings with 26105 characters,
+and the built_in function-call counts, 510360 in all, are:
+= -- 37258
+> -- 8581
+< -- 1761
++ -- 14196
+- -- 3376
+* -- 35929
+:= -- 59185
 add.period$ -- 0
-call.type$ -- 76
-change.case$ -- 635
-chr.to.int$ -- 310
-cite$ -- 150
-duplicate$ -- 55147
-empty$ -- 43899
-format.name$ -- 5536
-if$ -- 96385
+call.type$ -- 80
+change.case$ -- 659
+chr.to.int$ -- 322
+cite$ -- 158
+duplicate$ -- 57388
+empty$ -- 45706
+format.name$ -- 5782
+if$ -- 100278
 int.to.chr$ -- 0
-int.to.str$ -- 170
+int.to.str$ -- 178
 missing$ -- 0
-newline$ -- 2721
-num.names$ -- 2912
-pop$ -- 27606
+newline$ -- 2834
+num.names$ -- 3040
+pop$ -- 28999
 preamble$ -- 1
-purify$ -- 1259
+purify$ -- 1310
 quote$ -- 0
-skip$ -- 11516
+skip$ -- 12085
 stack$ -- 0
-substring$ -- 61920
-swap$ -- 10852
-text.length$ -- 1726
+substring$ -- 63850
+swap$ -- 11361
+text.length$ -- 1819
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 2571
+type$ -- 2707
 warning$ -- 0
-while$ -- 8456
+while$ -- 8761
 width$ -- 0
-write$ -- 2646
-(There were 10 error messages)
+write$ -- 2755
+(There were 11 error messages)

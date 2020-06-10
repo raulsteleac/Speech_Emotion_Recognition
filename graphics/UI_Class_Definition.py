@@ -298,41 +298,54 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
 
         self.label_11 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_11.setGeometry(QtCore.QRect(10, 115, 125, 30))
+        self.label_11.setGeometry(QtCore.QRect(10, 100, 125, 30))
         self.label_11.setObjectName("label_11")
         self.horizontalSlider = QtWidgets.QSlider(self.groupBox_2)
-        self.horizontalSlider.setGeometry(QtCore.QRect(135, 123, 430, 17))
+        self.horizontalSlider.setGeometry(QtCore.QRect(135, 109, 430, 17))
         self.horizontalSlider.setMaximum(10)
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.label_12 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_12.setGeometry(QtCore.QRect(570, 115, 31, 30))
+        self.label_12.setGeometry(QtCore.QRect(570, 102, 31, 30))
         self.label_12.setObjectName("label_12")
 
         self.label_15 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_15.setGeometry(QtCore.QRect(10, 150, 121, 25))
+        self.label_15.setGeometry(QtCore.QRect(10, 132, 121, 25))
         self.label_15.setObjectName("label_15")
         self.horizontalSlider_2 = QtWidgets.QSlider(self.groupBox_2)
-        self.horizontalSlider_2.setGeometry(QtCore.QRect(135, 157, 430, 17))
+        self.horizontalSlider_2.setGeometry(QtCore.QRect(135, 137, 430, 17))
         self.horizontalSlider_2.setMaximum(10)
         self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_2.setObjectName("horizontalSlider_2")
         self.label_16 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_16.setGeometry(QtCore.QRect(570, 150, 31, 25))
+        self.label_16.setGeometry(QtCore.QRect(570, 134, 31, 25))
         self.label_16.setObjectName("label_15")
 
+
+        self.ooda_check_box = QtWidgets.QCheckBox(self.groupBox_2)
+        self.ooda_check_box.setGeometry(QtCore.QRect(15, 160, 120, 31))
+        self.ooda_check_box.setObjectName("checkBoxOODA")
+        self.horizontalSlider_ooda = QtWidgets.QSlider(self.groupBox_2)
+        self.horizontalSlider_ooda.setGeometry(QtCore.QRect(135, 168, 430, 17))
+        self.horizontalSlider_ooda.setMaximum(9)
+        self.horizontalSlider_ooda.setMinimum(1)
+        self.horizontalSlider_ooda.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_ooda.setObjectName("horizontalSlider_ooda")
+        self.label_ooda = QtWidgets.QLabel(self.groupBox_2)
+        self.label_ooda.setGeometry(QtCore.QRect(570, 164, 31, 25))
+        self.label_ooda.setObjectName("label_ooda")
+
         self.label_13 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_13.setGeometry(QtCore.QRect(10, 188, 121, 25))
+        self.label_13.setGeometry(QtCore.QRect(10, 197, 121, 25))
         self.label_13.setObjectName("label_13")
         self.doubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox_2)
-        self.doubleSpinBox.setGeometry(QtCore.QRect(131, 188, 100, 31))
+        self.doubleSpinBox.setGeometry(QtCore.QRect(121, 197, 100, 31))
         self.doubleSpinBox.setDecimals(5)
         self.doubleSpinBox.setSingleStep(1e-05)
         self.doubleSpinBox.setObjectName("doubleSpinBox")
 
         self.verticalLayout_2.addWidget(self.groupBox_2)
-
-
+        
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setMinimumSize(QtCore.QSize(30, 70))
         self.groupBox.setObjectName("groupBox")
@@ -495,9 +508,14 @@ class Ui_MainWindow(object):
         change_label_16(self)
         self.horizontalSlider.setValue(8)
         change_label_12(self)
+        self.horizontalSlider_ooda.setValue(8)
+        change_label_ooda(self)
         self.doubleSpinBox.setValue(0.0001)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         fill_file(self)
+        self.ooda_check_box.setChecked(False)
+        self.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
+        self.horizontalSlider_ooda.setEnabled(False)
 
         self.pushButton.clicked.connect(lambda: on_start_button_clicked(self))
         self.pushButtonStop.clicked.connect(lambda: on_buttonStop_clicked(self))
@@ -509,6 +527,8 @@ class Ui_MainWindow(object):
         self.radioButton_2.toggled.connect(lambda: init_inference(self))
         self.horizontalSlider.valueChanged.connect(lambda: change_label_12(self))
         self.horizontalSlider_2.valueChanged.connect(lambda: change_label_16(self))
+        self.horizontalSlider_ooda.valueChanged.connect(lambda: change_label_ooda(self))
+        self.ooda_check_box.stateChanged.connect(lambda: change_horizontal_ooda(self))
         self.print_accuracy_graph(0)
 
     def refresh_label_7(self):
@@ -527,7 +547,7 @@ class Ui_MainWindow(object):
         
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Speech Emotion Recognizer"))
         self.groupBox_4.setTitle(_translate("MainWindow", "Statistics"))
         self.groupBox_5.setTitle(_translate("MainWindow", "Recording"))
         self.label_2.setText(_translate("MainWindow", "Angry"))
@@ -550,6 +570,7 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "1"))
         self.label_17.setText(_translate("MainWindow", "Current epoch:"))
         self.label_19.setText(_translate("MainWindow", "0"))
+        self.label_ooda.setText(_translate("MainWindow", "0"))
         self.label_total.setText(_translate("MainWindow", "Numarul total de intrari = 0"))
         self.comboBox.setItemText(0, _translate("MainWindow", "EMO-DB"))
         self.comboBox.setItemText(1, _translate("MainWindow", "SAVEE"))
@@ -561,6 +582,7 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(7, _translate("MainWindow", "JL"))
         self.comboBox.setItemText(7, _translate("MainWindow", "INRP"))
         self.comboBox.setItemText(8, _translate("MainWindow", "MULTIPLE"))
+        self.ooda_check_box.setText(_translate("MainWindow", "OODA loop"))
         self.label.setText(_translate("MainWindow", "Select dataset:"))
         self.groupBox.setTitle(_translate("MainWindow", "Actions"))
         self.radioButton.setToolTip(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
@@ -663,9 +685,22 @@ ses_online_model = 0
 def change_label_16(app):
     app.label_16.setText(str(float(app.horizontalSlider_2.value())/10))
 
-
 def change_label_12(app):
     app.label_12.setText(str(float(app.horizontalSlider.value())/10))
+
+def change_label_ooda(app):
+    app.label_ooda.setText(str(float(app.horizontalSlider_ooda.value())/10))
+
+
+def change_horizontal_ooda(app):
+    if app.ooda_check_box.isChecked():
+        app.horizontalSlider_ooda.setStyleSheet(SLYDER_ENABLED)
+        app.horizontalSlider_ooda.setEnabled(True)
+    else:
+        app.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
+        app.horizontalSlider_ooda.setEnabled(False)
+    app.label_ooda.setEnabled(app.ooda_check_box.isChecked())
+    
 
 def fill_file(app):
     global ses, ser_inference_model, files, ses_online, ses_online_model
@@ -710,7 +745,11 @@ def init_inference(app):
         app.groupBox_5.setEnabled(True)
         app.groupBox_2.setEnabled(False)
         app.horizontalSlider.setStyleSheet(SLYDER_DISABLED)
+        app.horizontalSlider.setEnabled(False)
         app.horizontalSlider_2.setStyleSheet(SLYDER_DISABLED)
+        app.horizontalSlider_2.setEnabled(False)
+        app.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
+        app.horizontalSlider_ooda.setEnabled(False)
         ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked(), app.lineEdit_2.text())
         if ser_inference_model == None:
             app.open_alert_dialog(title="Missing Inference Files Alert", text="We could no find any files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
@@ -738,7 +777,10 @@ def init_inference(app):
         app.groupBox_3.setEnabled(False)
         app.groupBox_5.setEnabled(False)
         app.horizontalSlider.setStyleSheet(SLYDER_ENABLED)
+        app.horizontalSlider.setEnabled(True)
         app.horizontalSlider_2.setStyleSheet(SLYDER_ENABLED)
+        app.horizontalSlider_2.setEnabled(True)
+        change_horizontal_ooda(app)
         close_inference_model(ses)
 
 thread_1 = 1
@@ -882,7 +924,7 @@ class Play_App(QtCore.QThread):
         f = wave.open(self.file, "rb")
         p = pyaudio.PyAudio()
         try:
-                p.get_default_output_device_info()
+                print(p.get_default_output_device_info())
         except IOError:
                 print("\n\n No out device found. \n\n")
                 self.app_rnning.open_alert_dialog(title="Missing output device alert", text="We could not identify any audio output device.", info="Please try and reconnec the device and restart the app.")
@@ -890,7 +932,7 @@ class Play_App(QtCore.QThread):
 
         stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
                         channels=f.getnchannels(),
-                        rate= 48000,
+                        rate= 48000,                        
                         output=True)
         data = f.readframes(chunk)
         while data:

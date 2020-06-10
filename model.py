@@ -192,8 +192,9 @@ class Speech_Emotion_Recognizer(object):
       def add_to_input_examples_results(self, index, val):
             self.examples_dict[index] += val
 
-      def update_input_length(self, epochs, epoch):
-            self._op_length = self._init_op_length - (int(epoch//5)) * int(self._init_op_length // ((5*epochs)/(5*4)))
+      def update_input_length(self, epochs, epoch, fraction):
+            print(fraction)
+            self._op_length = self._op_length - int((fraction) * self._init_op_length // (int((epochs-1) // 5)))
       
       def calculate_worst_input_examples(self):
             # self.examples_dict = {k: v for k, v in sorted(self.examples_dict.items(), key=lambda item: item[1])}
@@ -274,7 +275,6 @@ class Speech_Emotion_Recognizer(object):
             self.saver.restore(ses, path)
 #%%
 def main(thread=None, epochs=10, keep_prob=0.5, train_ratio = 0.8, lr = 0.0001, id_config=1, flag_end_to_end = 1):
-      empty_dir("./model"+str(int(flag_end_to_end)))
       tf.reset_default_graph()
       ses = tf.Session()
       
@@ -307,11 +307,11 @@ def main(thread=None, epochs=10, keep_prob=0.5, train_ratio = 0.8, lr = 0.0001, 
             ser_train_model.refresh_current_examp()
             # shuffle_indexes()
             print("-----------> Epoch " + str(epoch))
-            # if epoch % 5 == 0 and epoch:
-            #       ser_train_model.update_input_length(epochs, epoch)
-            #       ser_train_model.calculate_worst_input_examples()
-            #       update_indexes(ser_train_model.get_keys())
-            #       ser_train_model.init_examples(get_indexes())
+            if epoch % 5 == 0 and epoch and thread.app_rnning.ooda_check_box.isChecked():
+                  ser_train_model.update_input_length(epochs, epoch, float(thread.app_rnning.horizontalSlider_ooda.value() / 10))
+                  ser_train_model.calculate_worst_input_examples()
+                  update_indexes(ser_train_model.get_keys())
+                  ser_train_model.init_examples(get_indexes())
 
             if thread:
                   thread.print_epoch.emit(str(epoch))
@@ -321,7 +321,9 @@ def main(thread=None, epochs=10, keep_prob=0.5, train_ratio = 0.8, lr = 0.0001, 
             if (epoch) % 5 == 0:
                   print("----------------------------------------------------------------")
                   ser_test_model.run_model(ses, writer, merged_summaries, thread=None)
-                  print("----------------------------------------------------------------")
+                  print(
+                      "----------------------------------------------------------------")
+      empty_dir("./model"+str(int(flag_end_to_end)))
       ser_train_model.save_model(ses, "./model"+str(int(flag_end_to_end))+"/model.ckpt")
       writer = tf.summary.FileWriter('./graphs', ses.graph)
       thread.stopFlag = 0
