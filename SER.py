@@ -20,6 +20,12 @@ class SER_GUI(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     app.setStyleSheet(qdarkgraystyle.load_stylesheet())
+    font = app.font()
+    fond_db = QtGui.QFontDatabase()
+    fond_db.addApplicationFont("Fonts/Roboto-Bold.ttf")
+    font = QtGui.QFont("Roboto")
+    font.setPointSize(11)
+    app.setFont(font)
     main_Window = SER_GUI()
     main_Window.draw()
     app.exec_()

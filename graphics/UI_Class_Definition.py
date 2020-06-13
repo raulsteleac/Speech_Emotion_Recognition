@@ -247,17 +247,17 @@ class Ui_MainWindow(object):
         self.groupBox_2.setObjectName("groupBox_2")
 
         self.label_18 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_18.setGeometry(QtCore.QRect(10, 75, 200, 25))
+        self.label_18.setGeometry(QtCore.QRect(10, 75, 205, 25))
         self.label_18.setObjectName("label_18")
         
         self.radioButton_3 = QtWidgets.QRadioButton(self.groupBox_2)
-        self.radioButton_3.setGeometry(QtCore.QRect(210, 77, 165, 25))
+        self.radioButton_3.setGeometry(QtCore.QRect(215, 77, 165, 25))
         self.radioButton_3.setChecked(True)
         self.radioButton_3.setAutoRepeat(False)
         self.radioButton_3.setObjectName("radioButton_3")
 
         self.radioButton_4 = QtWidgets.QRadioButton(self.groupBox_2)
-        self.radioButton_4.setGeometry(QtCore.QRect(320, 77, 120, 25))
+        self.radioButton_4.setGeometry(QtCore.QRect(325, 77, 120, 25))
         self.radioButton_4.setObjectName("radioButton_4")
 
         self.label_8 = QtWidgets.QLabel(self.groupBox_2)
@@ -562,7 +562,7 @@ class Ui_MainWindow(object):
         self.radioButton_3.setText(_translate("MainWindow", "End-to-end"))
         self.radioButton_4.setText(_translate("MainWindow", "Hand-Crafted"))
         self.label_8.setText(_translate("MainWindow", "Epochs:"))
-        self.label_18.setText(_translate("MainWindow", "Feature extractio tehnioque:"))
+        self.label_18.setText(_translate("MainWindow", "Feature extraction tehnioque:"))
         self.label_11.setText(_translate("MainWindow", "Train / Test Ratio:"))
         self.label_12.setText(_translate("MainWindow", "1"))
         self.label_13.setText(_translate("MainWindow", "Learning Rate:"))
