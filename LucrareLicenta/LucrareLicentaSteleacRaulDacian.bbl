@@ -1040,6 +1040,27 @@
     \field{year}{2017}
   \endentry
 
+  \entry{auto}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=RA}{%
+         family={Rosebrock},
+         familyi={R\bibinitperiod},
+         given={Adrian},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RA1}
+    \strng{fullhash}{RA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Autoencoders with Keras, TensorFlow, and Deep Learning}
+    \verb{url}
+    \verb https://www.pyimagesearch.com/2020/02/17/autoencoders-with-keras-tens
+    \verb orflow-and-deep-learning/
+    \endverb
+    \field{year}{2020}
+  \endentry
+
   \entry{dae}{article}{}
     \name{author}{4}{}{%
       {{hash=CL}{%

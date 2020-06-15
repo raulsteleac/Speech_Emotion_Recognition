@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  13 JUN 2020 21:53
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  15 JUN 2020 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1054,7 +1054,10 @@ LaTeX Font Info:    Try loading font information for U+ntxsyc on input line 6.
 
 (/app/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
-) [3])
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.8pt on input line 8.
+ [3])
 \tf@toc=\write4
 \openout4 = `LucrareLicentaSteleacRaulDacian.toc'.
 
@@ -1069,8 +1072,6 @@ LaTeX Font Info:    Font shape `T1/qhv/bx/n' in size <16> not available
 (Font)              Font shape `T1/qhv/b/n' tried instead on input line 128.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
 (Font)              scaled to size 14.3999pt on input line 128.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.8pt on input line 132.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <14> not available
 (Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 136.
 
@@ -1333,10 +1334,10 @@ ml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17432 strings out of 492922
- 281539 string characters out of 6134661
- 895494 words of memory out of 5000000
- 21162 multiletter control sequences out of 15000+600000
+ 17434 strings out of 492922
+ 281613 string characters out of 6134661
+ 895873 words of memory out of 5000000
+ 21164 multiletter control sequences out of 15000+600000
  134862 words of font info for 135 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  53i,18n,92p,2177b,4803s stack positions out of 5000i,500n,10000p,200000b,80000s

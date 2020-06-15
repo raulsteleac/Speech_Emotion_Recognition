@@ -19,13 +19,12 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated field_info (elt_size=4) to 14313 items from 5000.
 Database file #1: LucrareLicentaSteleacRaulDacian-blx.bib
 Database file #2: Bibliography.bib
-Repeated entry---line 50 of file Bibliography.bib
+Repeated entry---line 52 of file Bibliography.bib
  : @manual{mfcc4
  :              ,
 I'm skipping whatever remains of this entry
 Warning--entry type for "meld" isn't style-file defined
---line 188 of file Bibliography.bib
-Warning--I didn't find a database entry for "mulți-domain"
+--line 190 of file Bibliography.bib
 Biblatex version: 3.11
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, Massimiliano" has a comma at the end for entry emovo
@@ -49,45 +48,45 @@ Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, M
 while executing---line 2774 of file biblatex.bst
 Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, Massimiliano" has a comma at the end for entry emovo
 while executing---line 2774 of file biblatex.bst
-You've used 80 entries,
+You've used 81 entries,
             6304 wiz_defined-function locations,
-            1601 strings with 26105 characters,
-and the built_in function-call counts, 510360 in all, are:
-= -- 37258
-> -- 8581
-< -- 1761
-+ -- 14196
-- -- 3376
-* -- 35929
-:= -- 59185
+            1604 strings with 26260 characters,
+and the built_in function-call counts, 513771 in all, are:
+= -- 37449
+> -- 8652
+< -- 1777
++ -- 14254
+- -- 3401
+* -- 36132
+:= -- 59488
 add.period$ -- 0
-call.type$ -- 80
-change.case$ -- 659
+call.type$ -- 81
+change.case$ -- 666
 chr.to.int$ -- 322
-cite$ -- 158
-duplicate$ -- 57388
-empty$ -- 45706
-format.name$ -- 5782
-if$ -- 100278
+cite$ -- 160
+duplicate$ -- 57790
+empty$ -- 46071
+format.name$ -- 5826
+if$ -- 101003
 int.to.chr$ -- 0
-int.to.str$ -- 178
+int.to.str$ -- 180
 missing$ -- 0
-newline$ -- 2834
-num.names$ -- 3040
-pop$ -- 28999
+newline$ -- 2855
+num.names$ -- 3078
+pop$ -- 29330
 preamble$ -- 1
-purify$ -- 1310
+purify$ -- 1320
 quote$ -- 0
-skip$ -- 12085
+skip$ -- 12219
 stack$ -- 0
-substring$ -- 63850
-swap$ -- 11361
-text.length$ -- 1819
+substring$ -- 64103
+swap$ -- 11456
+text.length$ -- 1836
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 2707
+type$ -- 2741
 warning$ -- 0
-while$ -- 8761
+while$ -- 8804
 width$ -- 0
-write$ -- 2755
+write$ -- 2775
 (There were 11 error messages)
