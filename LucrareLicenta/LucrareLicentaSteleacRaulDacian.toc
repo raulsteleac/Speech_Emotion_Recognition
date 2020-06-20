@@ -21,6 +21,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.3.2}Dificultatea extragerii informației emoționale}{9}% 
 \defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Structura lucrării}{10}% 
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Analiza stadiului actual în domeniul problemei}{11}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Tipologii arhitecturale in SER}{11}% 
@@ -29,7 +31,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Extragerea datelor de intrare}{12}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.3}Clasificatorul}{12}% 
+\contentsline {subsection}{\numberline {2.1.3}Clasificatorul}{13}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.4}Tehnici de îmbunătățire a clasificării}{13}% 
 \defcounter {refsection}{0}\relax 
@@ -39,7 +41,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}Improved End-to-End Speech Emotion Recognition Using Self Attention Mechanism and Multitask Learning}{15}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}Automatic speech emotion recognition using recurrent neural networks with local attention}{15}% 
+\contentsline {subsection}{\numberline {2.2.3}Automatic speech emotion recognition using recurrent neural networks with local attention}{16}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Prezentarea soluției propuse}{16}% 
 \defcounter {refsection}{0}\relax 
