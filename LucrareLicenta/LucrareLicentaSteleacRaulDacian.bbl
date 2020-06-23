@@ -214,6 +214,26 @@
     \field{year}{2019}
   \endentry
 
+  \entry{pyaudio}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=PH}{%
+         family={Pham},
+         familyi={P\bibinitperiod},
+         given={Hubert},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PH1}
+    \strng{fullhash}{PH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{PyAudio}
+    \verb{url}
+    \verb https://pypi.org/project/PyAudio/
+    \endverb
+    \field{year}{2006}
+  \endentry
+
   \entry{qdarkgraystyle}{manual}{}
     \name{author}{1}{}{%
       {{hash=SM}{%

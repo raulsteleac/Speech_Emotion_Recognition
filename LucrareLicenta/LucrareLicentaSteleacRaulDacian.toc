@@ -13,7 +13,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Motivație aplicativă}{7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Motivație personală}{8}% 
+\contentsline {subsection}{\numberline {1.2.2}Motivație personală}{7}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Obstacole in studiul SER}{8}% 
 \defcounter {refsection}{0}\relax 
@@ -71,28 +71,28 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.7}Cicluri OODA}{34}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Descrierea implementării}{35}% 
+\contentsline {chapter}{\numberline {4}Descrierea implementării}{37}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Modului de implementare a sistemului de recunoaștere a emoțiilor}{35}% 
+\contentsline {section}{\numberline {4.1}Modului de implementare a sistemului de recunoaștere a emoțiilor}{37}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Bazele de date folosite}{35}% 
+\contentsline {subsection}{\numberline {4.1.1}Bazele de date folosite}{37}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Preprocesarea datelor}{37}% 
+\contentsline {subsection}{\numberline {4.1.2}Preprocesarea datelor}{39}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Extragerea caracteristicilor de intrare}{38}% 
+\contentsline {subsection}{\numberline {4.1.3}Extragerea caracteristicilor de intrare}{40}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.4}Clasificatorul sistemului SER}{40}% 
+\contentsline {subsection}{\numberline {4.1.4}Clasificatorul sistemului SER}{42}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Implementarea și utilizarea interfeței grafice}{43}% 
+\contentsline {section}{\numberline {4.2}Implementarea și utilizarea interfeței grafice}{45}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}Interfața grafică în modul de antrenare}{43}% 
+\contentsline {subsection}{\numberline {4.2.1}Interfața grafică în modul de antrenare}{45}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Interfața grafică în modul de infererența}{46}% 
+\contentsline {subsection}{\numberline {4.2.2}Interfața grafică în modul de infererența}{48}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Rezultate si experimente}{49}% 
+\contentsline {chapter}{\numberline {5}Rezultate si experimente}{51}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Concluzii}{51}% 
+\contentsline {chapter}{\numberline {6}Concluzii}{55}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliografie}{52}% 
+\contentsline {chapter}{Bibliografie}{56}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Referinte}{53}% 
+\contentsline {chapter}{Referinte}{57}% 
