@@ -73,7 +73,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Descrierea implementării}{37}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Prezenatrea implementării sistemului de recunoaștere a emoțiilor}{37}% 
+\contentsline {section}{\numberline {4.1}Prezentarea implementării sistemului de recunoaștere a emoțiilor}{37}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.1}Bazele de date folosite}{37}% 
 \defcounter {refsection}{0}\relax 

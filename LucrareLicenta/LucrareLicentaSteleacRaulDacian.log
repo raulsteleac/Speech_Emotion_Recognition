@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  24 JUN 2020 18:42
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  24 JUN 2020 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1231,8 +1231,8 @@ Overfull \hbox (63.37556pt too wide) in paragraph at lines 704--707
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 (Font)              scaled to size 10.95pt on input line 707.
 
-Overfull \hbox (10.86603pt too wide) in paragraph at lines 711--711
-|[]\T1/qhv/b/n/16 Prezenatrea im-ple-ment rii sis-te-mu-lui de recunoa[]tere a 
+Overfull \hbox (10.93802pt too wide) in paragraph at lines 711--711
+|[]\T1/qhv/b/n/16 Prezentarea im-ple-ment rii sis-te-mu-lui de recunoa[]tere a 
 emo[]iilor| 
  []
 
