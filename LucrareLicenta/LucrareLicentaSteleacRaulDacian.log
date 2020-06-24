@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  24 JUN 2020 12:23
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  24 JUN 2020 18:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1066,7 +1066,12 @@ File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 8.8pt on input line 8.
- [3])
+ [3]
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <8.8> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 98.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.8pt on input line 98.
+)
 \tf@toc=\write4
 \openout4 = `LucrareLicentaSteleacRaulDacian.toc'.
 
@@ -1188,7 +1193,7 @@ File: melspectogram.png Graphic file (type bmp)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [26] [27]
-Overfull \hbox (0.76826pt too wide) in paragraph at lines 577--577
+Overfull \hbox (0.76826pt too wide) in paragraph at lines 575--575
 []\T1/ntxtlf/m/n/12 Bazat  pe aceast  for-mul  ma-te-ma-tic , re[]ele ne-u-ro-n
 ale convolu[]ionale au reu[]it s  dep []easc 
  []
@@ -1198,71 +1203,63 @@ File: cnns.png Graphic file (type bmp)
 [28]
 File: maxpool.png Graphic file (type bmp)
 <maxpool.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[29]
+ [29]
 File: unfolding.png Graphic file (type bmp)
 <unfolding.png>
  [30]
 File: rnn_layer.png Graphic file (type bmp)
 <rnn_layer.png>
 
-Overfull \hbox (6.19681pt too wide) in paragraph at lines 626--628
+Overfull \hbox (6.19681pt too wide) in paragraph at lines 622--624
  [][] 
  []
 
 [31]
 File: lstm.png Graphic file (type bmp)
 <lstm.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[32] [33] [34] [35] [36
+ [32] [33] [34] [35] [36
 
 ]
 Capitolul 4.
 File: uml.png Graphic file (type bmp)
 <uml.png>
 
-Overfull \hbox (63.37556pt too wide) in paragraph at lines 707--710
+Overfull \hbox (63.37556pt too wide) in paragraph at lines 704--707
  []|  [] 
  []
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.95pt on input line 710.
+(Font)              scaled to size 10.95pt on input line 707.
 
-Overfull \hbox (14.49489pt too wide) in paragraph at lines 714--714
-|[]\T1/qhv/b/n/16 Modului de im-ple-men-tare a sis-te-mu-lui de recunoa[]tere a
- emo[]iilor| 
+Overfull \hbox (10.86603pt too wide) in paragraph at lines 711--711
+|[]\T1/qhv/b/n/16 Prezenatrea im-ple-ment rii sis-te-mu-lui de recunoa[]tere a 
+emo[]iilor| 
  []
 
 [37] [38] [39] (/app/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
-LaTeX Font Info:    Try loading font information for T1+ntxtt on input line 758
+LaTeX Font Info:    Try loading font information for T1+ntxtt on input line 755
 .
 
 (/app/texmf-dist/tex/latex/newtx/t1ntxtt.fd
 File: t1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 758.
+(Font)              scaled to size 12.0pt on input line 755.
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 10.0pt on input line 758.
+(Font)              scaled to size 10.0pt on input line 755.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 759.
+(Font)              scaled to size 10.0pt on input line 756.
  [40]
-Overfull \hbox (3.05794pt too wide) in paragraph at lines 792--793
+Overfull \hbox (3.05794pt too wide) in paragraph at lines 789--790
 \T1/ntxtlf/m/n/12 di-men-siu-nea \T1/ntxtlf/m/it/12 4x4x32\T1/ntxtlf/m/n/12 . L
 a fi-nal, re-zul-ta-tul care ajunge s  aib  di-men-siu-nea \T1/ntxtlf/m/it/12 (
 4 * nr_segmente)x16x16\T1/ntxtlf/m/n/12 ,
  []
 
 [41]
-Overfull \hbox (1.32005pt too wide) in paragraph at lines 834--834
+Overfull \hbox (1.32005pt too wide) in paragraph at lines 831--831
 []\T1/ntxtlf/m/n/12 În Fig.2.2[] se poate ob-serva cum mo-du-lul cla-si-fi-ca-t
 or este alc tuit din dou  ce-lule bidirec[]ionale
  []
@@ -1271,7 +1268,7 @@ or este alc tuit din dou  ce-lule bidirec[]ionale
 File: gui_training4.png Graphic file (type bmp)
 <gui_training4.png>
 
-Overfull \hbox (1.00012pt too wide) in paragraph at lines 938--940
+Overfull \hbox (1.00012pt too wide) in paragraph at lines 935--937
 []  [] 
  []
 
@@ -1284,7 +1281,7 @@ File: gui_train_logs.png Graphic file (type bmp)
 File: gui_train_tabel.png Graphic file (type bmp)
 <gui_train_tabel.png>
 
-Overfull \hbox (51.9751pt too wide) in paragraph at lines 1000--1012
+Overfull \hbox (51.9751pt too wide) in paragraph at lines 997--1009
 []  $[]$   $[]$ 
  []
 
@@ -1300,7 +1297,7 @@ Capitolul 5.
 ]
 Capitolul 6.
 
-Overfull \hbox (15.29906pt too wide) in paragraph at lines 1127--1127
+Overfull \hbox (15.29906pt too wide) in paragraph at lines 1123--1123
 []\T1/ntxtlf/m/n/12 Sistemul SER pro-pus în-cearc  s  de-ter-mine o ar-hi-tec-t
 ur  efi-cient  pen-tru re-zol-va-rea recunoa[]terii
  []
@@ -1308,20 +1305,20 @@ ur  efi-cient  pen-tru re-zol-va-rea recunoa[]terii
 [55]
 
 Package biblatex Warning: Option 'resetnumbers' requires 'defernumbers=true'.
-(biblatex)                Ignoring 'resetnumbers=true' on input line 1143.
+(biblatex)                Ignoring 'resetnumbers=true' on input line 1139.
 
 [56]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
-(Font)              scaled to size 12.0pt on input line 1143.
+(Font)              scaled to size 12.0pt on input line 1139.
 
-Overfull \hbox (11.46526pt too wide) in paragraph at lines 1143--1143
+Overfull \hbox (11.46526pt too wide) in paragraph at lines 1139--1139
 []\T1/ntxtlf/m/n/12 ... \T1/ntxtlf/m/it/12 Trans-for-mata Fo-u-rier\T1/ntxtlf/m
 /n/12 . 2018. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/12 https
  : / / ro . wikipedia . org / wiki / Transformata _
  []
 
 
-Overfull \hbox (16.91814pt too wide) in paragraph at lines 1143--1143
+Overfull \hbox (16.91814pt too wide) in paragraph at lines 1139--1139
 \T1/ntxtlf/m/it/12 Cep-s-tral Co-e-ffi-cients (MFCCs) and What's In-Between\T1/
 ntxtlf/m/n/12 . 2016. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/
 12 https : / / haythamfayek .
@@ -1329,26 +1326,46 @@ ntxtlf/m/n/12 . 2016. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/
 
 
 Package biblatex Warning: Option 'resetnumbers' requires 'defernumbers=true'.
-(biblatex)                Ignoring 'resetnumbers=true' on input line 1147.
+(biblatex)                Ignoring 'resetnumbers=true' on input line 1143.
 
+LaTeX Font Info:    Calculating math sizes for size <20> on input line 1143.
+LaTeX Font Info:    Font shape `T1/qhv/bx/n' in size <14.59991> not available
+(Font)              Font shape `T1/qhv/b/n' tried instead on input line 1143.
+LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
+(Font)              scaled to size 13.13983pt on input line 1143.
 [57]
 Missing character: There is no ‐ in font ntx-Regular-tlf-t1!
 Missing character: There is no – in font ntx-Regular-tlf-t1!
  [58] [59]
 Missing character: There is no ’ in font ntx-Regular-tlf-t1!
- [60] [61] (./LucrareLicentaSteleacRaulDacian.aux)
+ [60] [61]
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf, page 1>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf, page 1>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf, page 1>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf, page 1>
+File: decl.pdf Graphic file (type pdf)
+<use decl.pdf, page 1>
+ [62] (./LucrareLicentaSteleacRaulDacian.aux)
 Package logreq Info: Writing requests to 'LucrareLicentaSteleacRaulDacian.run.x
 ml'.
 \openout1 = `LucrareLicentaSteleacRaulDacian.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17524 strings out of 492922
- 282521 string characters out of 6134661
- 900890 words of memory out of 5000000
- 21249 multiletter control sequences out of 15000+600000
- 134968 words of font info for 136 fonts, out of 8000000 for 9000
+ 17559 strings out of 492922
+ 283182 string characters out of 6134661
+ 900914 words of memory out of 5000000
+ 21283 multiletter control sequences out of 15000+600000
+ 158408 words of font info for 162 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  53i,20n,92p,1644b,4803s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on LucrareLicentaSteleacRaulDacian.pdf (61 pages).
+Output written on LucrareLicentaSteleacRaulDacian.pdf (62 pages).
