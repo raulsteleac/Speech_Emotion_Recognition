@@ -1446,40 +1446,24 @@
     \field{year}{2001}
   \endentry
 
-  \entry{nnspic}{article}{}
-    \name{author}{3}{}{%
-      {{hash=BF}{%
-         family={Bre},
-         familyi={B\bibinitperiod},
-         given={Facundo},
-         giveni={F\bibinitperiod},
-      }}%
-      {{hash=GJ}{%
-         family={Gimenez},
-         familyi={G\bibinitperiod},
-         given={Juan},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=FV}{%
-         family={Fachinotti},
-         familyi={F\bibinitperiod},
-         given={Víctor},
-         giveni={V\bibinitperiod},
+  \entry{samuel}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SAL}{%
+         family={Samuel},
+         familyi={S\bibinitperiod},
+         given={Arthur\bibnamedelima L.},
+         giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod},
       }}%
     }
-    \strng{namehash}{BFGJFV1}
-    \strng{fullhash}{BFGJFV1}
+    \strng{namehash}{SAL1}
+    \strng{fullhash}{SAL1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1016/j.enbuild.2017.11.045
-    \endverb
-    \field{title}{Prediction of wind pressure coefficients on building surfaces
-  using Artificial Neural Networks}
-    \field{volume}{158}
-    \field{journaltitle}{Energy and Buildings}
-    \field{month}{11}
-    \field{year}{2017}
+    \field{pages}{210\bibrangedash 229}
+    \field{title}{Some Studies in Machine Learning Using the Game of Checkers}
+    \field{volume}{3}
+    \field{journaltitle}{IBM J. Res. Dev.}
+    \field{year}{1959}
   \endentry
 
   \entry{stft6}{manual}{}

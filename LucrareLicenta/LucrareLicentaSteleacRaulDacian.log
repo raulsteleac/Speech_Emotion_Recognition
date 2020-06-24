@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  23 JUN 2020 20:21
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.3)  24 JUN 2020 12:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1133,19 +1133,19 @@ Capitolul 2.
 File: mushroom_encoder.png Graphic file (type bmp)
 <mushroom_encoder.png>
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 252.
+(Font)              scaled to size 10.95pt on input line 253.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 252.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 253.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 252.
+(Font)              scaled to size 10.95pt on input line 253.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 252.
+(Font)              scaled to size 8.0pt on input line 253.
  [13] [14] [15]
 File: ../Diagrams/Sistem_Diagram.jpeg Graphic file (type bmp)
 <../Diagrams/Sistem_Diagram.jpeg>
 
-Overfull \hbox (18.92456pt too wide) in paragraph at lines 311--314
+Overfull \hbox (18.92456pt too wide) in paragraph at lines 312--315
 |  [] 
  []
 
@@ -1160,7 +1160,7 @@ File: nns.png Graphic file (type bmp)
 File: sigmoid.png Graphic file (type bmp)
 <sigmoid.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--369
+Underfull \hbox (badness 10000) in paragraph at lines 364--371
 
  []
 
@@ -1184,51 +1184,57 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: melspectogram.png Graphic file (type bmp)
 <melspectogram.png>
 
-Overfull \hbox (21.85014pt too wide) in paragraph at lines 543--544
- [][] 
- []
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [26] [27]
-Overfull \hbox (0.76826pt too wide) in paragraph at lines 574--574
+Overfull \hbox (0.76826pt too wide) in paragraph at lines 577--577
 []\T1/ntxtlf/m/n/12 Bazat  pe aceast  for-mul  ma-te-ma-tic , re[]ele ne-u-ro-n
 ale convolu[]ionale au reu[]it s  dep []easc 
  []
 
 File: cnns.png Graphic file (type bmp)
 <cnns.png>
+[28]
+File: maxpool.png Graphic file (type bmp)
+<maxpool.png>
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[28]
-File: maxpool.jpeg Graphic file (type bmp)
-<maxpool.jpeg>
- [29]
+[29]
 File: unfolding.png Graphic file (type bmp)
 <unfolding.png>
  [30]
 File: rnn_layer.png Graphic file (type bmp)
 <rnn_layer.png>
- [31]
+
+Overfull \hbox (6.19681pt too wide) in paragraph at lines 626--628
+ [][] 
+ []
+
+[31]
 File: lstm.png Graphic file (type bmp)
 <lstm.png>
- [32] [33] [34] [35] [36
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[32] [33] [34] [35] [36
 
 ]
 Capitolul 4.
 File: uml.png Graphic file (type bmp)
 <uml.png>
 
-Overfull \hbox (63.37556pt too wide) in paragraph at lines 703--706
+Overfull \hbox (63.37556pt too wide) in paragraph at lines 707--710
  []|  [] 
  []
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.95pt on input line 706.
+(Font)              scaled to size 10.95pt on input line 710.
 
-Overfull \hbox (14.49489pt too wide) in paragraph at lines 710--710
+Overfull \hbox (14.49489pt too wide) in paragraph at lines 714--714
 |[]\T1/qhv/b/n/16 Modului de im-ple-men-tare a sis-te-mu-lui de recunoa[]tere a
  emo[]iilor| 
  []
@@ -1236,27 +1242,27 @@ Overfull \hbox (14.49489pt too wide) in paragraph at lines 710--710
 [37] [38] [39] (/app/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
-LaTeX Font Info:    Try loading font information for T1+ntxtt on input line 754
+LaTeX Font Info:    Try loading font information for T1+ntxtt on input line 758
 .
 
 (/app/texmf-dist/tex/latex/newtx/t1ntxtt.fd
 File: t1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 754.
+(Font)              scaled to size 12.0pt on input line 758.
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 10.0pt on input line 754.
+(Font)              scaled to size 10.0pt on input line 758.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 755.
+(Font)              scaled to size 10.0pt on input line 759.
  [40]
-Overfull \hbox (3.05794pt too wide) in paragraph at lines 788--789
+Overfull \hbox (3.05794pt too wide) in paragraph at lines 792--793
 \T1/ntxtlf/m/n/12 di-men-siu-nea \T1/ntxtlf/m/it/12 4x4x32\T1/ntxtlf/m/n/12 . L
 a fi-nal, re-zul-ta-tul care ajunge s  aib  di-men-siu-nea \T1/ntxtlf/m/it/12 (
 4 * nr_segmente)x16x16\T1/ntxtlf/m/n/12 ,
  []
 
 [41]
-Overfull \hbox (1.32005pt too wide) in paragraph at lines 830--830
+Overfull \hbox (1.32005pt too wide) in paragraph at lines 834--834
 []\T1/ntxtlf/m/n/12 În Fig.2.2[] se poate ob-serva cum mo-du-lul cla-si-fi-ca-t
 or este alc tuit din dou  ce-lule bidirec[]ionale
  []
@@ -1265,7 +1271,7 @@ or este alc tuit din dou  ce-lule bidirec[]ionale
 File: gui_training4.png Graphic file (type bmp)
 <gui_training4.png>
 
-Overfull \hbox (12.29616pt too wide) in paragraph at lines 934--936
+Overfull \hbox (1.00012pt too wide) in paragraph at lines 938--940
 []  [] 
  []
 
@@ -1278,7 +1284,7 @@ File: gui_train_logs.png Graphic file (type bmp)
 File: gui_train_tabel.png Graphic file (type bmp)
 <gui_train_tabel.png>
 
-Overfull \hbox (51.9751pt too wide) in paragraph at lines 996--1008
+Overfull \hbox (51.9751pt too wide) in paragraph at lines 1000--1012
 []  $[]$   $[]$ 
  []
 
@@ -1294,7 +1300,7 @@ Capitolul 5.
 ]
 Capitolul 6.
 
-Overfull \hbox (15.29906pt too wide) in paragraph at lines 1123--1123
+Overfull \hbox (15.29906pt too wide) in paragraph at lines 1127--1127
 []\T1/ntxtlf/m/n/12 Sistemul SER pro-pus în-cearc  s  de-ter-mine o ar-hi-tec-t
 ur  efi-cient  pen-tru re-zol-va-rea recunoa[]terii
  []
@@ -1302,20 +1308,20 @@ ur  efi-cient  pen-tru re-zol-va-rea recunoa[]terii
 [55]
 
 Package biblatex Warning: Option 'resetnumbers' requires 'defernumbers=true'.
-(biblatex)                Ignoring 'resetnumbers=true' on input line 1139.
+(biblatex)                Ignoring 'resetnumbers=true' on input line 1143.
 
 [56]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
-(Font)              scaled to size 12.0pt on input line 1139.
+(Font)              scaled to size 12.0pt on input line 1143.
 
-Overfull \hbox (11.46526pt too wide) in paragraph at lines 1139--1139
+Overfull \hbox (11.46526pt too wide) in paragraph at lines 1143--1143
 []\T1/ntxtlf/m/n/12 ... \T1/ntxtlf/m/it/12 Trans-for-mata Fo-u-rier\T1/ntxtlf/m
 /n/12 . 2018. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/12 https
  : / / ro . wikipedia . org / wiki / Transformata _
  []
 
 
-Overfull \hbox (16.91814pt too wide) in paragraph at lines 1139--1139
+Overfull \hbox (16.91814pt too wide) in paragraph at lines 1143--1143
 \T1/ntxtlf/m/it/12 Cep-s-tral Co-e-ffi-cients (MFCCs) and What's In-Between\T1/
 ntxtlf/m/n/12 . 2016. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/
 12 https : / / haythamfayek .
@@ -1323,7 +1329,7 @@ ntxtlf/m/n/12 . 2016. \T1/ntxtlf/m/sc/12 url\T1/ntxtlf/m/n/12 : $\T1/ntxtt/m/n/
 
 
 Package biblatex Warning: Option 'resetnumbers' requires 'defernumbers=true'.
-(biblatex)                Ignoring 'resetnumbers=true' on input line 1143.
+(biblatex)                Ignoring 'resetnumbers=true' on input line 1147.
 
 [57]
 Missing character: There is no ‐ in font ntx-Regular-tlf-t1!
@@ -1338,8 +1344,8 @@ ml'.
  ) 
 Here is how much of TeX's memory you used:
  17524 strings out of 492922
- 282524 string characters out of 6134661
- 901198 words of memory out of 5000000
+ 282521 string characters out of 6134661
+ 900890 words of memory out of 5000000
  21249 multiletter control sequences out of 15000+600000
  134968 words of font info for 136 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

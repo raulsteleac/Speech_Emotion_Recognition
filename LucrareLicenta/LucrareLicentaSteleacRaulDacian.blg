@@ -16,7 +16,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated field_info (elt_size=4) to 14730 items from 5000.
+Reallocated field_info (elt_size=4) to 14313 items from 5000.
 Database file #1: LucrareLicentaSteleacRaulDacian-blx.bib
 Database file #2: Bibliography.bib
 Repeated entry---line 52 of file Bibliography.bib
@@ -50,43 +50,43 @@ Name 3 in "Costantini, Giovanni and Iadarola, Iacopo and Paoloni, and Todisco, M
 while executing---line 2774 of file biblatex.bst
 You've used 82 entries,
             6304 wiz_defined-function locations,
-            1608 strings with 26318 characters,
-and the built_in function-call counts, 517032 in all, are:
-= -- 37625
-> -- 8723
-< -- 1793
-+ -- 14312
-- -- 3424
-* -- 36318
-:= -- 59775
+            1608 strings with 26220 characters,
+and the built_in function-call counts, 515066 in all, are:
+= -- 37491
+> -- 8655
+< -- 1781
++ -- 14195
+- -- 3385
+* -- 36164
+:= -- 59462
 add.period$ -- 0
 call.type$ -- 82
 change.case$ -- 673
-chr.to.int$ -- 322
+chr.to.int$ -- 316
 cite$ -- 162
-duplicate$ -- 58191
-empty$ -- 46419
-format.name$ -- 5870
-if$ -- 101696
+duplicate$ -- 57901
+empty$ -- 46338
+format.name$ -- 5832
+if$ -- 101373
 int.to.chr$ -- 0
 int.to.str$ -- 182
 missing$ -- 0
-newline$ -- 2875
+newline$ -- 2860
 num.names$ -- 3116
-pop$ -- 29661
+pop$ -- 29626
 preamble$ -- 1
-purify$ -- 1330
+purify$ -- 1324
 quote$ -- 0
-skip$ -- 12353
+skip$ -- 12320
 stack$ -- 0
-substring$ -- 64309
-swap$ -- 11550
-text.length$ -- 1853
+substring$ -- 64138
+swap$ -- 11506
+text.length$ -- 1841
 text.prefix$ -- 0
 top$ -- 1
 type$ -- 2775
 warning$ -- 0
-while$ -- 8847
+while$ -- 8787
 width$ -- 0
-write$ -- 2794
+write$ -- 2779
 (There were 11 error messages)

@@ -53,9 +53,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}Caracteristicile Hand-crafted}{24}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Coeficientii Mel cepstrali}{24}% 
+\contentsline {subsection}{\numberline {3.3.1}Coeficienții Mel cepstrali}{25}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Deltas si delta-deltas}{25}% 
+\contentsline {subsection}{\numberline {3.3.2}Deltas si delta-deltas}{26}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.4}Extragerea caracteristicilor End-to-end}{26}% 
 \defcounter {refsection}{0}\relax 
@@ -67,7 +67,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}Rețele neuronale recurente}{30}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Mecanismul de atenție}{33}% 
+\contentsline {section}{\numberline {3.6}Mecanismul de atenție}{34}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.7}Cicluri OODA}{34}% 
 \defcounter {refsection}{0}\relax 
