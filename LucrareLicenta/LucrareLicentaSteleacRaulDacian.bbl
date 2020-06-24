@@ -300,6 +300,188 @@
     \field{year}{2012}
   \endentry
 
+  \entry{standord_cnn}{manual}{}
+    \name{author}{4}{}{%
+      {{hash=LFF}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Fei-Fei},
+         giveni={F\bibinithyphendelim F\bibinitperiod},
+      }}%
+      {{hash=KR}{%
+         family={Krishna},
+         familyi={K\bibinitperiod},
+         given={Ranjay},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=XD}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Danfei},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Byun},
+         familyi={B\bibinitperiod},
+         given={Amelie},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LFF+1}
+    \strng{fullhash}{LFFKRXDBA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{CS231n: Convolutional Neural Networks for Visual Recognition}
+    \verb{url}
+    \verb https://cs231n.github.io/convolutional-networks/
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{dpb}{book}{}
+    \name{author}{3}{}{%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=BY}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={Yoshua},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Courville},
+         familyi={C\bibinitperiod},
+         given={Aaron},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{GIBYCA1}
+    \strng{fullhash}{GIBYCA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{\url{http://www.deeplearningbook.org}}
+    \field{title}{Deep Learning}
+    \field{year}{2016}
+  \endentry
+
+  \entry{compar1}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KL}{%
+         family={Kerkeni},
+         familyi={K\bibinitperiod},
+         given={Leila},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Serrestou},
+         familyi={S\bibinitperiod},
+         given={Youssef},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mbarki},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RK}{%
+         family={Raoof},
+         familyi={R\bibinitperiod},
+         given={Kosai},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mahjoub},
+         familyi={M\bibinitperiod},
+         given={Mohamed},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KL+1}
+    \strng{fullhash}{KLSYMMRKMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.5220/0006611601750182
+    \endverb
+    \field{pages}{175\bibrangedash 182}
+    \field{title}{Speech Emotion Recognition: Methods and Cases Study}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{compar2}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=FR}{%
+         family={Fonnegra},
+         familyi={F\bibinitperiod},
+         given={Rubén},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=DG}{%
+         family={Díaz},
+         familyi={D\bibinitperiod},
+         given={Gloria},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FRDG1}
+    \strng{fullhash}{FRDG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-319-76270-8_59
+    \endverb
+    \field{isbn}{978-3-319-76269-2}
+    \field{pages}{882\bibrangedash 892}
+    \field{title}{Speech Emotion Recognition Based on a Recurrent Neural
+  Network Classification Model}
+    \field{month}{01}
+    \field{year}{2018}
+  \endentry
+
+  \entry{compar3}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=LW}{%
+         family={Lim},
+         familyi={L\bibinitperiod},
+         given={Wootaek},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=JD}{%
+         family={Jang},
+         familyi={J\bibinitperiod},
+         given={Daeyoung},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LT}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Taejin},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LWJDLT1}
+    \strng{fullhash}{LWJDLT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/APSIPA.2016.7820699
+    \endverb
+    \field{pages}{1\bibrangedash 4}
+    \field{title}{Speech emotion recognition using convolutional and Recurrent
+  Neural Networks}
+    \field{month}{12}
+    \field{year}{2016}
+  \endentry
+
   \entry{blanton}{article}{}
     \name{author}{1}{}{%
       {{hash=BS}{%
@@ -1740,77 +1922,6 @@
     \field{year}{2019}
   \endentry
 
-  \entry{standord_cnn}{manual}{}
-    \name{author}{4}{}{%
-      {{hash=LFF}{%
-         family={Li},
-         familyi={L\bibinitperiod},
-         given={Fei-Fei},
-         giveni={F\bibinithyphendelim F\bibinitperiod},
-      }}%
-      {{hash=KR}{%
-         family={Krishna},
-         familyi={K\bibinitperiod},
-         given={Ranjay},
-         giveni={R\bibinitperiod},
-      }}%
-      {{hash=XD}{%
-         family={Xu},
-         familyi={X\bibinitperiod},
-         given={Danfei},
-         giveni={D\bibinitperiod},
-      }}%
-      {{hash=BA}{%
-         family={Byun},
-         familyi={B\bibinitperiod},
-         given={Amelie},
-         giveni={A\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{LFF+1}
-    \strng{fullhash}{LFFKRXDBA1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{title}{CS231n: Convolutional Neural Networks for Visual Recognition}
-    \verb{url}
-    \verb https://cs231n.github.io/convolutional-networks/
-    \endverb
-    \field{year}{2020}
-  \endentry
-
-  \entry{dpb}{book}{}
-    \name{author}{3}{}{%
-      {{hash=GI}{%
-         family={Goodfellow},
-         familyi={G\bibinitperiod},
-         given={Ian},
-         giveni={I\bibinitperiod},
-      }}%
-      {{hash=BY}{%
-         family={Bengio},
-         familyi={B\bibinitperiod},
-         given={Yoshua},
-         giveni={Y\bibinitperiod},
-      }}%
-      {{hash=CA}{%
-         family={Courville},
-         familyi={C\bibinitperiod},
-         given={Aaron},
-         giveni={A\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {MIT Press}%
-    }
-    \strng{namehash}{GIBYCA1}
-    \strng{fullhash}{GIBYCA1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{note}{\url{http://www.deeplearningbook.org}}
-    \field{title}{Deep Learning}
-    \field{year}{2016}
-  \endentry
-
   \entry{hands}{book}{}
     \name{author}{1}{}{%
       {{hash=GA}{%
@@ -2443,117 +2554,6 @@
     \field{journaltitle}{International Conference on Learning Representations}
     \field{month}{12}
     \field{year}{2014}
-  \endentry
-
-  \entry{compar1}{inproceedings}{}
-    \name{author}{5}{}{%
-      {{hash=KL}{%
-         family={Kerkeni},
-         familyi={K\bibinitperiod},
-         given={Leila},
-         giveni={L\bibinitperiod},
-      }}%
-      {{hash=SY}{%
-         family={Serrestou},
-         familyi={S\bibinitperiod},
-         given={Youssef},
-         giveni={Y\bibinitperiod},
-      }}%
-      {{hash=MM}{%
-         family={Mbarki},
-         familyi={M\bibinitperiod},
-         given={Mohamed},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=RK}{%
-         family={Raoof},
-         familyi={R\bibinitperiod},
-         given={Kosai},
-         giveni={K\bibinitperiod},
-      }}%
-      {{hash=MM}{%
-         family={Mahjoub},
-         familyi={M\bibinitperiod},
-         given={Mohamed},
-         giveni={M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{KL+1}
-    \strng{fullhash}{KLSYMMRKMM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.5220/0006611601750182
-    \endverb
-    \field{pages}{175\bibrangedash 182}
-    \field{title}{Speech Emotion Recognition: Methods and Cases Study}
-    \field{month}{01}
-    \field{year}{2018}
-  \endentry
-
-  \entry{compar2}{inbook}{}
-    \name{author}{2}{}{%
-      {{hash=FR}{%
-         family={Fonnegra},
-         familyi={F\bibinitperiod},
-         given={Rubén},
-         giveni={R\bibinitperiod},
-      }}%
-      {{hash=DG}{%
-         family={Díaz},
-         familyi={D\bibinitperiod},
-         given={Gloria},
-         giveni={G\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{FRDG1}
-    \strng{fullhash}{FRDG1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1007/978-3-319-76270-8_59
-    \endverb
-    \field{isbn}{978-3-319-76269-2}
-    \field{pages}{882\bibrangedash 892}
-    \field{title}{Speech Emotion Recognition Based on a Recurrent Neural
-  Network Classification Model}
-    \field{month}{01}
-    \field{year}{2018}
-  \endentry
-
-  \entry{compar3}{inproceedings}{}
-    \name{author}{3}{}{%
-      {{hash=LW}{%
-         family={Lim},
-         familyi={L\bibinitperiod},
-         given={Wootaek},
-         giveni={W\bibinitperiod},
-      }}%
-      {{hash=JD}{%
-         family={Jang},
-         familyi={J\bibinitperiod},
-         given={Daeyoung},
-         giveni={D\bibinitperiod},
-      }}%
-      {{hash=LT}{%
-         family={Lee},
-         familyi={L\bibinitperiod},
-         given={Taejin},
-         giveni={T\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{LWJDLT1}
-    \strng{fullhash}{LWJDLT1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1109/APSIPA.2016.7820699
-    \endverb
-    \field{pages}{1\bibrangedash 4}
-    \field{title}{Speech emotion recognition using convolutional and Recurrent
-  Neural Networks}
-    \field{month}{12}
-    \field{year}{2016}
   \endentry
 
   \entry{imbun1}{article}{}
