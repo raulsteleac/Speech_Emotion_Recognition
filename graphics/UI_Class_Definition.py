@@ -1,133 +1,29 @@
-# -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'SER_GUI.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
 from pydub.playback import play
 import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
-from model import main, inference, online, init_inference_model, close_inference_model, init_online_model
 from util import *
 from pyqtgraph import PlotWidget
 from recording.recorder import MicrophoneRecorder
+from graphics.Graphical_Defines import *
 import time
 import sys
 
-COMPLETED_STYLE_ANGRY = """
-QProgressBar {
-    border: 1px solid #76797C;
-    border-radius: 5px;
-    text-align: center;
-}
-
-QProgressBar::chunk {
-    background-color: red;
-}
-"""
-
-COMPLETED_STYLE_HAPPY = """
-QProgressBar {
-    border: 1px solid #76797C;
-    border-radius: 5px;
-    text-align: center;
-}
-
-QProgressBar::chunk {
-    background-color: yellow;
-}
-"""
-
-COMPLETED_STYLE_SAD= """
-QProgressBar {
-    border: 1px solid #76797C;
-    border-radius: 5px;
-    text-align: center;
-}
-
-QProgressBar::chunk {
-    background-color: gray;
-}
-"""
-SLYDER_ENABLED = """
-QSlider::groove:horizontal {
-    border: 1px solid #565a5e;
-    height: 4px;
-    background: #565a5e;
-    margin: 0px;
-    border-radius: 2px;
-}
-
-QSlider::handle:horizontal {
-    background: #D1DBCB;
-    border: 1px solid #999999;
-    width: 10px;
-    height: 10px;
-    margin: -5px 0;
-}
-
-QSlider::add-page:qlineargradient {
-    background: #595858;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-QSlider::sub-page::qlineargradient:horizontal {
-    background:  #D1DBCB;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}"""
-SLYDER_DISABLED = """
-
-QSlider::groove:horizontal {
-    border: 1px solid #565a5e;
-    height: 4px;
-    background: #595858;
-    margin: 0px;
-    border-radius: 2px;
-}
-
-QSlider::handle:horizontal {
-    background: #595858;
-    border: 1px solid #999999;
-    width: 10px;
-    height: 10px;
-    margin: -5px 0;
-}
-
-QSlider::add-page:qlineargradient {
-    background: #595858;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-QSlider::sub-page::qlineargradient:horizontal {
-    background:  #595858;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}"""
+from model_instances.train import main
+from model_instances.inference import SER_Inference_Model
+from model_instances.online import SER_Online_Model
 
 class Ui_MainWindow(object):
     accuracy_vals = []
     recording_vals = np.zeros([960 * 10 * 10, ])
-    reg_count = 0
+    microphone_recorder = None
+    train_thread = None
+    recorder_thread = None
+    ser_inference_model = SER_Inference_Model()
+    ser_online_model = SER_Online_Model() 
+    label_7_line_nr = 0
+    play_th = None
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -269,7 +165,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
 
         self.label_17 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_17.setGeometry(QtCore.QRect(460, 243, 105, 30))
+        self.label_17.setGeometry(QtCore.QRect(460, 243, 110, 30))
         self.label_17.setObjectName("label_17")
 
         self.label_19 = QtWidgets.QLabel(self.groupBox_2)
@@ -298,10 +194,10 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
 
         self.label_11 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_11.setGeometry(QtCore.QRect(10, 100, 125, 30))
+        self.label_11.setGeometry(QtCore.QRect(10, 100, 130, 30))
         self.label_11.setObjectName("label_11")
         self.horizontalSlider = QtWidgets.QSlider(self.groupBox_2)
-        self.horizontalSlider.setGeometry(QtCore.QRect(135, 109, 430, 17))
+        self.horizontalSlider.setGeometry(QtCore.QRect(138, 109, 430, 17))
         self.horizontalSlider.setMaximum(10)
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
@@ -313,7 +209,7 @@ class Ui_MainWindow(object):
         self.label_15.setGeometry(QtCore.QRect(10, 132, 121, 25))
         self.label_15.setObjectName("label_15")
         self.horizontalSlider_2 = QtWidgets.QSlider(self.groupBox_2)
-        self.horizontalSlider_2.setGeometry(QtCore.QRect(135, 137, 430, 17))
+        self.horizontalSlider_2.setGeometry(QtCore.QRect(138, 137, 430, 17))
         self.horizontalSlider_2.setMaximum(10)
         self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_2.setObjectName("horizontalSlider_2")
@@ -326,7 +222,7 @@ class Ui_MainWindow(object):
         self.ooda_check_box.setGeometry(QtCore.QRect(15, 160, 120, 31))
         self.ooda_check_box.setObjectName("checkBoxOODA")
         self.horizontalSlider_ooda = QtWidgets.QSlider(self.groupBox_2)
-        self.horizontalSlider_ooda.setGeometry(QtCore.QRect(135, 168, 430, 17))
+        self.horizontalSlider_ooda.setGeometry(QtCore.QRect(138, 168, 430, 17))
         self.horizontalSlider_ooda.setMaximum(9)
         self.horizontalSlider_ooda.setMinimum(1)
         self.horizontalSlider_ooda.setOrientation(QtCore.Qt.Horizontal)
@@ -505,35 +401,34 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setText("Inference")
         self.lineEdit.setText("10")
         self.horizontalSlider_2.setValue(5)
-        change_label_16(self)
+        self.change_label_16()
         self.horizontalSlider.setValue(8)
-        change_label_12(self)
+        self.change_label_12()
         self.horizontalSlider_ooda.setValue(8)
-        change_label_ooda(self)
+        self.change_label_ooda()
         self.doubleSpinBox.setValue(0.0001)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        fill_file(self)
+        self.fill_file()
         self.ooda_check_box.setChecked(False)
         self.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
         self.horizontalSlider_ooda.setEnabled(False)
 
-        self.pushButton.clicked.connect(lambda: on_start_button_clicked(self))
-        self.pushButtonStop.clicked.connect(lambda: on_buttonStop_clicked(self))
-        self.pushButtonRecord.clicked.connect(lambda: on_buttonRecord_clicked(self))
-        self.pushButtonPlay.clicked.connect(lambda: play_recording(self))
-        self.pushButtonInfPlay.clicked.connect(lambda: play_recording(self, self.comboBox_2.currentText()))
-        self.pushButtonStopRecord.clicked.connect(lambda: on_buttonStopRecord_clicked(self))
-        self.lineEdit_2.returnPressed.connect(lambda: fill_file(self))
-        self.radioButton_2.toggled.connect(lambda: init_inference(self))
-        self.horizontalSlider.valueChanged.connect(lambda: change_label_12(self))
-        self.horizontalSlider_2.valueChanged.connect(lambda: change_label_16(self))
-        self.horizontalSlider_ooda.valueChanged.connect(lambda: change_label_ooda(self))
-        self.ooda_check_box.stateChanged.connect(lambda: change_horizontal_ooda(self))
+        self.pushButton.clicked.connect(lambda: self.on_start_button_clicked())
+        self.pushButtonStop.clicked.connect(lambda: self.on_buttonStop_clicked())
+        self.pushButtonRecord.clicked.connect(lambda: self.on_buttonRecord_clicked())
+        self.pushButtonPlay.clicked.connect(lambda: self.play_recording())
+        self.pushButtonInfPlay.clicked.connect(lambda: self.play_recording(self.comboBox_2.currentText()))
+        self.pushButtonStopRecord.clicked.connect(lambda: self.on_buttonStopRecord_clicked())
+        self.lineEdit_2.returnPressed.connect(lambda: self.fill_file())
+        self.radioButton_2.toggled.connect(lambda: self.init_inference())
+        self.horizontalSlider.valueChanged.connect(lambda: self.change_label_12())
+        self.horizontalSlider_2.valueChanged.connect(lambda: self.change_label_16())
+        self.horizontalSlider_ooda.valueChanged.connect(lambda: self.change_label_ooda())
+        self.ooda_check_box.stateChanged.connect(lambda: self.change_horizontal_ooda())
         self.print_accuracy_graph(0)
 
     def refresh_label_7(self):
-        global nr
-        nr = 0
+        self.label_7_line_nr = 0
         _translate = QtCore.QCoreApplication.translate
         self.label_7.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600; color:#55ff7f;\"> ...</span></p></body></html>"))
     
@@ -629,11 +524,10 @@ class Ui_MainWindow(object):
         self.graphicsViewRec.plot(self.recording_vals)
     
     def print_stats_model(self, string):
-        print_in_label_7(self, string)
+        self.print_in_label_7(string)
 
     def print_label_19(self, epoch):
             self.label_19.setText(epoch)
-
 
     def print_accuracy_matrix(self, matrix):
         for i in range(matrix.shape[0]):
@@ -661,219 +555,184 @@ class Ui_MainWindow(object):
         msg.setInformativeText(info)
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
-
-map_config = {
-    "EMO-DB": 1,
-    "SAVEE": 2,
-    "RAVDESS": 3,
-    "ENTERFACE": 4,
-    "EMOVO": 5,
-    "MAV": 6, 
-    "MELD": 7,
-    "JL": 8,
-    "INRP": 9,
-    "MULTIPLE": 10,
-}
-
-ses = 0
-ser_inference_model = 0
-files = []
-
-ses_online = 0
-ses_online_model = 0
-
-def change_label_16(app):
-    app.label_16.setText(str(float(app.horizontalSlider_2.value())/10))
-
-def change_label_12(app):
-    app.label_12.setText(str(float(app.horizontalSlider.value())/10))
-
-def change_label_ooda(app):
-    app.label_ooda.setText(str(float(app.horizontalSlider_ooda.value())/10))
-
-
-def change_horizontal_ooda(app):
-    if app.ooda_check_box.isChecked():
-        app.horizontalSlider_ooda.setStyleSheet(SLYDER_ENABLED)
-        app.horizontalSlider_ooda.setEnabled(True)
-    else:
-        app.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
-        app.horizontalSlider_ooda.setEnabled(False)
-    app.label_ooda.setEnabled(app.ooda_check_box.isChecked())
     
-
-def fill_file(app):
-    global ses, ser_inference_model, files, ses_online, ses_online_model
-    files = get_files_from_directory(app.lineEdit_2.text())
-    app.comboBox_2.clear()
-    for file in files:
-        app.comboBox_2.addItem(file)
-    if app.radioButton_2.isChecked() :  # inference
-        app.pushButton.setEnabled(True)
-        app.pushButtonInfPlay.setEnabled(True)
-        ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked(), app.lineEdit_2.text())
-        if ser_inference_model == None:
-            app.open_alert_dialog(title="Missing Inference Files Alert", text="We could no find any files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
-            app.pushButton.setEnabled(False)
-            app.pushButtonInfPlay.setEnabled(False)
-        ses_online, ses_online_model = init_online_model()
+    def on_start_button_clicked(self):
+        if self.radioButton.isChecked():  # training
+            self.pushButton.setEnabled(False)
+            self.pushButtonStop.setEnabled(True)
+            self.radioButton_2.setEnabled(False)
+            self.refresh_label_7()
+            self.refresh_graphics_view()
+            self.train_thread = Train_App(self)
+            self.train_thread.print_accuracy_signal.connect(self.print_accuracy_graph)
+            self.train_thread.print_stats.connect(self.print_stats_model)
+            self.train_thread.print_matrix.connect(self.print_accuracy_matrix)
+            self.train_thread.print_epoch.connect(self.print_label_19)
+            self.train_thread.start()
+        elif self.radioButton_2.isChecked():  # inference
+            vals = self.ser_inference_model.inference(self.comboBox_2.currentText()) * 100
+            self.progressBar.setValue(vals[0])
+            self.progressBar_2.setValue(vals[1])
+            self.progressBar_3.setValue(vals[2])
+            self.progressBar_4.setValue(vals[3])
+            self.print_in_label_7(str(list(map('{:.8f}'.format, vals))))
+        pass
     
-def init_inference(app):
-    global ses, ser_inference_model, files, ses_online, ses_online_model
-    if app.radioButton_2.isChecked():  # inference        
-        if app.radioButton_4.isChecked():
-            app.open_alert_dialog(title="Inference is not available for hand-crafted extraction", text="Hand-crafted feature extraction is used only as a baseline.", info="Please train your model using the end-to-ed extraction method in order to make inference available.")
-            app.radioButton.setChecked(True)
-            app.radioButton_2.setChecked(False)
-            return
-        if [f for f in os.listdir("model1") if not f.startswith('.')] == []:
-            app.open_alert_dialog(title="Missing model for Inference", text="There is no machine learning model to be loaded.", info="Please use the training mode to train a model before inference.")
-            app.radioButton.setChecked(True)
-            app.radioButton_2.setChecked(False)
-            return
-        app.pushButtonRecord.setEnabled(True)
-        app.pushButtonInfPlay.setEnabled(True)
-        app.progressBar.setEnabled(True)
-        app.progressBar_2.setEnabled(True)
-        app.progressBar_3.setEnabled(True)
-        app.progressBar_4.setEnabled(True)
-        app.label_2.setEnabled(True)
-        app.label_3.setEnabled(True)
-        app.label_4.setEnabled(True)
-        app.label_5.setEnabled(True)
-        app.groupBox_3.setEnabled(True)
-        app.groupBox_5.setEnabled(True)
-        app.groupBox_2.setEnabled(False)
-        app.horizontalSlider.setStyleSheet(SLYDER_DISABLED)
-        app.horizontalSlider.setEnabled(False)
-        app.horizontalSlider_2.setStyleSheet(SLYDER_DISABLED)
-        app.horizontalSlider_2.setEnabled(False)
-        app.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
-        app.horizontalSlider_ooda.setEnabled(False)
-        ses, ser_inference_model, files = init_inference_model(app.radioButton_3.isChecked(), app.lineEdit_2.text())
-        if ser_inference_model == None:
-            app.open_alert_dialog(title="Missing Inference Files Alert", text="We could no find any files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
-            app.pushButton.setEnabled(False)
-            app.pushButtonInfPlay.setEnabled(False)
-        ses_online, ses_online_model = init_online_model()
-    elif ses != 0 and app.radioButton.isChecked():
-        app.pushButton.setEnabled(True)
-        app.groupBox_2.setEnabled(True)
-        app.pushButtonRecord.setEnabled(False)
-        app.pushButtonInfPlay.setEnabled(False)
-        app.pushButtonStopRecord.setEnabled(False)
-        app.progressBar.setValue(0)
-        app.progressBar.setEnabled(False)
-        app.progressBar_2.setValue(0)
-        app.progressBar_2.setEnabled(False)
-        app.progressBar_3.setValue(0)
-        app.progressBar_3.setEnabled(False)
-        app.progressBar_4.setValue(0)
-        app.progressBar_4.setEnabled(False)
-        app.label_2.setEnabled(False)
-        app.label_3.setEnabled(False)
-        app.label_4.setEnabled(False)
-        app.label_5.setEnabled(False)
-        app.groupBox_3.setEnabled(False)
-        app.groupBox_5.setEnabled(False)
-        app.horizontalSlider.setStyleSheet(SLYDER_ENABLED)
-        app.horizontalSlider.setEnabled(True)
-        app.horizontalSlider_2.setStyleSheet(SLYDER_ENABLED)
-        app.horizontalSlider_2.setEnabled(True)
-        change_horizontal_ooda(app)
-        close_inference_model(ses)
+    def on_buttonStop_clicked(self):
+        if self.train_thread != None:
+            self.train_thread.stopFlag = True
+        pass
 
-thread_1 = 1
-def on_start_button_clicked(app):
-    global thread_1
-    if app.radioButton.isChecked():  # training
-        app.pushButton.setEnabled(False)
-        app.pushButtonStop.setEnabled(True)
-        app.radioButton_2.setEnabled(False)
-        app.refresh_label_7()
-        app.refresh_graphics_view()
-        thread_1 = Train_App(app)
-        thread_1.print_accuracy_signal.connect(app.print_accuracy_graph)
-        thread_1.print_stats.connect(app.print_stats_model)
-        thread_1.print_matrix.connect(app.print_accuracy_matrix)
-        thread_1.print_epoch.connect(app.print_label_19)
-        thread_1.start()
-    elif app.radioButton_2.isChecked():  # inference
-        global ses, ser_inference_model, files
-        vals = inference(ses, ser_inference_model, files ,app.comboBox_2.currentText()) * 100
-        app.progressBar.setValue(vals[0])
-        app.progressBar_2.setValue(vals[1])
-        app.progressBar_3.setValue(vals[2])
-        app.progressBar_4.setValue(vals[3])
-        print_in_label_7(app, str(list(map('{:.8f}'.format, vals))))
-    pass
+    def change_label_16(self):
+        self.label_16.setText(str(float(self.horizontalSlider_2.value())/10))
 
-def on_buttonStop_clicked(app):
-    if thread_1 != 1:
-        thread_1.stopFlag = True
-    pass
+    def change_label_12(self):
+        self.label_12.setText(str(float(self.horizontalSlider.value())/10))
 
-mr = None
-recorder_thread = 1
-def on_buttonRecord_clicked(app):
-      app.refresh_rec_graphics_view()
-      global mr, recorder_thread
-      mr = MicrophoneRecorder()
-      if not mr.check_device_availability():
-          return
-      recorder_thread = Record_App(app, mr)
-      recorder_thread.print_recording_signal.connect(app.print_recording_graph)
-      recorder_thread.start()
-      app.pushButtonStopRecord.setEnabled(True)
-      app.pushButton.setEnabled(False)
-      app.pushButtonInfPlay.setEnabled(False)
-      app.pushButtonPlay.setEnabled(False)
+    def change_label_ooda(self):
+        self.label_ooda.setText(str(float(self.horizontalSlider_ooda.value())/10))
 
-def on_buttonStopRecord_clicked(app):
-        import librosa
-        import pyaudio
-        global ses,  mr, ses_online, ses_online_model
-        mr.close()
-        vals = []
-        if np.array(mr.get_frames()).shape[0] > 30:
-            app.pushButtonPlay.setEnabled(True)
-            mr.save_to_wav()        
-            frames, _ = librosa.load("output.wav", 16000)    
-            vals = online(ses_online, ses_online_model, frames, 44100) * 100
+    def change_horizontal_ooda(self):
+        if self.ooda_check_box.isChecked():
+            self.horizontalSlider_ooda.setStyleSheet(SLYDER_ENABLED)
+            self.horizontalSlider_ooda.setEnabled(True)
         else:
-            app.pushButtonPlay.setEnabled(False)
-            vals = [0 for _ in range(4)]
-        app.progressBar.setValue(vals[0])
-        app.progressBar_2.setValue(vals[1])
-        app.progressBar_3.setValue(vals[2])
-        app.progressBar_4.setValue(vals[3])
-        print_in_label_7(app, str(list(map('{:.8f}'.format, vals))))
-        app.pushButton.setEnabled(True)
-        app.pushButtonRecord.setEnabled(True)
-        app.pushButtonStopRecord.setEnabled(False)
-        app.pushButtonInfPlay.setEnabled(True)
-        app.pushButtonPlay.setEnabled(True)
+            self.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
+            self.horizontalSlider_ooda.setEnabled(False)
+        self.label_ooda.setEnabled(self.ooda_check_box.isChecked())
 
-nr = 0
-def print_in_label_7(app, str):
-    _translate = QtCore.QCoreApplication.translate
-    global nr
-    nr += 1
-    if nr >= 24:
-        txt = app.label_7.text().split("<html>")
-        txt = "<html>".join(txt[1:25])
-        app.label_7.setText(_translate(
-            "MainWindow", txt + "<html><head/><body><span style=\" font-weight:600; color:#55ff7f;\">" + str + "</span></body></html>"))
-    else:
-        app.label_7.setText(_translate("MainWindow", app.label_7.text(
-        ) + "<html><head/><body><span style=\" font-weight:600; color:#55ff7f;\">" + str + "</span></body></html>"))
-import time
+    def fill_file(self):
+        self.ser_inference_model.files = get_files_from_directory(self.lineEdit_2.text())
+        self.comboBox_2.clear()
+        for file in self.ser_inference_model.files:
+            self.comboBox_2.addItem(file)
+        if self.radioButton_2.isChecked() :  # inference
+            self.pushButton.setEnabled(True)
+            self.pushButtonInfPlay.setEnabled(True)
+            self.ser_inference_model.init_model(self.lineEdit_2.text())
+            if self.ser_inference_model.model == None:
+                self.open_alert_dialog(title="Missing Inference inference_files Alert", text="We could no find any inference_files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
+                self.pushButton.setEnabled(False)
+                self.pushButtonInfPlay.setEnabled(False)
+            self.ser_online_model.init_online_model()
+        
+    def init_inference(self):
+        if self.radioButton_2.isChecked():  # inference        
+            if self.radioButton_4.isChecked():
+                self.open_alert_dialog(title="Inference is not available for hand-crafted extraction", text="Hand-crafted feature extraction is used only as a baseline.", info="Please train your model using the end-to-ed extraction method in order to make inference available.")
+                self.radioButton.setChecked(True)
+                self.radioButton_2.setChecked(False)
+                return
+            if [f for f in os.listdir("model") if not f.startswith('.')] == []:
+                self.open_alert_dialog(title="Missing model for Inference", text="There is no machine learning model to be loaded.", info="Please use the training mode to train a model before inference.")
+                self.radioButton.setChecked(True)
+                self.radioButton_2.setChecked(False)
+                return
+            self.pushButtonRecord.setEnabled(True)
+            self.pushButtonInfPlay.setEnabled(True)
+            self.progressBar.setEnabled(True)
+            self.progressBar_2.setEnabled(True)
+            self.progressBar_3.setEnabled(True)
+            self.progressBar_4.setEnabled(True)
+            self.label_2.setEnabled(True)
+            self.label_3.setEnabled(True)
+            self.label_4.setEnabled(True)
+            self.label_5.setEnabled(True)
+            self.groupBox_3.setEnabled(True)
+            self.groupBox_5.setEnabled(True)
+            self.groupBox_2.setEnabled(False)
+            self.horizontalSlider.setStyleSheet(SLYDER_DISABLED)
+            self.horizontalSlider.setEnabled(False)
+            self.horizontalSlider_2.setStyleSheet(SLYDER_DISABLED)
+            self.horizontalSlider_2.setEnabled(False)
+            self.horizontalSlider_ooda.setStyleSheet(SLYDER_DISABLED)
+            self.horizontalSlider_ooda.setEnabled(False)
+            self.ser_inference_model.init_model(self.lineEdit_2.text())
+            if self.ser_inference_model.model == None:
+                self.open_alert_dialog(title="Missing Inference inference_files Alert", text="We could no find any inference_files to classify in the stated folder.", info="You can continue the inference process by using the online model.")
+                self.pushButton.setEnabled(False)
+                self.pushButtonInfPlay.setEnabled(False)
+            self.ser_online_model.init_online_model()
+        elif self.ser_inference_model.session != None and self.radioButton.isChecked():
+            self.pushButton.setEnabled(True)
+            self.groupBox_2.setEnabled(True)
+            self.pushButtonRecord.setEnabled(False)
+            self.pushButtonInfPlay.setEnabled(False)
+            self.pushButtonStopRecord.setEnabled(False)
+            self.progressBar.setValue(0)
+            self.progressBar.setEnabled(False)
+            self.progressBar_2.setValue(0)
+            self.progressBar_2.setEnabled(False)
+            self.progressBar_3.setValue(0)
+            self.progressBar_3.setEnabled(False)
+            self.progressBar_4.setValue(0)
+            self.progressBar_4.setEnabled(False)
+            self.label_2.setEnabled(False)
+            self.label_3.setEnabled(False)
+            self.label_4.setEnabled(False)
+            self.label_5.setEnabled(False)
+            self.groupBox_3.setEnabled(False)
+            self.groupBox_5.setEnabled(False)
+            self.horizontalSlider.setStyleSheet(SLYDER_ENABLED)
+            self.horizontalSlider.setEnabled(True)
+            self.horizontalSlider_2.setStyleSheet(SLYDER_ENABLED)
+            self.horizontalSlider_2.setEnabled(True)
+            self.change_horizontal_ooda()
+            self.ser_inference_model.close_model()
 
-play_th = 1
-def play_recording(app, file="output.wav"):
-        global play_th
-        play_th = Play_App(app, file)
-        play_th.start()
+    def on_buttonRecord_clicked(self):
+        self.refresh_rec_graphics_view()
+        self.microphone_recorder = MicrophoneRecorder()
+        if not self.microphone_recorder.check_device_availability():
+            return
+        self.recorder_thread = Record_App(self, self.microphone_recorder)
+        self.recorder_thread.print_recording_signal.connect(self.print_recording_graph)
+        self.recorder_thread.start()
+        self.pushButtonStopRecord.setEnabled(True)
+        self.pushButton.setEnabled(False)
+        self.pushButtonInfPlay.setEnabled(False)
+        self.pushButtonPlay.setEnabled(False)
+
+    def on_buttonStopRecord_clicked(self):
+            import librosa
+            import pyaudio
+            self.microphone_recorder.close()
+            vals = []
+            if np.array(self.microphone_recorder.get_frames()).shape[0] > 30:
+                self.pushButtonPlay.setEnabled(True)
+                self.microphone_recorder.save_to_wav()        
+                frames, _ = librosa.load("output.wav", 16000)    
+                vals = self.ser_online_model.online(frames, 44100) * 100
+            else:
+                self.pushButtonPlay.setEnabled(False)
+                vals = [0 for _ in range(4)]
+            self.progressBar.setValue(vals[0])
+            self.progressBar_2.setValue(vals[1])
+            self.progressBar_3.setValue(vals[2])
+            self.progressBar_4.setValue(vals[3])
+            self.print_in_label_7(str(list(map('{:.8f}'.format, vals))))
+            self.pushButton.setEnabled(True)
+            self.pushButtonRecord.setEnabled(True)
+            self.pushButtonStopRecord.setEnabled(False)
+            self.pushButtonInfPlay.setEnabled(True)
+            self.pushButtonPlay.setEnabled(True)
+
+    def print_in_label_7(self, str):
+        _translate = QtCore.QCoreApplication.translate
+        self.label_7_line_nr += 1
+        if self.label_7_line_nr >= 24:
+            txt = self.label_7.text().split("<html>")
+            txt = "<html>".join(txt[1:25])
+            self.label_7.setText(_translate(
+                "MainWindow", txt + "<html><head/><body><span style=\" font-weight:600; color:#55ff7f;\">" + str + "</span></body></html>"))
+        else:
+            self.label_7.setText(_translate("MainWindow", self.label_7.text(
+            ) + "<html><head/><body><span style=\" font-weight:600; color:#55ff7f;\">" + str + "</span></body></html>"))
+        import time
+
+    def play_recording(self, file="output.wav"):
+            self.play_th = Play_App(self, file)
+            self.play_th.start()
 
 class Train_App(QtCore.QThread):
     print_accuracy_signal = QtCore.pyqtSignal(float)
@@ -896,15 +755,14 @@ class Train_App(QtCore.QThread):
 class Record_App(QtCore.QThread):
     print_recording_signal = QtCore.pyqtSignal(object)
 
-    def __init__(self, app_rnning, mr, parent=None):
+    def __init__(self, app_rnning, microphone_recorder, parent=None):
         QtCore.QThread.__init__(self, parent)
         self.app_rnning = app_rnning
-        self.mr = mr
+        self.microphone_recorder = microphone_recorder
         self.app_rnning.pushButtonRecord.setEnabled(False)
 
     def run(self):
-        self.mr.start(self)
-
+        self.microphone_recorder.start(self)
 
 class Play_App(QtCore.QThread):
     print_recording_signal = QtCore.pyqtSignal(object)

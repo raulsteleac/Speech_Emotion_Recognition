@@ -1,14 +1,8 @@
 #%%
 import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
-
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 from feature_extractors.feature_extractor import Feature_Extractor
 from feature_extractors.end_to_end_extractor import Feature_Extractor_End_to_End_Train_Test

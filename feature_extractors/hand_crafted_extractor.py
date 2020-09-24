@@ -1,12 +1,5 @@
 # %%
 import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
-
 import librosa
 import numpy as np
 import tensorflow as tf
@@ -30,7 +23,7 @@ class Feature_Extractor_Hand_Crafted_Training_Testing(Feature_Extractor_Hand_Cra
             print("------------------ Extracting audio features from files")
             files = [wav_file for wav_file in files if wav_file[self.emotion_letter_position]
                      in self.e_to_n_mapping.keys()]
-            print(files[0])
+
             self.features = np.array([self._get_audio_features(wav_file) for wav_file in tqdm(files)])
             targets = [wav_file[self.emotion_letter_position]for wav_file in files]
             self.targets = np.append(self.targets,  one_hotizize(targets, self.e_to_n_mapping, self.emotion_number))
@@ -81,14 +74,3 @@ class Feature_Extractor_Hand_Crafted_Inference(Feature_Extractor_Hand_Crafted):
             print(self.features[0].shape)
             print("------------------------------------------------------------------------")
             return self.features, self.files
-
-
-# #%%
-# def main():
-#       session = tf.Session()
-#       dp = Feature_Extractor_Hand_Crafted_Training_Testing(select_config(1).dir_name,select_config(1).data_set_name, None)
-#       X, y, shape = dp.get_featurs_and_targets(session)
-#       print(X[0].shape)
-
-# if __name__ == "__main__":
-#     main()

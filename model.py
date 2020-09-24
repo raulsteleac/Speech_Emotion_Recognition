@@ -1,22 +1,9 @@
 #%%
 import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
-
 
 import numpy as np
-import tensorflow as tf
-
 from feature_extractors.hand_crafted_data_producers import Data_Producer_Hand_Crafted_Train_Test
-from feature_extractors.hand_crafted_data_producers import Data_Producer_Hand_Crafted_Inference
 from feature_extractors.end_to_end_data_producers import Data_Producer_End_to_End_Train_Test
-from feature_extractors.end_to_end_data_producers import Data_Producer_End_to_End_Inference
-from feature_extractors.online_inference_extractor import Online_Data_Producer_End_to_End_Inference
-from feature_extractors.online_inference_extractor import Online_Data_Producer_Hand_Crafted_Inference
 from util import *
 from PyQt5 import QtCore
 
@@ -137,9 +124,7 @@ class Speech_Emotion_Recognizer(object):
                   initial_zero_state_bw = multi_cell_bw.zero_state(1, tf.float32)
                   inputs = tf.expand_dims(inputs, axis=0)
                   outputs, _ = tf.nn.bidirectional_dynamic_rnn(multi_cell_fw, multi_cell_bw, inputs, initial_state_fw=initial_zero_state_fw, initial_state_bw=initial_zero_state_bw)
-                  # outputs, _ = tf.nn.dynamic_rnn(multi_cell_fw, inputs, initial_state=initial_zero_state_fw)
             return tf.concat(outputs, 2)[0]
-            # return outputs[0]
 
       def create_attention_layer(self, frame_predictions, weigths_dim):
             """ CREATES THE ATTENTION LAYER IN ORDER TO OBTAIN A WEIGHTED POOL LAYER BASED ON THE
@@ -155,7 +140,6 @@ class Speech_Emotion_Recognizer(object):
             
             alpha = tf.matmul(frame_predictions, W) + b
             alpha = tf.nn.softmax(alpha, axis=0)
-            # return tf.expand_dims(tf.reduce_sum(tf.multiply(frame_predictions, alpha[: tf.newaxis]), axis=0), axis=0)
             return tf.multiply(frame_predictions, alpha[: tf.newaxis])
 
       @property
@@ -203,7 +187,7 @@ class Speech_Emotion_Recognizer(object):
                   self.examples_dict.pop(key) 
             self.examples_dict = {k: v for k, v in sorted(self.examples_dict.items(), key=lambda item: item[0])}
 
-      def run_model(self, session, writer, merged_summaries, files = None, file_to_show=None, thread = None, feed_dict=None):
+      def run_model(self, session, writer, merged_summaries, files = None, file_to_show=None, thread = None, feed_dict=None, validation=False):
             """ RUNNING MODEL ON CURRENT CONFIGURATION 
                   This method is computing training, validation or testing depending on what model is calling it.
                   -Arguments:
@@ -241,8 +225,9 @@ class Speech_Emotion_Recognizer(object):
                               if thread == None:
                                     print("-----------> Instance number : %d Current Accuracy : %f" % (instance / sample_size, sample_accuray / sample_size))
                               else:
-                                    print("-----------> Instance number : %d Current Accuracy : %f" % (instance / sample_size, sample_accuray / sample_size))
-                                    thread.print_stats.emit(str("-----------> Instance number : " + str(instance / sample_size) + " Current Accuracy: " + str(sample_accuray / sample_size)))
+                                    print("-----------> Instance number : %d Current accuracy : %f" % (instance / sample_size, sample_accuray / sample_size))
+                                    if not validation:
+                                          thread.print_stats.emit(str("-----------> Instance number : " + str(instance / sample_size) + " Current Accuracy: " + str(sample_accuray / sample_size)))
                               sample_accuray = 0.0
                         if thread != None and thread.stopFlag == True:
                               return 1  
@@ -252,7 +237,10 @@ class Speech_Emotion_Recognizer(object):
                         print("############### %s Total Accurac y = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
                   else:
                         print("############### %s Total Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length)))      
-                        thread.print_stats.emit(str("############### %s tdotal Accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length))))
+                        if not validation:
+                              thread.print_stats.emit(str(" +++ %s total accuracy = %lf \n" % (self.model_op_name, (total_accuracy / self._op_length))))
+                        else:
+                              thread.print_stats.emit(str(" +++ Validation total accuracy = %lf \n" % ((total_accuracy / self._op_length))))
                         thread.print_matrix.emit(self.accuracy_matrix)
             else:
                   predictions = []
@@ -263,7 +251,6 @@ class Speech_Emotion_Recognizer(object):
                         if files[i] == file_to_show:
                               predictions =  vals["predictions_raw"]
                   return predictions
-            print(self.accuracy_matrix)
 
       def create_saver(self):
             self.saver = tf.train.Saver()
@@ -273,139 +260,4 @@ class Speech_Emotion_Recognizer(object):
 
       def restore_model(self, ses, path):
             self.saver.restore(ses, path)
-#%%
-def main(thread=None, epochs=10, keep_prob=0.5, train_ratio = 0.8, lr = 0.0001, id_config=1, flag_end_to_end = 1):
-      tf.reset_default_graph()
-      ses = tf.Session()
-      
-      ser_dp = SER_Data_Producer(select_config(id_config), train_ratio, flag_end_to_end=flag_end_to_end, thread=thread)
-      ser_dp.import_data(ses)
-
-      train_inputs, train_targets, train_length = ser_dp.train_data
-      test_inputs, test_targets, test_length = ser_dp.test_data
-
-      ser_train_model = Speech_Emotion_Recognizer( "Training", keep_prob, lr, True, flag_end_to_end=flag_end_to_end)
-      ser_test_model  = Speech_Emotion_Recognizer( "Testing",  flag_end_to_end=flag_end_to_end)
-
-      ser_train_model.set_inputs_targets_length(train_inputs, train_targets, train_length)
-      ser_test_model.set_inputs_targets_length(test_inputs, test_targets, test_length)
-
-      init_indexes(train_length)
-      ser_train_model.init_examples(get_indexes())
-
-      ser_train_model.model()
-      ser_test_model.model()
-
-      ser_train_model.create_saver()
-
-      writer = tf.summary.FileWriter('./graphs', ses.graph)
-      merged_summaries = tf.summary.merge_all()
-
-      print("\n %s just started ! \n" % ser_train_model.model_op_name)
-      ser_train_model.initialize_variables(ses)
-      for epoch in range(epochs):
-            ser_train_model.refresh_current_examp()
-            # shuffle_indexes()
-            print("-----------> Epoch " + str(epoch))
-            if epoch % 5 == 0 and epoch and thread.app_rnning.ooda_check_box.isChecked():
-                  ser_train_model.update_input_length(epochs, epoch, float(thread.app_rnning.horizontalSlider_ooda.value() / 10))
-                  ser_train_model.calculate_worst_input_examples()
-                  update_indexes(ser_train_model.get_keys())
-                  ser_train_model.init_examples(get_indexes())
-
-            if thread:
-                  thread.print_epoch.emit(str(epoch))
-            x = ser_train_model.run_model(ses, writer, merged_summaries, thread=thread)
-            if x == 1:
-                  break
-            if (epoch) % 5 == 0:
-                  print("----------------------------------------------------------------")
-                  ser_test_model.run_model(ses, writer, merged_summaries, thread=None)
-                  print(
-                      "----------------------------------------------------------------")
-      empty_dir("./model"+str(int(flag_end_to_end)))
-      ser_train_model.save_model(ses, "./model"+str(int(flag_end_to_end))+"/model.ckpt")
-      writer = tf.summary.FileWriter('./graphs', ses.graph)
-      thread.stopFlag = 0
-      thread.print_stats.emit("############### Trainig finished!")
-      print("\n %s just started ! \n" % ser_test_model.model_op_name)
-      ser_test_model.run_model(ses, writer, merged_summaries, thread=thread)
-
-      ses.close()
-end_to_end_flag = 1
-def init_inference_model(flag_end_to_end=1, dir_name="Inference"):
-      global end_to_end_flag
-      end_to_end_flag = flag_end_to_end
-      ses = tf.Session()
-      inf_config = Inference_Config()
-      inf_config.dir_name=[dir_name]
-      if flag_end_to_end:
-            ser_dp_inference = Data_Producer_End_to_End_Inference(
-                inf_config)
-      else:
-            ser_dp_inference = Data_Producer_Hand_Crafted_Inference(
-                inf_config)
-
-      ser_inference_model = Speech_Emotion_Recognizer(model_op_name="Inference", is_training=False, is_inference=True, flag_end_to_end=flag_end_to_end)
-
-      infr_inputs, inference_length, files = ser_dp_inference.produce_data(ses)
-
-      if inference_length == 0:
-            return None, None, []
-
-      ser_inference_model.set_inputs_targets_length(inputs=infr_inputs, op_length=inference_length)
-
-      ser_inference_model.model()
-      ser_inference_model.create_saver()
-      ser_inference_model.restore_model(ses, "./model"+str(int(flag_end_to_end))+"/model.ckpt")
-
-      ser_inference_model.model()
-      return ses, ser_inference_model, files
-
-def close_inference_model(ses):
-      if ses == None:
-            return
-      ses.close()
-
-def inference(ses, ser_inference_model, files, file_to_show):
-      writer = tf.summary.FileWriter('./graphs', ses.graph)
-      merged_summaries = tf.summary.merge_all()
-      list_vars = ser_inference_model.run_model(ses, writer, merged_summaries, files, file_to_show)
-      return list_vars
-
-infr_inputs = None
-inference_length = None
-def init_online_model():
-      global infr_inputs, inference_length, end_to_end_flag
-
-      infr_inputs = tf.placeholder(tf.float32, (None, 256 if end_to_end_flag else 75))
-      inference_length = tf.placeholder(tf.float32, None)
-
-      ses = tf.Session()     
-      ser_inference_model = Speech_Emotion_Recognizer(model_op_name="Online", is_training=False, is_inference=True, flag_end_to_end=end_to_end_flag)
-      ser_inference_model.set_inputs_targets_length(inputs=infr_inputs, op_length=inference_length)
-
-      ser_inference_model.model()
-      ser_inference_model.create_saver()
-      ser_inference_model.restore_model(ses, "./model"+str(int(end_to_end_flag))+"/model.ckpt")
-
-      ser_inference_model.model()
-      return ses, ser_inference_model
-
-
-def online(ses, ser_inference_model, frames, org_rt):
-      global infr_inputs, inference_length, end_to_end_flag
-      writer = tf.summary.FileWriter('./graphs', ses.graph)
-      merged_summaries = tf.summary.merge_all()
-      ser_dp_online = Online_Data_Producer_End_to_End_Inference() if end_to_end_flag else Online_Data_Producer_Hand_Crafted_Inference()
-      online_inputs_, online_length_ = ser_dp_online.produce_data(ses, frames, org_rt)
-      list_vars = ser_inference_model.run_model(ses, writer, merged_summaries, feed_dict={
-                                                infr_inputs: ses.run(online_inputs_), inference_length: online_length_})
-      return list_vars
-
-#%%
-
-if __name__ == "__main__":
-    main(epochs=10, flag_end_to_end=0)
-    
 

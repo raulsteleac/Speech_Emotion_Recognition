@@ -39,9 +39,8 @@ def batch_normalization(batch):
                   Returns the transformed batch with mean 0 and stdev 1  
       """
       means = tf.reduce_mean(batch)
-      stdev = tf.reduce_mean(np.power((batch - means), 2)) + 1e-6
+      stdev = tf.reduce_mean(tf.math.pow((batch - means), 2)) + 1e-6
       return (batch - means) / (tf.sqrt(stdev))
-      # return tf.nn.batch_normalization(batch, mean = means, variance=stdev, offset=0, scale=1, variance_epsilon=1e-6)
 
 def shuffle_data(inputs, targets):
             """ SHUFFLE BOTH THE INPUTS AND THE TARGETS IN THE SAME MANNER
@@ -49,7 +48,7 @@ def shuffle_data(inputs, targets):
                 inputs, targets - the shuffled version of the data  
             """
             shuffle = np.arange(inputs.shape[0])
-            np.random.seed(17)
+            # np.random.seed(17)
             np.random.shuffle(shuffle)
             inputs = inputs[shuffle]
             targets = targets[shuffle]
@@ -97,7 +96,6 @@ class EMO_DB_Config(object):
       dir_name = ['data_sets/EMO-DB']
       data_set_name = ['EMO-DB']
 
-
 class SAVEE_Config(object):
       dir_name = ['data_sets/SAVEE']
       data_set_name = ['SAVEE']
@@ -126,20 +124,15 @@ class JL_Config(object):
       dir_name = ['data_sets/JL']
       data_set_name = ['JL']
 
-
 class Inrp_Config(object):
       dir_name = ['data_sets/Inregistrari_Proprii']
       data_set_name = ['InrP']
 
 class MULTIPLE_DATA_SETS_Config(object):      
-      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS', #'data_sets/SAVEE',  
-      'data_sets/EMOVO',
-       'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 
-       'data_sets/JL', 
-       'data_sets/Inregistrari_Proprii']
-      data_set_name = ['EMO-DB', 'RAVDESS', #'SAVEE', 
-      'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
-
+      dir_name = ['data_sets/EMO-DB', 'data_sets/RAVDESS'#,'data_sets/SAVEE'
+      ,  'data_sets/EMOVO', 'data_sets/MONTREAL_AFFECTIVE_VOICE', 'data_sets/ENTERFACE', 'data_sets/JL', 'data_sets/Inregistrari_Proprii']
+      data_set_name = ['EMO-DB', 'RAVDESS'#, 'SAVEE'
+      , 'EMOVO', 'MAV', 'ENTERFACE', 'JL', 'InrP']
 
 class Inference_Config(object):
       dir_name = ['Inference']

@@ -1,12 +1,5 @@
 # %%
 import os
-try:
-    os.chdir(os.path.join(
-        os.getcwd(), 'Speech_Emotion_Recognition'))
-    print(os.getcwd())
-except:
-    pass
-
 import librosa
 import numpy as np
 import tensorflow as tf

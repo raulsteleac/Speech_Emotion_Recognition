@@ -1,6 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from graphics.UI_Class_Definition import Ui_MainWindow
-from model import main, inference
 from util import *
 import qdarkgraystyle
 

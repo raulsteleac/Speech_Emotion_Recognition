@@ -1,11 +1,4 @@
 import os
-try:
-    os.chdir(os.path.join(
-        os.getcwd(), 'Speech_Emotion_Recognition'))
-    print(os.getcwd())
-except:
-    pass
-
 import numpy as np
 import tensorflow as tf
 
@@ -129,3 +122,18 @@ class Data_Producer_Hand_Crafted_Inference(object):
 
             return inputs, inference_length, self._files
 #%%
+
+#%%
+def main():
+      session = tf.Session()
+      init_indexes(428)
+      dp = Data_Producer_Hand_Crafted_Train_Test(select_config(1), 0.8, None)
+      (X_train, y_train), _ = dp.produce_data_train(session)
+      (X_t, y_train), _= dp.produce_data_test(session)
+      print(session.run(X_t).shape)
+
+if __name__ == "__main__":
+    main()
+
+
+# %%

@@ -1,12 +1,6 @@
 # %%
-import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
 
+import os
 import librosa
 import numpy as np
 import tensorflow as tf
@@ -64,56 +58,47 @@ class Feature_Extractor(object):
             self.e_to_n_mapping = {'W': 0, 'F': 1, 'T': 2, 'N': 3}#, 'E': 4, 'A': 5, 'L': 6} 
             self.emotion_number = 4
             self.emotion_letter_position = -6
-            self.hz = 16000
-
+            
       def set_SAVEE_config(self):
             self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#, 'd':4, 'f': 5, 'u':6} 
             self.emotion_number = 4
             self.emotion_letter_position = 19
-            self.hz = 44100
-
+            
       def set_RAVDESS_config(self):
             self.e_to_n_mapping = {'5': 0, '3': 1, '4': 2, '1': 3}#, '7':4, '6':5, '2':6, '8':7} 
             self.emotion_number = 4
             self.emotion_letter_position = -17
-            self.hz = 48000
-
+            
       def set_ENTERFACE_Config(self):
             self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#'d':4, 'f': 5} 
             self.emotion_number = 4
             self.emotion_letter_position = -8
-            self.hz = 44100
-
+            
       def set_EMOVO_Config(self):
             self.e_to_n_mapping = {'r': 0, 'g': 1, 't': 2, 'n': 3}#, 'd':4, 'p': 5, 's': 6} 
             self.emotion_number = 4
             self.emotion_letter_position = -13
-            self.hz = 48000
-
+            
       def set_MAV_Config(self):
             self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}#, 'd':4, 'f': 5} 
             self.emotion_number = 4
             self.emotion_letter_position = 38
-            self.hz = 44100
-
+            
       def set_MELD_Config(self):
             self.e_to_n_mapping = {'a': 0, 'j': 1, 's': 2,'n': 3}
             self.emotion_number = 4
             self.emotion_letter_position = 26
-            self.hz = 16000
-
+            
       def set_JL_Config(self):
             self.e_to_n_mapping = {'a': 0, 'h': 1, 's': 2, 'n': 3}
             self.emotion_number = 4
             self.emotion_letter_position = 16
-            self.hz = 44100
-
+            
       def set_InrP_Config(self):
             self.e_to_n_mapping = {'A': 0, 'H': 1, 'S': 2, 'N': 3}  # , 'D': 4, 'F':5}
             self.emotion_number = 4
             self.emotion_letter_position = -5
-            self.hz = 48000
-
+            
       def show_pic(self, feature):
             pass
       
@@ -132,8 +117,6 @@ class Feature_Extractor_End_to_End(Feature_Extractor):
                   -Returns:
                         The reshaped signal that will be passed to the convolutional layer
             """
-            # if self.thread != None:
-            #       self.thread.print_stats.emit("------------------ Reshaping features regarding the audio file's frames")
             stft = np.transpose(stft)
             window_nr = (stft.shape[0] // window_length + 1) * window_length
             pad_size = window_nr - stft.shape[0]
@@ -225,7 +208,6 @@ class Feature_Extractor_Hand_Crafted(Feature_Extractor):
             zcr = librosa.feature.zero_crossing_rate(y=signal, frame_length=1020, hop_length=400)
             chroma = librosa.feature.chroma_stft(y=signal, sr=rate, n_fft=1140, win_length=1020, hop_length=400)
             rolloff = librosa.feature.spectral_rolloff(y=signal, sr=rate, n_fft=1140, win_length=1020, hop_length=400)
-
             features = [mfcc, delta, delta_deltas, rms, zcr, chroma, rolloff]
             return features 
             # return np.reshape(np.transpose(features),(-1,60))

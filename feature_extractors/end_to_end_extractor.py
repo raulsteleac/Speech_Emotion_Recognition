@@ -1,18 +1,9 @@
 #%%
 import os
-try:
-    os.chdir('/home/raulslab/work/Speech_Emotion_Recognition')
-    print(os.getcwd())
-except:
-      print("Can't change the Current Working Directory")
-      pass
-
 import numpy as np
 import matplotlib.pyplot as plt
-import tensorflow as tf
 from tqdm import tqdm
 
-from denoising_autoencoder import DAE
 from feature_extractors.feature_extractor import Feature_Extractor
 from feature_extractors.feature_extractor import Feature_Extractor_End_to_End
 from util import *
@@ -51,7 +42,6 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
                   self._set_data_set_config(ds_name)
                   if self.thread != None:
                         self.thread.print_stats.emit("------------------ Extracting audio features from %s " % ds_name)
-                  print(self.hz)
                   self._transform_wave_files(files)
                   self.features = np.array([np.reshape(stft, (stft.shape[0], stft[0].shape[0],  stft[0].shape[1])) for stft in self.features])
                   self.inputs = np.append(self.inputs, self.features)
@@ -62,7 +52,6 @@ class Feature_Extractor_End_to_End_Train_Test(Feature_Extractor_End_to_End):
 
 class Feature_Extractor_End_to_End_Inference(Feature_Extractor_End_to_End):
       def __init__(self, directory_name_list):
-            self.hz = 16000
             super().__init__(directory_name_list, None)
 
       def get_features_and_files(self, session):
