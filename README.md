@@ -1,4 +1,4 @@
-# End-to-end Speech Emotion Recognition using BLSTMs with attention and Multi-domain training 
+# End-to-end Speech Emotion Recognition using BLSTMs with self-attention and Multi-domain training 
 
 This repository contains the source code for a Speech Emotion Recognition (SER) model built using Tensorflow 1.15 and a set of Python libraries that were used to create the different features of the project like: GUI, sound processing, recording and display of statistics.  
 
